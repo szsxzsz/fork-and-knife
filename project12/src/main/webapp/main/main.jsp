@@ -41,6 +41,7 @@
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
  
+ <!--메인 배너  -->
                     <div class="item"><img src="assets/img/main.jpg" alt="The Last of us"></div>
                     <div class="item"><img src="assets/img/main2.jpg" alt="GTA V"></div>
 
