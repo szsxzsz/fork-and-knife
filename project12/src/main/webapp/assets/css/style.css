@@ -1245,6 +1245,9 @@ Asside widgets CSS
     list-style: none;
     padding-left: 0;
 }
+.padding-left-250 {
+	padding-left: 500px;
+}
 .panel.sidebar-menu ul.nav ul li {
     display: block;
 }
