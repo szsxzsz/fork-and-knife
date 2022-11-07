@@ -11,8 +11,8 @@
                     <div class="col-md-5 col-sm-8  col-xs-12">
                         <div class="header-half header-call">
                             <p>
-                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                                <span><i class="pe-7s-mail"></i> your@company.com</span>
+                                <span><i class="pe-7s-call"></i> 051-803-0909</span>
+                                <span><i class="pe-7s-mail"></i> 아이티윌 정지원</span>
                             </p>
                         </div>
                     </div>
@@ -43,14 +43,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="./main.re"><img src="assets/img/111.jpg" alt="" height="76" width="200"></a>
+                    <a href="./main.re"><img src="assets/img/forks.jpg" alt="" height="100" width="180"></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.re'" data-wow-delay="0.4s">로그인</button>
-                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./registerForm.re'" data-wow-delay="0.5s">회원가입</button>
+                        <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.re'" data-wow-delay="0.4s">login</button>
+                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./registerForm.re'" data-wow-delay="0.5s">join</button>
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                          <li class="dropdown yamm-fw" data-wow-delay="0.1s">

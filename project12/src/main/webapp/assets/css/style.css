@@ -756,11 +756,11 @@ label small{
     transition: all 0.4s ease;
 }
 .nav-button.login{
-    background-color: #FDC600;
+    background-color: #1c1a18;
     margin-right: 5px;
 }
 .nav-button:hover{
-    background-color: #FDC600;
+    background-color: #1c1a18;
 
 }
 .navbar{
@@ -1088,7 +1088,7 @@ font-weight: 500;
 page-header
 ======================================================*/
 .page-head{
-    background: #494C53 url("../../assets/img/page-header.jpg") 
+    background: #1c1a18 
         no-repeat scroll center top / cover;
     color:#FFF;
     position: relative;
@@ -2086,14 +2086,14 @@ single property page
 }
 
 .sidebar-property{
-    background-color:#EEE;
+    background-color:#ffffff;
     padding: 15px 25px 25px;
 }
 .dealer-widget {
     background-color: #838383;
     padding: 15px;
-    color:#FFF;
-    padding-bottom: 20px;
+    color:#e7e7e7;
+    padding-bottom: 25px;
     margin: -15px -15px 25px;
 }
 .dealer-name{
@@ -2101,8 +2101,8 @@ single property page
     margin-bottom: 5px;
 }
 .dealer-name a {
-    color: #626262;
-    font-size: 20px;
+    color: #f6f6f6;
+    font-size: 30px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -2805,7 +2805,7 @@ color: #535353;
 }
 .footer{
 padding: 0px 0px 60px;
-background: rgba(255, 255, 255, 0.89) none repeat scroll 0% 0%;
+background: #1c1a18 none repeat scroll 0% 0%;
 }
 .footer ul li i { 
     padding-right: 10px;

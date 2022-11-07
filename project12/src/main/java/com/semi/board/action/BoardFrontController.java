@@ -49,6 +49,12 @@ public class BoardFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./main/register.jsp");
 			forward.setRedirect(false);
+			
+		}else if(command.equals("/StoreDetails.re")) {
+			forward = new ActionForward();
+			forward.setPath("./main/StoreDetails.jsp");
+			forward.setRedirect(false);
+			
 		}
 		
 		
@@ -66,6 +72,7 @@ public class BoardFrontController extends HttpServlet{
 				RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
 				dis.forward(request, response);
 			}
+			
 		System.out.println("C : 3. 페이지 이동 끝 \n");
 		}
 		
