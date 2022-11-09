@@ -17,6 +17,31 @@
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#lunchBegins').change(function() {
+					var city = $(this).val();
+					$('#basic12').children("option").remove();
+// 					$('#basic12').append("<option>사하구</option>");
+// 					$('#basic12').load("gu.jsp .busan");
+					$.ajax({
+						url:"gu.jsp",
+						success:function(result) {
+						alert('성공');
+// 						$(result).find('.busan').each(function() {
+// 						$('#basic12').append("<option>"+$(this).val()+"</option>");
+// 							});
+						}
+						error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       }
+						
+					}); // end of ajax
+				});
+			});
+		
+		</script>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <jsp:include page="../inc/top.jsp"/>
 		
@@ -57,23 +82,19 @@
                                         <div class="row">
                                             <div class="col-xs-6">
 
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Your City">
+                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="시">
 
-                                                    <option>New york, CA</option>
-                                                    <option>Paris</option>
-                                                    <option>Casablanca</option>
-                                                    <option>Tokyo</option>
-                                                    <option>Marraekch</option>
-                                                    <option>kyoto , shibua</option>
+                                                    <option value="busan">부산</option>
+                                                    <option value="seoul">서울</option>
+                                                    <option value="daejeon">대전</option>
+                                                    <option value="wakanda">와칸다</option>
+                                                    <option value="forever">포에버</option>
+                                                    <option value="black">블랙팬서</option>
                                                 </select>
                                             </div>
                                             <div class="col-xs-6">
-
-                                                <select id="basic" class="selectpicker show-tick form-control">
-                                                    <option> -Status- </option>
-                                                    <option>Rent </option>
-                                                    <option>Boy</option>
-                                                    <option>used</option>  
+                                                <select id="basic12" class="show-tick form-control" >
+                                                     <option selected>도시 선택</option>
 
                                                 </select>
                                             </div>
