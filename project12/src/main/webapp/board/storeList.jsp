@@ -21,18 +21,20 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#lunchBegins').change(function() {
-					var city = $(this).val();
 					$('#basic12').children("option").remove();
-// 					$('#basic12').append("<option>사하구</option>");
-// 					$('#basic12').load("gu.jsp .busan");
+// 					
+					var city = $(this).val();
 					$.ajax({
-						url:"gu.jsp",
-						success:function(result) {
-						alert('성공');
-// 						$(result).find('.busan').each(function() {
-// 						$('#basic12').append("<option>"+$(this).val()+"</option>");
-// 							});
-						}
+						url:"http://localhost:8081/project12/board/gu.xml",
+						type:"get",
+						datatype:"xml",
+						success:function(data) {
+						var v = $(data).find(city);
+						v.find("gus").each(function() {
+							var info = "<option>"+$(this).find("gu").text()+"</option>";
+							$('#basic12').append(info);
+							});
+						},
 						error:function(request,status,error){
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				       }
@@ -73,7 +75,7 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Key word">
+                                                <input type="text" class="form-control" placeholder="가게 검색">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -83,7 +85,7 @@
                                             <div class="col-xs-6">
 
                                                 <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="시">
-
+													<option selected>시</option>
                                                     <option value="busan">부산</option>
                                                     <option value="seoul">서울</option>
                                                     <option value="daejeon">대전</option>
@@ -94,7 +96,7 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <select id="basic12" class="show-tick form-control" >
-                                                     <option selected>도시 선택</option>
+                                                     <option selected>구</option>
 
                                                 </select>
                                             </div>
@@ -104,7 +106,7 @@
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <label for="price-range">Price range ($):</label>
+                                                <label for="price-range">가격대 : </label>
                                                 <input type="text" class="span2" value="" data-slider-min="0" 
                                                        data-slider-max="600" data-slider-step="5" 
                                                        data-slider-value="[0,450]" id="price-range" ><br />
@@ -112,7 +114,7 @@
                                                 <b class="pull-right color">100000$</b>                                                
                                             </div>
                                             <div class="col-xs-6">
-                                                <label for="property-geo">Property geo (m2) :</label>
+                                                <label for="property-geo">인원 :</label>
                                                 <input type="text" class="span2" value="" data-slider-min="0" 
                                                        data-slider-max="600" data-slider-step="5" 
                                                        data-slider-value="[50,450]" id="property-geo" ><br />
@@ -125,7 +127,7 @@
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <label for="price-range">Min baths :</label>
+                                                <label for="price-range">거리 : </label>
                                                 <input type="text" class="span2" value="" data-slider-min="0" 
                                                        data-slider-max="600" data-slider-step="5" 
                                                        data-slider-value="[250,450]" id="min-baths" ><br />
