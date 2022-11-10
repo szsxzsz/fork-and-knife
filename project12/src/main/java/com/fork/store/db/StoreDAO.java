@@ -64,7 +64,7 @@ public class StoreDAO {
 			con = getConnection();
 		// 3. sql 작성(select) & pstmt 객체
 //			sql = "select * from itwill_board";
-			sql = "select * from itwill_board " + "limit ?,? ";
+			sql = "select * from store " + "limit ?,? ";
 			pstmt = con.prepareStatement(sql);
 		// ?????
 			pstmt.setInt(1, startRow-1); // 시작행-1

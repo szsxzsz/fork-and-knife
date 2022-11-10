@@ -331,29 +331,29 @@
 
                     <div class="col-md-12 clear"> 
                         <div id="list-type" class="proerty-th">
+                            <c:forEach var="dto" items="${boardListAll }">
+                           <!--  가게 1개 시작  -->
                             <div class="col-sm-6 col-md-4 p0">
-                            		<!--  가게 1개 시작  -->
+                            		
+                            		
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
                                             <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
                                         </div>
 
                                         <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
+                                            <h5><a href="property-1.html">${dto.s_name }</a></h5>
                                             <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
+                                            <span class="pull-left"><b> 별점 :</b> ${dto.s_star} </span>
+<!--                                             <span class="proerty-price pull-right"> $ 300,000</span> -->
                                             <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-<!--                                             <div class="property-icon"> -->
-<!--                                                 <img src="assets/img/icon/bed.png">(5)| -->
-<!--                                                 <img src="assets/img/icon/shawer.png">(2)| -->
-<!--                                                 <img src="assets/img/icon/cars.png">(1)   -->
-<!--                                             </div> -->
+
                                         </div>
 
 
                                     </div>
-                                </div> <!-- 가게 1개 끝 -->
+                                  </div> <!-- 가게 1개 끝 -->
+                               </c:forEach>
                         </div>
                     </div> <!--  가게 목록 끝  -->
                     
@@ -365,15 +365,15 @@
 	
 	<!-- 이전 -->
 	<c:if test="${startPage > pageBlock }">
-		<li><a href="./BoardList.bo?pageNum=${startPage-pageBlock }">Prev</a></li>
+		<li><a href="./storeList.re?pageNum=${startPage-pageBlock }">Prev</a></li>
 	</c:if>
 	<!-- 페이지 번호(1,2,3....) -->
 	<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-		<li><a href="./BoardList.bo?pageNum=${i }">${i }</a><li>
+		<li><a href="./storeList.re?pageNum=${i }">${i }</a><li>
 	</c:forEach>
 	<!-- 다음 -->
 	<c:if test="${endPage < pageCount }">
-		<li><a href="./BoardList.bo?pageNum=${startPage+pageBlock }">[다음]</a><li>
+		<li><a href="./storeList.re?pageNum=${startPage+pageBlock }">[다음]</a><li>
 	</c:if>
 </c:if>
                                 </ul>

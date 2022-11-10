@@ -18,7 +18,7 @@ public class StoreListAction implements Action {
 		
 		int cnt = dao.getBoardCount();
 		System.out.println(cnt);		
-		int pageSize = 5;
+		int pageSize = 9;
 		
 		// 	http://localhost:8088/JSP/board/boardList.jsp?pageNum=3 
 		
