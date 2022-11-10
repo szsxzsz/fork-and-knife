@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -25,7 +26,7 @@
 // 					
 					var city = $(this).val();
 					$.ajax({
-						url:"http://localhost:8081/project12/board/gu.xml",
+						url:"gu.re",
 						type:"get",
 						datatype:"xml",
 						success:function(data) {
@@ -60,10 +61,11 @@
         <!-- End page header -->
 
         <!-- property area -->
+<!--         검색 start -->
         <div class="properties-area recent-property" style="background-color: #FFF;">
             <div class="container">  
                 <div class="row">
-                     
+                  
                 <div class="col-md-3 p0 padding-top-40">
                     <div class="blog-asside-right pr0">
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
@@ -105,59 +107,76 @@
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-8">
                                                 <label for="price-range">가격대 : </label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
+                                                <input type="text" class="span2 ddkjh" value="" data-slider-min="0" 
                                                        data-slider-max="600" data-slider-step="5" 
                                                        data-slider-value="[0,450]" id="price-range" ><br />
-                                                <b class="pull-left color">2000$</b> 
-                                                <b class="pull-right color">100000$</b>                                                
+                                                <b class="pull-left color">0</b> 
+                                                <b class="pull-right color">100000</b>                                                
                                             </div>
-                                            <div class="col-xs-6">
-                                                <label for="property-geo">인원 :</label>
+                                            <div class="col-xs-4">
+                                                <div class="checkbox">
+                                                    <br><label> <input type="checkbox" checked><br>상관없음</label>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            
+                                    </fieldset>    
+                                    <hr>
+                                    <fieldset class="padding-5">                            
+										<div class="row">
+                                            <div class="col-xs-8">
+                                                <label for="property-geo">거리 :</label>
                                                 <input type="text" class="span2" value="" data-slider-min="0" 
                                                        data-slider-max="600" data-slider-step="5" 
                                                        data-slider-value="[50,450]" id="property-geo" ><br />
                                                 <b class="pull-left color">40m</b> 
-                                                <b class="pull-right color">12000m</b>                                                
-                                            </div>                                            
-                                        </div>
-                                    </fieldset>                                
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label for="price-range">거리 : </label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="600" data-slider-step="5" 
-                                                       data-slider-value="[250,450]" id="min-baths" ><br />
-                                                <b class="pull-left color">1</b> 
-                                                <b class="pull-right color">120</b>                                                
+                                                <b class="pull-right color">12000m</b>
+                                                                                                
                                             </div>
-
-                                            <div class="col-xs-6">
-                                                <label for="property-geo">Min bed :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="600" data-slider-step="5" 
-                                                       data-slider-value="[250,450]" id="min-bed" ><br />
-                                                <b class="pull-left color">1</b> 
-                                                <b class="pull-right color">120</b>
-
+                                           <div class="col-xs-4">
+                                                <div class="checkbox">
+                                                    <br><label> <input type="checkbox" checked><br>상관없음</label>
+                                                </div>
                                             </div>
+                                                
+                                                                                      
                                         </div>
-                                    </fieldset>
-
+                                        
+                                         </fieldset>   
+                                         <hr>
+                                         <fieldset class="padding-5">                            
+										<div class="row">
+                                            <div class="col-xs-6">
+                                                <label for="property-geo">인원 :</label>
+                								<select id="" class="show-tick form-control" >
+                                                     <option selected>명</option>
+													<c:forEach var="i" begin="1" end="10" step="1">
+													<option value="${i}">${i}명</option>
+													</c:forEach>
+                                                </select>
+                                               </div>
+                                            <div class="col-xs-6">
+                                                <div class="checkbox">
+                                                    <br><label> <input type="checkbox" checked> 상관없음</label>
+                                                </div>
+                                            </div>
+                                                                                    
+                                        </div>
+                                         </fieldset> 
+                                   	<hr>
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Fire Place</label>
+                                                    <label> <input type="checkbox" checked> 한식</label>
                                                 </div> 
                                             </div>
 
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox"> Dual Sinks</label>
+                                                    <label> <input type="checkbox"> 중식</label>
                                                 </div>
                                             </div>                                            
                                         </div>
@@ -167,68 +186,44 @@
                                         <div class="row">
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Swimming Pool</label>
+                                                    <label> <input type="checkbox" checked> 일식</label>
                                                 </div>
                                             </div>  
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> 2 Stories </label>
+                                                    <label> <input type="checkbox" checked> 양식</label>
                                                 </div>
                                             </div>  
                                         </div>
                                     </fieldset>
 
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6"> 
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"> Laundry Room </label>
-                                                </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Emergency Exit</label>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                    </fieldset>
+                                     
 
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Jog Path </label>
+                                                    <label>  <input type="checkbox" checked> 오마카세</label>
                                                 </div>
                                             </div>  
-                                            <div class="col-xs-6"> 
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> 26' Ceilings </label>
-                                                </div>
-                                            </div>  
+                                           
                                         </div>
                                     </fieldset>
 
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12"> 
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Hurricane Shutters </label>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                    </fieldset>
+                                    
 
                                     <fieldset >
                                         <div class="row">
                                             <div class="col-xs-12">  
-                                                <input class="button btn largesearch-btn" value="Search" type="submit">
+                                                <input class="button btn largesearch-btn" value="검 색" type="submit">
                                             </div>  
                                         </div>
                                     </fieldset>                                     
                                 </form>
                             </div>
                         </div>
-
+<!-- 						검색 end -->
+						
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Recommended</h3>
@@ -337,6 +332,7 @@
                     <div class="col-md-12 clear"> 
                         <div id="list-type" class="proerty-th">
                             <div class="col-sm-6 col-md-4 p0">
+                            		<!--  가게 1개 시작  -->
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
                                             <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
@@ -348,198 +344,38 @@
                                             <span class="pull-left"><b> Area :</b> 120m </span>
                                             <span class="proerty-price pull-right"> $ 300,000</span>
                                             <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
+<!--                                             <div class="property-icon"> -->
+<!--                                                 <img src="assets/img/icon/bed.png">(5)| -->
+<!--                                                 <img src="assets/img/icon/shawer.png">(2)| -->
+<!--                                                 <img src="assets/img/icon/cars.png">(1)   -->
+<!--                                             </div> -->
                                         </div>
 
 
                                     </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-2.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
-
-                                <div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> 120m </span>
-                                            <span class="proerty-price pull-right"> $ 300,000</span>
-                                            <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                            <div class="property-icon">
-                                                <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1)  
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div> 
+                                </div> <!-- 가게 1개 끝 -->
                         </div>
-                    </div>
+                    </div> <!--  가게 목록 끝  -->
                     
                     <div class="col-md-12"> 
                         <div class="pull-right">
                             <div class="pagination">
                                 <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">Next</a></li>
+    <c:if test="${reqeustScope.totalCnt != 0 }">
+	
+	<!-- 이전 -->
+	<c:if test="${startPage > pageBlock }">
+		<li><a href="./BoardList.bo?pageNum=${startPage-pageBlock }">Prev</a></li>
+	</c:if>
+	<!-- 페이지 번호(1,2,3....) -->
+	<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+		<li><a href="./BoardList.bo?pageNum=${i }">${i }</a><li>
+	</c:forEach>
+	<!-- 다음 -->
+	<c:if test="${endPage < pageCount }">
+		<li><a href="./BoardList.bo?pageNum=${startPage+pageBlock }">[다음]</a><li>
+	</c:if>
+</c:if>
                                 </ul>
                             </div>
                         </div>                
@@ -548,7 +384,21 @@
                 </div>              
             </div>
         </div>
-
+<c:if test="${reqeustScope.totalCnt != 0 }">
+	
+	<!-- 이전 -->
+	<c:if test="${startPage > pageBlock }">
+		<li><a href="./BoardList.bo?pageNum=${startPage-pageBlock }">Prev</a></li>
+	</c:if>
+	<!-- 페이지 번호(1,2,3....) -->
+	<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+		<li><a href="./BoardList.bo?pageNum=${i }">${i }</a><li>
+	</c:forEach>
+	<!-- 다음 -->
+	<c:if test="${endPage < pageCount }">
+		<li><a href="./BoardList.bo?pageNum=${startPage+pageBlock }">[다음]</a><li>
+	</c:if>
+</c:if>
           <jsp:include page="../inc/bottom.jsp"/>
     </body>
 </html>

@@ -347,6 +347,9 @@ input[type="search"]::-webkit-search-decoration {
     box-shadow: 0px 1px 1px rgba(179, 179, 179, 0.1) inset;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
+.font12kjh{
+	font-size: 12px;
+}
 .form-inline input[type=submit]{
     background: #1C1A18;
     color: #fff;

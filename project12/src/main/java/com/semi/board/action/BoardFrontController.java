@@ -59,12 +59,23 @@ public class BoardFrontController extends HttpServlet{
 		
 		else if(command.equals("/storeList.re")) {
 			
-			forward = new ActionForward();
-			forward.setPath("./board/storeList.jsp");
-			forward.setRedirect(false);
+			action = new StoreListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
-		
+		else if(command.equals("/gu.re")) {
+			
+			forward = new ActionForward();
+			forward.setPath("./board/gu.xml");
+			forward.setRedirect(false);
+		}
 		
 		
 		// 3. 페이지 이동
