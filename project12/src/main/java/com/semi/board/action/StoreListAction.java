@@ -40,7 +40,7 @@ public class StoreListAction implements Action {
 		// 디비에 전체 글 리스트 가져오기
 //		ArrayList boardListAll =  dao.getBoardList();
 		ArrayList boardListAll = dao.getBoardList(startRow, pageSize);
-
+		ArrayList recStore = dao.getBoardList(cnt);
 		   /////////////////////////////////////////////////////////////////////////////////////////////////
 			// 페이징 처리 (2)
 			
@@ -75,7 +75,7 @@ public class StoreListAction implements Action {
 		// Action -> jsp 페이지 정보 전달(request 영역객체 저장)
 		request.setAttribute("boardListAll", boardListAll); // +a를 넣을경우, 추가적인 정보를 담을경우
 		request.setAttribute("totalCnt", cnt);
-		
+		request.setAttribute("recStore", recStore);
 		// 페이징처리 정보 저장
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("totalCnt", cnt);
@@ -86,7 +86,7 @@ public class StoreListAction implements Action {
 		
 //		request.setAttribute("boardListAll", dao.getBoardList()); // 디비에 있는 정보를 그대로 출력만 할 경우
 		
-		
+		System.out.println(recStore);
 		// 페이지 이동준비(티켓 생성)
 		ActionForward forward = new ActionForward();
 		forward.setPath("./board/storeList.jsp");

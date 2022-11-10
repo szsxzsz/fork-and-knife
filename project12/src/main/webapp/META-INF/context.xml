@@ -7,8 +7,8 @@
 	type="javax.sql.DataSource"  
 	driverClassName="com.mysql.cj.jdbc.Driver"  
 	username="root"  
-	password="1234"  
-	url="jdbc:mysql://localhost:3306/spdb"  
+	password="0325"  
+	url="jdbc:mysql://localhost:3307/project_self"  
 	maxWait="5000"  
   />
 </Context>

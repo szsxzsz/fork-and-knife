@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -52,7 +55,59 @@ public class StoreDAO {
 	}
 	// 자원해제 메서드 - closeDB()
 	
-	// getStoreList 가게 목록 불러오기 start
+	// getStoreList(페이징) 가게 목록 불러오기 start
+	
+	public ArrayList getBoardList(int cnt) {
+		System.out.println(" DAO : getBoardList() 호출 ");
+		// 글정보 모두 저장하는 배열
+		ArrayList boardList = new ArrayList();
+		
+		
+		
+		try {
+		// 1.2. 디비 연결
+			con = getConnection();
+		// 3. sql 작성(select) & pstmt 객체
+//			sql = "select * from itwill_board";
+			Set set = new TreeSet<>();
+			while(set.size()<4) {
+				int a = (int)(Math.random()*cnt+1);
+				set.add(a);
+			}
+			Iterator<Integer> it = set.iterator();
+			
+				while(it.hasNext()) {
+				sql = "select * from store where s_no=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, it.next());
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+				StoreDTO dto = new StoreDTO();
+				dto.setM_no(rs.getLong("m_no"));
+				dto.setS_image(rs.getString("s_image"));
+				dto.setS_name(rs.getString("s_name"));
+				dto.setS_star(rs.getDouble("s_star"));
+				dto.setS_no(rs.getLong("s_no"));
+				dto.setS_type(rs.getString("s_type"));
+				//DTO -> List
+				
+				boardList.add(dto);
+				}
+		
+			} // for
+			System.out.println(" DAO : 게시판 목록 저장완료!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return boardList;
+	}
+	
+	// getStoreList(페이징) 가게 목록 불러오기 end
 	
 	public ArrayList getBoardList(int startRow, int pageSize) {
 		System.out.println(" DAO : getBoardList() 호출 ");
@@ -80,6 +135,7 @@ public class StoreDAO {
 				dto.setS_name(rs.getString("s_name"));
 				dto.setS_star(rs.getDouble("s_star"));
 				dto.setS_no(rs.getLong("s_no"));
+				dto.setS_type(rs.getString("s_type"));
 				//DTO -> List
 				
 				boardList.add(dto);
@@ -96,7 +152,12 @@ public class StoreDAO {
 		return boardList;
 	}
 	
-	// getStoreList 가게 목록 불러오기 end
+	// getStoreList(페이징X) 가게 목록 전체 불러오기 start
+	
+	
+	
+	// getStoreList(페이징X) 가게 목록 전체 불러오기 end
+	
 	
 	// getStoreCount 가게 갯수 start
 	
