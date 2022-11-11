@@ -52,11 +52,6 @@ public class StoreFrontController extends HttpServlet {
 					forward.setPath("./main/register.jsp");
 					forward.setRedirect(false);
 					
-				}else if(command.equals("/StoreDetails.re")) {
-					forward = new ActionForward();
-					forward.setPath("./main/StoreDetails.jsp");
-					forward.setRedirect(false);
-					
 				}
 				
 				else if(command.equals("/storeList.re")) {
@@ -72,7 +67,14 @@ public class StoreFrontController extends HttpServlet {
 					
 				}
 				
-				
+				else if(command.equals("/storeDetails.re")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./board/storeDetails.jsp");
+					forward.setRedirect(false);
+					
+					
+				}
 				
 				System.out.println(" C : 2. 가상주소 매핑 끝 \n");
 				// 3. 페이지 이동
