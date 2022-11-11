@@ -11,14 +11,7 @@
   </welcome-file-list>
   
   <!-- member 주소 매핑 -->
-  <servlet>
-    <servlet-name>MemberFrontController</servlet-name>
-    <servlet-class>com.itwillbs.member.action.MemberFrontController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemberFrontController</servlet-name>
-    <url-pattern>*.me</url-pattern>
-  </servlet-mapping>
+
   <!-- member 주소 매핑 -->
   
 <!-- 한글처리 필터 설정하기 -->

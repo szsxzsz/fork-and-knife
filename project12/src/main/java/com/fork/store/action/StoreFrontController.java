@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("*.st")
+
+@WebServlet("*.re")
 public class StoreFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,28 +30,49 @@ public class StoreFrontController extends HttpServlet {
 				ActionForward forward = null;
 				
 				// 2. 가상주소 매핑(패턴1,2,3)
-				if(command.equals("/StoreInfo.st")) {
-					System.out.println(" C : /StoreInfo.st 호출");
-					System.out.println(" C : [패턴3] DB 사용o, view 이동");
-					
-					// -> json으로 받아서 데이터 삽입
-					// storeAction() 객체 생성 
-					
-					
-					try {
-						forward = action.execute(request, response);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				else if(command.equals("/Main.st")) {
-					System.out.println(" C : /Main.st 호출");
+				if(command.equals("/main.re")) {
+					System.out.println("C : /main.re 호출");
+					System.out.println("C : [패턴1] DB X, view");
 					
 					forward = new ActionForward();
 					forward.setPath("./main/main.jsp");
 					forward.setRedirect(false);
+				}
+				
+				else if(command.equals("/loginForm.re")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./main/login.jsp");
+					forward.setRedirect(false);
+				}
+				
+				else if(command.equals("/registerForm.re")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./main/register.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/StoreDetails.re")) {
+					forward = new ActionForward();
+					forward.setPath("./main/StoreDetails.jsp");
+					forward.setRedirect(false);
 					
 				}
+				
+				else if(command.equals("/storeList.re")) {
+					
+					action = new StoreListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				
 				
 				System.out.println(" C : 2. 가상주소 매핑 끝 \n");
 				// 3. 페이지 이동
