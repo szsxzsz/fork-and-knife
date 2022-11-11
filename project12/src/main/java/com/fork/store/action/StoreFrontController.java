@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("*.re")
+@WebServlet("*.st")
 public class StoreFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,8 +30,8 @@ public class StoreFrontController extends HttpServlet {
 				ActionForward forward = null;
 				
 				// 2. 가상주소 매핑(패턴1,2,3)
-				if(command.equals("/main.re")) {
-					System.out.println("C : /main.re 호출");
+				if(command.equals("/main.st")) {
+					System.out.println("C : /main.st 호출");
 					System.out.println("C : [패턴1] DB X, view");
 					
 					forward = new ActionForward();
@@ -39,14 +39,14 @@ public class StoreFrontController extends HttpServlet {
 					forward.setRedirect(false);
 				}
 				
-				else if(command.equals("/loginForm.re")) {
+				else if(command.equals("/loginForm.st")) {
 					
 					forward = new ActionForward();
 					forward.setPath("./main/login.jsp");
 					forward.setRedirect(false);
 				}
 				
-				else if(command.equals("/registerForm.re")) {
+				else if(command.equals("/registerForm.st")) {
 					
 					forward = new ActionForward();
 					forward.setPath("./main/register.jsp");
@@ -54,7 +54,7 @@ public class StoreFrontController extends HttpServlet {
 					
 				}
 				
-				else if(command.equals("/storeList.re")) {
+				else if(command.equals("/storeList.st")) {
 					
 					action = new StoreListAction();
 					
@@ -67,7 +67,7 @@ public class StoreFrontController extends HttpServlet {
 					
 				}
 				
-				else if(command.equals("/storeDetails.re")) {
+				else if(command.equals("/storeDetails.st")) {
 					
 					forward = new ActionForward();
 					forward.setPath("./board/storeDetails.jsp");
