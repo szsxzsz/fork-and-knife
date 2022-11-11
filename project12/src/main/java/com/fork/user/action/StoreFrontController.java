@@ -101,6 +101,22 @@ public class StoreFrontController extends HttpServlet {
 				
 				}
 				
+				else if(command.equals("/LogoutAction.us")) {
+					
+					System.out.println(" C : /DCheckAction.us 호출 ");
+					System.out.println(" C : 패턴3) DB사용O, view페이지 출력");
+					
+					// DCheckAction() 객체
+					action = new LogoutAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				
+				}
+				
 //				else if(command.equals("/StMyPage.on")) {
 //					System.out.println(" C : /StMyPage.on 호출 ");
 //					System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");

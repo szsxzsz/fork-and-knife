@@ -73,34 +73,40 @@
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     
                     <div class="button navbar-right">
-                    <c:if test="${id==null }">
+                    <c:choose>
+                    <c:when test="${id==null }">
                         <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">로그인</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./Join.us'" data-wow-delay="0.5s">회원가입</button>
-                    </c:if>
-                    <c:if test="${id.equals('admin') }">
+                    </c:when>
+                    <c:when test="${id.equals('admin') }">
                     <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">관리자페이지</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
-                    </c:if>
+                    </c:when>
+                    <c:otherwise>
+                    	<button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">마이페이지</button>
+                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
+                    </c:otherwise>
+                    </c:choose>
                     </div>
                     
                     <ul class="main-nav nav navbar-nav navbar-right">
                          <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b>Home</b></a>
                             <jsp:include page="categories.jsp"/>
                         </li>
-
+<!-- <b class="caret"></b> -->
                         <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Category <b class="caret"></b></a>
-                            <jsp:include page="categories.jsp"/>
-                        </li>
-                        
-                        <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Event <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b>Category</b> </a>
                             <jsp:include page="categories.jsp"/>
                         </li>
                         
                         <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Notice <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b>Event</b> </a>
+                            <jsp:include page="categories.jsp"/>
+                        </li>
+                        
+                        <li class="dropdown yamm-fw" data-wow-delay="0.1s">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b>Notice </b></a>
                             <jsp:include page="categories.jsp"/>
                             
                         </li>

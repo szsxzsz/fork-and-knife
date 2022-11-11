@@ -704,12 +704,14 @@ label small{
 
 .navbar-default .navbar-nav > li > a{
     color: black;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 400;
     text-transform: capitalize;
     position: relative;
 
 }
+
+
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     color: #929292;
     background-color: transparent;

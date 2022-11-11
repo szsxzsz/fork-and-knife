@@ -17,7 +17,14 @@ public class LoginAction implements Action {
 		String pw = (String)request.getParameter("pw");
 		System.out.println(id+", "+pw);
 		ActionForward forward = new ActionForward();
-	
+		
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("id")!=null) {
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
 		
 		StoreDAO dao = new StoreDAO();
 		
@@ -48,13 +55,13 @@ public class LoginAction implements Action {
 //		if(result == 1) {
 		// 로그인 성공 -> 아이디 세션영역에 저장
 //		}
-			HttpSession session = request.getSession();
+			
 			session.setAttribute("id", id);
 		
 		
 		
-		forward.setPath("/main.st");
-		forward.setRedirect(false);
+		forward.setPath("./main.st");
+		forward.setRedirect(true);
 		
 		
 		
