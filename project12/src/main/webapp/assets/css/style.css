@@ -304,6 +304,16 @@ input[type="search"]::-webkit-search-decoration {
     border-color: #F0F0F0;
     font-weight: 600;
 }
+
+.btn-default-login-kjh {
+    border-radius: 1px;
+    padding: 10px 20px;
+    border: 1px solid #1C1A18;
+    color: #fff;
+    background-color: #1C1A18;
+    border-color: #F0F0F0;
+    font-weight: 600;
+}
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
     color: #000;
     background-color: #1C1A18;

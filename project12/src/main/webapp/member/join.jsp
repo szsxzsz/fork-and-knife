@@ -164,7 +164,7 @@
 		
 	  if(id.length > 5){
 		$.ajax({
-			url:'${pageContext.request.contextPath}/DCheckAction.re',
+			url:'${pageContext.request.contextPath}/DCheckAction.us',
 			method:'post',
 			data:{id:id},
 			dataType:'json',
