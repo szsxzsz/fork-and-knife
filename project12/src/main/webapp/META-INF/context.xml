@@ -6,9 +6,9 @@
 	auth="Container"  
 	type="javax.sql.DataSource"  
 	driverClassName="com.mysql.cj.jdbc.Driver"  
-	username="root"  
-	password="0325"  
-	url="jdbc:mysql://localhost:3307/project_self"  
+	username="class7_220721_team2"  
+	password="wlghks123"  
+	url="jdbc:mysql://db.itwillbs.dev:3306/class7_220721_team2" 
 	maxWait="5000"  
   />
 </Context>
