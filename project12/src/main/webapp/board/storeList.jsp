@@ -300,7 +300,7 @@
                             		
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
-                                            <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
+                                            <a href="./storeDetails.re" ><img src="assets/img/demo/property-3.jpg"></a>
                                         </div>
 
                                         <div class="item-entry overflow">

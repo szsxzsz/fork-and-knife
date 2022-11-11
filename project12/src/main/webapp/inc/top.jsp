@@ -65,14 +65,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="./main.re"><img src="assets/img/forks.jpg" alt="" height="76" width="200"></a>
+                    <a href="./main.st"><img src="assets/img/forks.jpg" alt="" height="76" width="200"></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.re'" data-wow-delay="0.4s">로그인</button>
-                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./registerForm.re'" data-wow-delay="0.5s">회원가입</button>
+                        <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">로그인</button>
+                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./Join.us'" data-wow-delay="0.5s">회원가입</button>
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                          <li class="dropdown yamm-fw" data-wow-delay="0.1s">

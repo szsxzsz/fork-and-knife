@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("*.st")
 public class StoreFrontController extends HttpServlet {
 
@@ -29,26 +30,49 @@ public class StoreFrontController extends HttpServlet {
 				ActionForward forward = null;
 				
 				// 2. 가상주소 매핑(패턴1,2,3)
-				if(command.equals("/StoreInfo.st")) {
-					System.out.println(" C : /StoreInfo.st 호출");
-					System.out.println(" C : [패턴3] DB 사용o, view 이동");
-					
-					// -> json으로 받아서 데이터 삽입
-					// storeAction() 객체 생성 
-					
-					
-					try {
-						forward = action.execute(request, response);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				else if(command.equals("/Main.st")) {
-					System.out.println(" C : /Main.st 호출");
+				if(command.equals("/main.st")) {
+					System.out.println("C : /main.st 호출");
+					System.out.println("C : [패턴1] DB X, view");
 					
 					forward = new ActionForward();
 					forward.setPath("./main/main.jsp");
 					forward.setRedirect(false);
+				}
+				
+				else if(command.equals("/loginForm.st")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./main/login.jsp");
+					forward.setRedirect(false);
+				}
+				
+				else if(command.equals("/registerForm.st")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./main/register.jsp");
+					forward.setRedirect(false);
+					
+				}
+				
+				else if(command.equals("/storeList.st")) {
+					
+					action = new StoreListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/storeDetails.st")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./board/storeDetails.jsp");
+					forward.setRedirect(false);
+					
 					
 				}
 				
