@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
-	<Resource
-		name="class7_team2/Project2" 
-		auth="Container" 
-		type="javax.sql.DataSource" 
-		driverClassName="com.mysql.cj.jdbc.Driver" 
-		username="class7_220721_team2" 
-		password="wlghks123" 
-		url="jdbc:mysql://localhost:3306/class7_team2" 
-		maxWait="5000" 
-	 />
+  <Resource
+	name="jdbc/project12"  
+	auth="Container"  
+	type="javax.sql.DataSource"  
+	driverClassName="com.mysql.cj.jdbc.Driver"  
+	username="root"  
+	password="0325"  
+	url="jdbc:mysql://localhost:3307/project_self"  
+	maxWait="5000"  
+  />
 </Context>

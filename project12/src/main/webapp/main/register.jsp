@@ -343,7 +343,7 @@
         </div>
 
           <!-- Footer area-->
-        <jsp:include page="../inc/bottop.jsp"/>
+        <jsp:include page="../inc/bottom.jsp"/>
 
     </body>
 </html>

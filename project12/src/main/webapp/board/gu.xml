@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<city>
+<busan>
+	<gus>
+		<gu>사하구</gu>
+	</gus>
+	<gus>
+		<gu>사상구</gu>
+	</gus>
+	<gus>
+		<gu>동래구</gu>
+	</gus>
+	<gus>
+		<gu>남구</gu>
+	</gus>
+	<gus>
+		<gu>북구</gu>
+	</gus>
+	<gus>
+		<gu>철구</gu>
+	</gus>
+</busan>
+
+<seoul>
+	<gus>
+		<gu>강남구</gu>
+	</gus>
+	<gus>
+		<gu>강동구</gu>
+	</gus>
+	<gus>
+		<gu>강북구</gu>
+	</gus>
+	<gus>
+		<gu>강서구</gu>
+	</gus>
+	<gus>
+		<gu>관악구</gu>
+	</gus>
+	<gus>
+		<gu>광진구</gu>
+	</gus>
+</seoul>
+
+<daejeon>
+	<gus>
+		<gu>성심당구</gu>
+	</gus>
+	<gus>
+		<gu>노잼구</gu>
+	</gus>
+</daejeon>
+
+<wakanda>
+	<gus>
+		<gu>와칸다</gu>
+	</gus>
+	<gus>
+		<gu>곧 개봉</gu>
+	</gus>
+</wakanda>
+
+<forever>
+	<gus>
+		<gu>RIP</gu>
+	</gus>
+	<gus>
+		<gu>black pancer</gu>
+	</gus>
+</forever>
+
+<black>
+	<gus>
+		<gu>블랙</gu>
+	</gus>
+	<gus>
+		<gu>아담</gu>
+	</gus>
+</black>
+</city>
