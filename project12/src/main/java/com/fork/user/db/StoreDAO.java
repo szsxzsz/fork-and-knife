@@ -28,7 +28,7 @@ public class StoreDAO {
 				
 				// DB 연동 정보 불러오기(context.xml 파일정보)
 				// 다운캐스팅
-				DataSource ds = (DataSource)initCTX.lookup("java:comp/env/jdbc/testDB");
+				DataSource ds = (DataSource)initCTX.lookup("java:comp/env/jdbc/project12");
 				
 				// DB 정보(연결) 불러오기
 				con = ds.getConnection();
@@ -301,4 +301,45 @@ public class StoreDAO {
 				return result;
 			}
 			
+			// 멤버 로그인 memberLogin
+			public int memberLogin(String id, String pw) {
+				int result = -1;
+				
+				try {
+					// 1.2. 디비연결
+					con = getConnection();
+					// 3. sql & pstmt
+					sql = "select m_pw from member where m_id=?";
+					pstmt = con.prepareStatement(sql);
+					//???
+					pstmt.setString(1, id);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					
+					if(rs.next()) {
+						// 회원
+						if(pw.equals(rs.getString("m_pw"))) {
+							// 로그인 성공
+							result = 1;
+						}else {
+							// 로그인 실패
+							result = 0;
+						}
+					}else {
+						// 비회원
+						result = -1;
+					}
+					System.out.println(" DAO : 로그인 체크 ("+result+")");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return result;
+			}
+			// 멤버 로그인 memberLogin end
 }

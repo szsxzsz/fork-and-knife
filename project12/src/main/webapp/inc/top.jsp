@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -70,10 +71,18 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
+                    
                     <div class="button navbar-right">
+                    <c:if test="${id==null }">
                         <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">로그인</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./Join.us'" data-wow-delay="0.5s">회원가입</button>
+                    </c:if>
+                    <c:if test="${id.equals('admin') }">
+                    <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">관리자페이지</button>
+                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
+                    </c:if>
                     </div>
+                    
                     <ul class="main-nav nav navbar-nav navbar-right">
                          <li class="dropdown yamm-fw" data-wow-delay="0.1s">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
