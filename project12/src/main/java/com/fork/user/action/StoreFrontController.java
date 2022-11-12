@@ -3,6 +3,7 @@ package com.fork.user.action;
 import java.io.IOException;
 
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -152,7 +153,90 @@ public class StoreFrontController extends HttpServlet {
 				
 				//////// 이메일 인증 /////////
 				
+				/// 관리자페이지(어드민 가게 목록)
+				else if(command.equals("/adminStoreList.us")) {
+					
+					action = new AdminStoreListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+				}
+				/// 관리자페이지(어드민 가게 목록)
 				
+				/// 관리자 페이지 (어드민 일반 회원 목록)
+				else if(command.equals("/adminGenMemList.us")) {
+					
+					action = new AdminGenMemberListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				/// 관리자 페이지 (어드민 일반 회원 목록)
+				
+				else if(command.equals("/adminDeleteGenMemAction.us")) {
+					
+					action = new AdminDelGenMemberAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/adminCeoMemList.us")) {
+					
+					action = new AdminCeoMemberListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/adminDeleteCeoMemAction.us")) {
+					
+					action = new AdminDelCeoMemberAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/adminReportList.us")) {
+					
+					action = new AdminReportListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				// 관리자페이지
 				System.out.println(" C : 2. 가상주소 매핑(패턴 1,2,3) 끝 \n");
 				
 				// 3. 페이지 이동

@@ -1,13 +1,18 @@
 package com.fork.user.db;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
+
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.fork.store.db.StoreDTO;
 
 public class StoreDAO {
 
@@ -342,4 +347,386 @@ public class StoreDAO {
 				return result;
 			}
 			// 멤버 로그인 memberLogin end
+			
+			// 어드민 가게목록불러오기 getStoreList start
+			public List<Map> AdminGetBoardList(int startRow, int pageSize) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				List<Map> boardList = new ArrayList<Map>();
+				HashMap<String,Object> hm = null;
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//					sql = "select * from itwill_board";
+					sql = "select * from store A inner join member B on A.m_no = B.m_no limit ?,?; ";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, startRow-1); // 시작행-1
+					pstmt.setInt(2, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						hm = new HashMap<String,Object>();
+						hm.put("m_name", rs.getString("m_name"));
+						hm.put("s_image", rs.getString("s_image"));
+						hm.put("s_name", rs.getString("s_name"));
+						hm.put("s_no", rs.getLong("s_no"));
+						hm.put("s_type", rs.getString("s_type"));
+						hm.put("s_number",rs.getInt("s_number"));
+						hm.put("s_addr",rs.getString("s_addr"));
+						hm.put("s_regdate", rs.getTimestamp("s_regdate"));
+						//DTO -> List
+						
+						boardList.add(hm);
+					}//while
+					System.out.println(boardList);
+					System.out.println(" DAO : 게시판 목록 저장완료!");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return boardList;
+			}
+			
+			// 어드민 가게 목록 불러오기 getStoreList end
+			
+			// 어드민 가게 삭제하기 
+			public void AdminDeleteStore(int s_no) {			
+				try {
+					con = getConnection();
+					
+					sql = "select * from store where s_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, s_no);
+					pstmt.executeQuery();
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						sql = "delete from store where s_no=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setInt(1, s_no);
+						pstmt.executeUpdate();
+					}
+					
+					
+					System.out.println(" DAO : 회원삭제 완료");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+			
+			}
+			// 어드민 가게 삭제하기
+			
+			// 어드민 일반 회원 목록 불러오기 getGenMemList, General
+			
+			public ArrayList adminGetGenMemList(int startRow, int pageSize) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				ArrayList memList = new ArrayList();
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//					sql = "select * from itwill_board";
+					sql = "select * from member " + "limit ?,? ";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, startRow-1); // 시작행-1
+					pstmt.setInt(2, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						MemberDTO dto = new MemberDTO();
+						
+						dto.setM_no(rs.getInt("m_no"));
+						dto.setM_id(rs.getString("m_id"));
+						dto.setM_nickName(rs.getString("m_nickname"));
+						dto.setM_email(rs.getString("m_email"));
+						dto.setM_gender(rs.getString("m_gender"));
+						dto.setM_tel(rs.getString("m_tel"));
+						dto.setM_birth(rs.getString("m_birth"));
+						dto.setM_regdate(rs.getTimestamp("m_regdate"));
+						dto.setM_name(rs.getString("m_name"));
+						
+						memList.add(dto);
+					}//while
+					
+					System.out.println(" DAO : 게시판 목록 저장완료!"+memList);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return memList;
+			}
+			
+			// 어드민 일반 회원 목록 불러오기 getGenMemList, General
+			
+			// 일반 회원 수 카운트 getGenMemCount
+			public int getGenMemCount() {
+				int cnt = 0;
+				
+				// 1.2. 디비연결
+				try {
+					con = getConnection();
+					// 3. sql
+					sql = "select count(*) from member";
+					pstmt = con.prepareStatement(sql);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					if(rs.next()) {
+						
+//						cnt = rs.getInt(1);
+						cnt = rs.getInt("count(*)");
+					}
+					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
+			
+			// 일반 회원 수 카운트 getGenMemCount
+			
+			// 어드민 일반 회원 삭제
+			public void AdminDeleteGenMem(int m_no) {			
+				try {
+					con = getConnection();
+					
+					sql = "select * from member where m_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, m_no);
+					pstmt.executeQuery();
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						sql = "delete from member where m_no=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setInt(1, m_no);
+						pstmt.executeUpdate();
+					}
+					
+					
+					System.out.println(" DAO : 회원삭제 완료");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+			
+			}
+			// 어드민 일반 회원 삭제
+			
+			// 어드민 점주 회원 갯수 카운트
+			public int getCeoMemCount() {
+				int cnt = 0;
+				
+				// 1.2. 디비연결
+				try {
+					con = getConnection();
+					// 3. sql
+					sql = "select count(*) from ceo";
+					pstmt = con.prepareStatement(sql);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					if(rs.next()) {
+						
+//						cnt = rs.getInt(1);
+						cnt = rs.getInt("count(*)");
+					}
+					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
+			// 어드민 점주 회원 갯수 카운트
+			
+			// 어드민 점주 회원리스트 받기
+			
+			public ArrayList adminGetCeoMemList(int startRow, int pageSize) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				ArrayList memList = new ArrayList();
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//					sql = "select * from itwill_board";
+					sql = "select * from ceo " + "limit ?,? ";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, startRow-1); // 시작행-1
+					pstmt.setInt(2, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						CeoDTO dto = new CeoDTO();
+						
+						dto.setC_no(rs.getInt("c_no"));
+						dto.setC_id(rs.getString("c_id"));
+						dto.setC_nickName(rs.getString("c_nickname"));
+						dto.setC_email(rs.getString("c_email"));
+						dto.setC_name(rs.getString("c_name"));
+						dto.setC_tel(rs.getString("c_tel"));
+						
+						dto.setC_regdate(rs.getTimestamp("c_regdate"));
+						
+						memList.add(dto);
+					}//while
+					
+					System.out.println(" DAO : 게시판 목록 저장완료!"+memList);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return memList;
+			}
+			
+			// 어드민 점주 회원리스트 받기
+			
+			// 어드민 점주 삭제
+			public void AdminDeleteCeoMem(int c_no) {			
+				try {
+					con = getConnection();
+					
+					sql = "select * from ceo where c_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, c_no);
+					pstmt.executeQuery();
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						sql = "delete from ceo where c_no=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setInt(1, c_no);
+						pstmt.executeUpdate();
+					}
+					
+					
+					System.out.println(" DAO : 회원삭제 완료");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+			
+			}
+			// 어드민 점주 삭제
+			
+			// 어드민 신고 갯수 조회
+			public int getReportCount() {
+				int cnt = 0;
+				
+				// 1.2. 디비연결
+				try {
+					con = getConnection();
+					// 3. sql
+					sql = "select count(*) from report";
+					pstmt = con.prepareStatement(sql);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					if(rs.next()) {
+						
+//						cnt = rs.getInt(1);
+						cnt = rs.getInt("count(*)");
+					}
+					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
+			// 어드민 신고 갯수 조회
+			
+			// 어드민 신고 목록 조히
+			public ArrayList adminReportList(int startRow, int pageSize) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				ArrayList repList = new ArrayList();
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//					sql = "select * from itwill_board";
+					sql = "select * from report " + "limit ?,? ";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, startRow-1); // 시작행-1
+					pstmt.setInt(2, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						ReportDTO dto = new ReportDTO();
+						dto.setRep_no(rs.getInt("rep_no"));
+						dto.setS_no(rs.getInt("s_no"));
+						dto.setRep_howmany(rs.getInt("rep_howmany"));
+						dto.setRep_reason(rs.getString("rep_reason"));
+						dto.setRep_memo(rs.getString("rep_memo"));
+						
+						
+						repList.add(dto);
+					}//while
+					
+					System.out.println(" DAO : 게시판 목록 저장완료!"+repList);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return repList;
+			}
+			// 어드민 신고 목록 조회
 }
