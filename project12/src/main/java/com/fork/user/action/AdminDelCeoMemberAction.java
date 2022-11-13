@@ -33,7 +33,7 @@ public class AdminDelCeoMemberAction implements Action {
 		dao.AdminDeleteCeoMem(c_no);
 		
 		
-		forward.setPath("/adminGenMemList.us?pageNum="+pageNum);
+		forward.setPath("/adminCeoMemList.us?pageNum="+pageNum);
 		forward.setRedirect(false);
 		return forward;
 	}
