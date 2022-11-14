@@ -42,7 +42,7 @@ public class JoinAction implements Action {
 			cdto.setC_pw(request.getParameter("pw"));
 			
 			StoreDAO cdao = new StoreDAO();
-			cdao.ceoJoin(cdto);
+//			cdao.ceoJoin(cdto);
 		}
 		
 		

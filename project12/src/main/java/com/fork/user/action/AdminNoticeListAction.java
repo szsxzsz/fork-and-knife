@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fork.user.db.StoreDAO;
 
-public class AdminReportListAction implements Action {
+public class AdminNoticeListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,7 +20,7 @@ public class AdminReportListAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
-		int cnt = dao.getReportCount();
+		int cnt = dao.getNoticeCount();
 		
 		if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
@@ -50,8 +50,8 @@ public class AdminReportListAction implements Action {
 		
 		// 디비에 전체 글 리스트 가져오기
 		//ArrayList boardListAll = dao.getBoardList();
-		List repList = dao.adminGetReportList(startRow,pageSize);
-		
+		List noticeList = dao.adminGetNoticeList(startRow,pageSize);
+		System.out.println(noticeList);
 		
 		////////////////////////////////////////////////////////////
 		// 페이징 처리 (2)
@@ -84,7 +84,7 @@ public class AdminReportListAction implements Action {
 		// 직접출력 -> 위임(대신출력) view.jsp페이지에서 출력
 		// Action -> jsp 페이지 정보 전달(request 영역객체 저장)
 		
-		request.setAttribute("repList", repList);
+		request.setAttribute("noticeList", noticeList);
 		//request.setAttribute("boardListAll", dao.getBoardList());
 		
 		// 페이징처리 정보 저장
@@ -95,7 +95,7 @@ public class AdminReportListAction implements Action {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		
-		forward.setPath("./admin/adminReportList.jsp");
+		forward.setPath("./admin/adminNoticeList.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

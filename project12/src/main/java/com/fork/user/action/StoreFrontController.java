@@ -236,6 +236,66 @@ public class StoreFrontController extends HttpServlet {
 					
 				}
 				
+				else if(command.equals("/adminDeleteReportAction.us")) {
+					
+					action = new AdminDeleteReportAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/adminNoticeList.us")) {
+					
+					action = new AdminNoticeListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				
+				else if(command.equals("/adminDeleteNoticeAction.us")) {
+					
+					action = new AdminDeleteNoticeAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/adminNoticeWrite.us")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./admin/adminNoticeWrite.jsp");
+					forward.setRedirect(true);	
+					
+				}
+				
+				else if(command.equals("/adminNoticeWriteAction.us")) {
+					
+//					action = new AdminNoticeWriteAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
 				// 관리자페이지
 				System.out.println(" C : 2. 가상주소 매핑(패턴 1,2,3) 끝 \n");
 				

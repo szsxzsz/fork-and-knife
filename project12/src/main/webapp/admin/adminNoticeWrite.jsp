@@ -17,6 +17,18 @@
 <link rel="stylesheet" href="../assets/vendor/datepicker/tempusdominus-bootstrap-4.css" />
 <link rel="stylesheet" href="../assets/vendor/inputmask/css/inputmask.css" />
 <link rel="stylesheet" href="../assets/vendor/summernote/css/summernote-bs4.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+	  ${'#eventTerm'}.hide();
+// 	  $('#isEvent').change(function(){
+// 		  if($(this).val()=="이벤트") {
+// 			 ${'#eventTerm'}.show();
+// 		  }
+// 	  });
+  });
+</script>
 </head>
 
 <body>
@@ -79,12 +91,19 @@
 									<div class="card-body">
 										<form>
 											<div class="form-group">
-												<select id="inputText3" type="text" class="form-control">
+												<select id="isEvent" type="text" class="form-control">
 													<option>게시판 선택</option>
 													<option>공지</option>
-													<option>이벤트</option>
+													<option value="이벤트">이벤트</option>
 												</select>
+												<span id="eventTerm">
+													이벤트 기간 :<br> 
+													시작일자 <input type="date" name="eventSdate"><br>
+													종료일자 <input type="date" name="eventEdate">
+												
+												</span>
 											</div>
+											
 											<div class="form-group">
 												<label for="inputText3" class="col-form-label">제목</label> 
 												<input id="inputText3" type="text" class="form-control">

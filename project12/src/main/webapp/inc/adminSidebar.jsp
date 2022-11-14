@@ -37,10 +37,10 @@
                                 <div id="submenu-6" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">공지 목록</a>
+                                            <a class="nav-link" href="./adminNoticeList.us">공지 목록</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="./admin/adminNoticeWrite.jsp">공지 작성</a>
+                                            <a class="nav-link" href="./adminNoticeWrite.us">공지 작성</a>
                                         </li>
                                     </ul>
                                 </div>

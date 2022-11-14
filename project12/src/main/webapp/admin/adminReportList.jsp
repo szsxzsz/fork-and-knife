@@ -29,7 +29,7 @@
 	
 	if(isMove){
 		// 장바구니 페이지 이동
-		location.href="./adminDeleteGenMemAction.us?m_no="+x+"&pageNum="+y;
+		location.href="./adminDeleteReportAction.us?rep_no="+x+"&pageNum="+y;
 	}
 	
 	}
@@ -93,15 +93,15 @@
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class="border-0">No.</th>
-                                                        <th class="border-0">아이디</th>
-                                                        <th class="border-0">닉네임</th>
-                                                        <th class="border-0">이름</th>
-                                                        <th class="border-0">이메일</th>
-                                                        <th class="border-0">성별</th>
-                                                        <th class="border-0">전화번호</th>
-                                                        <th class="border-0">생년월일</th>
-                                                        <th class="border-0">생성일자</th>
+                                                        <th class="border-0">가게 이름</th>
+                                                        <th class="border-0">점주 이름</th>
+                                                        <th class="border-0">신고자 ID</th>
+                                                        <th class="border-0">신고자명</th>
+                                                        <th class="border-0">신고 사유</th>
+                                                        <th class="border-0">신고 횟수</th>
+                                                        <th class="border-0">신고일자</th>
                                                         <th class="border-0">관리</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <!-- 가게 정보입력 -->
@@ -113,20 +113,20 @@
 <!--                                                         <td> -->
 <!--                                                             <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div> -->
 <!--                                                         </td> -->
-                                                        <td>${rep.s_no }</td>
-                                                        <td>${rep.m_nickName }</td>
-                                                        <td>${gml.m_name}</td>
+                                                        <td>${rep.s_name }</td>
+                                                        <td>${rep.c_name }</td>
+                                                        <td>${rep.m_id}</td>
                                                         
-                                                        <td>${gml.m_email }</td>
-                                                        <td>${gml.m_gender }</td>
-                                                        <td>${gml.m_tel }</td>
+                                                        <td>${rep.m_name }</td>
+                                                        <td>${rep.rep_reason }</td>
+                                                        <td>${rep.rep_howmany }</td>
                                                       
-                                                        <td>${gml.m_birth }</td>
-                                                        <td>${gml.m_regdate }
+                                                        <td>${rep.rep_date}</td>
+                                                       
                                                         <td>
                                                         	<a href="#">수정</a> 
                                                         	
-                                                        	<a href="javascript: isDelete(${gml.m_no },${pageNum })">삭제</a>
+                                                        	<a href="javascript: isDelete(${rep.rep_no },${pageNum })">삭제</a>
                                                          </td>
                                                     </tr>
                                                    </c:forEach>
