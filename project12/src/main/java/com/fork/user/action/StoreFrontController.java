@@ -280,13 +280,13 @@ public class StoreFrontController extends HttpServlet {
 					
 					forward = new ActionForward();
 					forward.setPath("./admin/adminNoticeWrite.jsp");
-					forward.setRedirect(true);	
+					forward.setRedirect(false);	
 					
 				}
 				
 				else if(command.equals("/adminNoticeWriteAction.us")) {
 					
-//					action = new AdminNoticeWriteAction();
+					action = new AdminNoticeWriteAction();
 					
 					try {
 						forward = action.execute(request, response);
@@ -296,6 +296,15 @@ public class StoreFrontController extends HttpServlet {
 					}
 					
 				}
+				else if(command.equals("/genMemDetail.us")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./admin/genMemDetail.jsp");
+					forward.setRedirect(false);	
+					
+				}
+				
+				
 				// 관리자페이지
 				System.out.println(" C : 2. 가상주소 매핑(패턴 1,2,3) 끝 \n");
 				

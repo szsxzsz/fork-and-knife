@@ -799,8 +799,8 @@ public class StoreDAO {
 						dto.setN_title(rs.getString("n_title"));
 						dto.setN_readcount(rs.getInt("n_readcount"));
 						dto.setN_date(rs.getTimestamp("n_date"));
-						dto.setN_eventSdate(rs.getTimestamp("n_eventSdate"));
-						dto.setN_eventEdate(rs.getTimestamp("n_eventEdate"));
+						dto.setN_eventSdate(rs.getString("n_eventSdate"));
+						dto.setN_eventEdate(rs.getString("n_eventEdate"));
 						
 						noticeList.add(dto);
 					}//while
@@ -880,4 +880,50 @@ public class StoreDAO {
 			
 			}
 			// 어드민 공지 삭제
+			
+			// 어드민 공지 등록
+			public void InsertNotice(NoticeDTO dto) {
+				
+				try {
+					
+					int cnt = 1;
+					
+					con = getConnection();
+					
+					sql = "select max(n_no) from notice";
+					pstmt = con.prepareStatement(sql);
+					
+					rs = pstmt.executeQuery();
+					
+					
+					if(rs.next()) {
+						cnt = rs.getInt(1)+1;
+					}
+					
+					
+					sql = "insert into notice values (?,?,now(),?,?,?,?,?,?)";
+					
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, cnt);
+					pstmt.setString(2, dto.getN_title());
+					
+					pstmt.setInt(3, dto.getN_readcount());
+					pstmt.setInt(4, dto.getN_isevent());
+					pstmt.setString(5, dto.getN_img());
+					pstmt.setString(6, dto.getN_content());
+					pstmt.setString(7, dto.getN_eventSdate());
+					pstmt.setString(8, dto.getN_eventEdate());
+					
+					pstmt.executeUpdate();
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+			}
+			// 어드민 공지 등록
 }
