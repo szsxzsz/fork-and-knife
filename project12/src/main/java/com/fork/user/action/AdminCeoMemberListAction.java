@@ -20,16 +20,29 @@ public class AdminCeoMemberListAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
-		int cnt = dao.getCeoMemCount();
 		
-		if (!(id.equals("admin"))) {
+		
+		
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-			
-		} // 로그인 제어
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
+		// 로그인 제어
 		
 		int pageSize = 9;
+		String c_id = (String)request.getParameter("c_id");
+		
+		
+		
+		int cnt = dao.getCeoMemCount();
+		
 		
 		// http://localhost:8088/JSP/board/boardList.jsp?pageNum=2
 		
@@ -50,7 +63,18 @@ public class AdminCeoMemberListAction implements Action {
 		
 		// 디비에 전체 글 리스트 가져오기
 		//ArrayList boardListAll = dao.getBoardList();
-		List ceoMemList = dao.adminGetCeoMemList(startRow,pageSize);
+		List ceoMemList = null;
+		StringBuffer sb = new StringBuffer();
+		if (c_id!=null) {
+			c_id = c_id.trim();
+			sb.append(c_id);
+			sb.insert(0, "%");
+			sb.insert(c_id.length()+1, "%");
+			ceoMemList = dao.adminGetCeoMemList(sb.toString());
+		}
+		else {
+			ceoMemList = dao.adminGetCeoMemList(startRow,pageSize);
+		}
 		
 		
 		////////////////////////////////////////////////////////////

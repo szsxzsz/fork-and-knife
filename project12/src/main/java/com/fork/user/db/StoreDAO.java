@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -349,7 +350,7 @@ public class StoreDAO {
 			// 멤버 로그인 memberLogin end
 			
 			// 어드민 가게목록불러오기 getStoreList start
-			public List<Map> AdminGetBoardList(int startRow, int pageSize) {
+			public List<Map> adminGetBoardList(int startRow, int pageSize) {
 				System.out.println(" DAO : getBoardList() 호출 ");
 				// 글정보 모두 저장하는 배열
 				List<Map> boardList = new ArrayList<Map>();
@@ -398,7 +399,7 @@ public class StoreDAO {
 			// 어드민 가게 목록 불러오기 getStoreList end
 			
 			// 어드민 가게 삭제하기 
-			public void AdminDeleteStore(int s_no) {			
+			public void adminDeleteStore(int s_no) {			
 				try {
 					con = getConnection();
 					
@@ -479,6 +480,56 @@ public class StoreDAO {
 			}
 			
 			// 어드민 일반 회원 목록 불러오기 getGenMemList, General
+			
+			// 어드민 일반 회원 목록 불러오기 getGenMemList, General
+			
+			public ArrayList adminGetGenMemList(String m_id) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				ArrayList memList = new ArrayList();
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//								sql = "select * from itwill_board";
+					sql = "select * from member where m_id Like ?";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setString(1, m_id); // 시작행-1
+					// 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						MemberDTO dto = new MemberDTO();
+						
+						dto.setM_no(rs.getInt("m_no"));
+						dto.setM_id(rs.getString("m_id"));
+						dto.setM_nickName(rs.getString("m_nickname"));
+						dto.setM_email(rs.getString("m_email"));
+						dto.setM_gender(rs.getString("m_gender"));
+						dto.setM_tel(rs.getString("m_tel"));
+						dto.setM_birth(rs.getString("m_birth"));
+						dto.setM_regdate(rs.getTimestamp("m_regdate"));
+						dto.setM_name(rs.getString("m_name"));
+						
+						memList.add(dto);
+					}//while
+					
+					System.out.println(" DAO : 게시판 목록 저장완료!"+memList);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return memList;
+			}
+						
+						// 어드민 일반 회원 목록 불러오기 getGenMemList, General
 			
 			// 일반 회원 수 카운트 getGenMemCount
 			public int getGenMemCount() {
@@ -574,6 +625,8 @@ public class StoreDAO {
 			}
 			// 어드민 점주 회원 갯수 카운트
 			
+			
+			
 			// 어드민 점주 회원리스트 받기
 			
 			public ArrayList adminGetCeoMemList(int startRow, int pageSize) {
@@ -623,8 +676,57 @@ public class StoreDAO {
 			
 			// 어드민 점주 회원리스트 받기
 			
+			// 어드민 점주 회원리스트 받기
+			
+			public ArrayList adminGetCeoMemList(String c_id) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				ArrayList memList = new ArrayList();
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//								sql = "select * from itwill_board";
+					sql = "select * from ceo where c_id Like ?";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setString(1, c_id); // 시작행-1
+					
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						CeoDTO dto = new CeoDTO();
+						
+						dto.setC_no(rs.getInt("c_no"));
+						dto.setC_id(rs.getString("c_id"));
+						dto.setC_nickName(rs.getString("c_nickname"));
+						dto.setC_email(rs.getString("c_email"));
+						dto.setC_name(rs.getString("c_name"));
+						dto.setC_tel(rs.getString("c_tel"));
+						
+						dto.setC_regdate(rs.getTimestamp("c_regdate"));
+						
+						memList.add(dto);
+					}//while
+					
+					System.out.println(" DAO : 게시판 목록 저장완료!"+memList);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return memList;
+			}
+						
+						// 어드민 점주 회원리스트 받기
+			
 			// 어드민 점주 삭제
-			public void AdminDeleteCeoMem(int c_no) {			
+			public void adminDeleteCeoMem(int c_no) {			
 				try {
 					con = getConnection();
 					
@@ -739,7 +841,7 @@ public class StoreDAO {
 			// 어드민 신고 목록 조회
 			
 			// 어드민 신고 삭제
-			public void AdminDeleteReport(int rep_no) {			
+			public void adminDeleteReport(int rep_no) {			
 				try {
 					con = getConnection();
 					
@@ -882,7 +984,7 @@ public class StoreDAO {
 			// 어드민 공지 삭제
 			
 			// 어드민 공지 등록
-			public void InsertNotice(NoticeDTO dto) {
+			public void insertNotice(NoticeDTO dto) {
 				
 				try {
 					
@@ -926,4 +1028,84 @@ public class StoreDAO {
 				
 			}
 			// 어드민 공지 등록
+			
+			// 어드민 회원 상세 정보
+			public MemberDTO adminGetGenMemDetail(int m_no) {			
+				MemberDTO dto = null;
+				try {
+					con = getConnection();
+					
+					sql = "select * from member where m_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, m_no);
+					pstmt.executeQuery();
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						dto = new MemberDTO();
+						
+						dto.setM_no(m_no);
+						dto.setM_id(rs.getString("m_id"));
+						dto.setM_name(rs.getString("m_name"));
+						dto.setM_email(rs.getString("m_email"));
+						dto.setM_nickName(rs.getString("m_nickname"));
+						dto.setM_birth(rs.getString("m_birth"));
+						dto.setM_gender(rs.getString("m_gender"));
+						dto.setM_tel(rs.getString("m_tel"));
+						dto.setM_regdate(rs.getTimestamp("m_regdate"));
+					
+					}
+					
+					
+					System.out.println(" DAO : 회원삭제 완료");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+			return dto;
+			}
+			// 어드민 회원 상세 정보
+			
+			// 어드민 회원 상세, 각종 횟수
+			
+			public HashMap<String, Integer> adminGetGenCount(int m_no) {
+				
+				HashMap<String, Integer> hs = new HashMap<String, Integer>();
+				
+				try {
+					con=getConnection();
+					sql = "select (select count(*) from reviewcs where m_no=?) A,"
+							+ "(select count(*) from report where m_no=?) B,"
+							+ "(select count(*) from reservation where m_no=?) C,"
+							+ "(select count(*) from payment where m_no=?) D";
+					pstmt = con.prepareStatement(sql);
+					for (int i=1;i<5;i++) {
+						pstmt.setInt(i, m_no);
+					}
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						hs.put("review", rs.getInt("A"));
+						hs.put("report", rs.getInt("B"));
+						hs.put("reservation", rs.getInt("C"));
+						hs.put("payment", rs.getInt("D"));
+					}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return hs;
+			}
+			
+			// 어드민 회원 상세, 각종 횟수
+			
+			
 }

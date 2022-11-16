@@ -19,18 +19,23 @@ public class AdminDelCeoMemberAction implements Action {
 	
 		ActionForward forward = new ActionForward();
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-					
-			} 
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
 		// 로그인 제어
 		int c_no = Integer.parseInt(request.getParameter("c_no"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		
-		dao.AdminDeleteCeoMem(c_no);
+		dao.adminDeleteCeoMem(c_no);
 		
 		
 		forward.setPath("/adminCeoMemList.us?pageNum="+pageNum);

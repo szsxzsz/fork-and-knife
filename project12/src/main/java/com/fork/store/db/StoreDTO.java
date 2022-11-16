@@ -19,7 +19,7 @@ public class StoreDTO {
 	private String s_menuprice;
 	private String s_menuImg;
 	private int s_number; // 사업자 번호
-	private Long m_no;
+	private Long c_no;
 	private Double s_star;
 	
 	

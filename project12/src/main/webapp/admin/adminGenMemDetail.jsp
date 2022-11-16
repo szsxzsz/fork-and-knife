@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h3 class="mb-2">Influencer Profile </h3>
+                                <h3 class="mb-2">회원 상세정보</h3>
                                 <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
@@ -80,16 +80,16 @@
                                         <img src="assets/images/avatar-1.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
                                     </div>
                                     <div class="text-center">
-                                        <h2 class="font-24 mb-0">Michael J. Christy</h2>
-                                        <p>Project Manager @Influnce</p>
+                                        <h2 class="font-24 mb-0">${dto.m_name }</h2>
+                                        <p>@General</p>
                                     </div>
                                 </div>
                                 <div class="card-body border-top">
                                     <h3 class="font-16">Contact Information</h3>
                                     <div class="">
                                         <ul class="list-unstyled mb-0">
-                                        <li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i>michaelchristy@gmail.com</li>
-                                        <li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>(900) 123 4567</li>
+                                        <li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i>${dto.m_email }</li>
+                                        <li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>${dto.m_tel }</li>
                                     </ul>
                                     </div>
                                 </div>
@@ -159,38 +159,38 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="section-block">
-                                                    <h3 class="section-title">My Campaign State</h3>
+                                                    <h3 class="section-title">얼마나 활동했노?</h3>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">9</h1>
-                                                        <p>Campaign Invitations</p>
+                                                        <h1 class="mb-1">${cnt["review"]}</h1>
+                                                        <p>등록된 리뷰 갯수</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">35</h1>
-                                                        <p>Finished Campaigns</p>
+                                                        <h1 class="mb-1">${cnt["report"]}</h1>
+                                                        <p>등록된 신고 갯수</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">8</h1>
-                                                        <p>Accepted Campaigns</p>
+                                                        <h1 class="mb-1">${cnt["reservation"]}</h1>
+                                                        <p>등록된 예약 갯수</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">1</h1>
-                                                        <p>Declined Campaigns</p>
+                                                        <h1 class="mb-1">${cnt["payment"] }</h1>
+                                                        <p>등록된 결제 횟수</p>
                                                     </div>
                                                 </div>
                                             </div>

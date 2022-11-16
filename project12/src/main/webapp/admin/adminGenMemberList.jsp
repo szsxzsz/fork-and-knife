@@ -95,10 +95,10 @@
                                 <div class="influence-profile-content pills-regular">
                                 <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="pills-general-tab" data-toggle="pill" href="#pills-general" role="tab" aria-controls="pills-general" aria-selected="true">일반 회원</a>
+                                        <a class="nav-link active" href="./adminGenMemList.us">일반 회원</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-ceo-tab" data-toggle="pill" href="#pills-ceo" role="tab" aria-controls="pills-ceo" aria-selected="false">점주 회원</a>
+                                        <a class="nav-link" href="./adminCeoMemList.us" >점주 회원</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
@@ -131,7 +131,7 @@
 <!--                                                         <td> -->
 <!--                                                             <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div> -->
 <!--                                                         </td> -->
-                                                        <td><a href="./genMemDetail.us">${gml.m_id }</a></td>
+                                                        <td><a href="./adminGenMemDetail.us?m_no=${gml.m_no }">${gml.m_id }</a></td>
                                                         <td>${gml.m_nickName }</td>
                                                         <td>${gml.m_name}</td>
                                                         
@@ -150,28 +150,29 @@
                                                    </c:forEach>
                                                     <tr>
                                                     	<td colspan="4"> <!-- 페이지 -->
-                                                    	<div>
-                                                    		<c:if test="${reqeustScope.totalCnt != 0 }">
-	
-																<!-- 이전 -->
-																<c:if test="${startPage > pageBlock }">
-																	<a href="./adminGenMemList.us?pageNum=${startPage-pageBlock }">Prev</a>
-																</c:if>
-																<!-- 페이지 번호(1,2,3....) -->
-																<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-																	<a href="./adminGenMemList.us?pageNum=${i }">${i }&nbsp;&nbsp;</a>
-																</c:forEach>
-																<!-- 다음 -->
-																<c:if test="${endPage < pageCount }">
-																	<a href="./adminGenMemList.us?pageNum=${startPage+pageBlock }">[다음]</a>
-																</c:if>
-															</c:if>
-														</div>
+                                                    	
+                                                    		
+										<nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                            	<c:if test="${reqeustScope.totalCnt != 0 }">
+                                            		<c:if test="${startPage > pageBlock }">
+		                                                <li class="page-item"><a class="page-link" href="./adminGenMemList.us?pageNum=${startPage-pageBlock }">Previous</a></li>
+		                                            </c:if>
+		                                            <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+		                                                <li class="page-item"><a class="page-link"  href="./adminGenMemList.us?pageNum=${i }">${i }</a></li>
+		                                            </c:forEach>   
+		                                            <c:if test="${endPage < pageCount }">
+		                                                <li class="page-item"><a class="page-link"  href="./adminGenMemList.us?pageNum=${startPage+pageBlock }">[Next]]</a></li>
+		                                            </c:if>
+		                                        </c:if>
+                                            </ul>
+                                        </nav>
+														
 														<!-- 페이지 위치 확인  -->
 														
 														<!-- 페이지 위치 확인  -->
-														<td>
-                                                        <td colspan="5"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
+														</td>
+                                                        
                                                     </tr>
                                                 </tbody>
                                                 <!-- 가게 정보입력 -->
@@ -182,8 +183,8 @@
                             				</div>
                             
                             			</div>
-                            			<div class="tab-pane fade show active" id="pills-ceo" role="tabpanel" aria-labelledby="pills-ceo-tab">
-                            			<div class="card">
+                            		<div class="tab-pane fade" id="pills-ceo" role="tabpanel" aria-labelledby="pills-ceo-tab">
+                            		<div class="card">
                                     <h5 class="card-header">CEO Member List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
@@ -259,6 +260,14 @@
 
             						</div>
                         		</div>
+                    		</div>
+                    		<div class="col-xl-9">
+                    		<form action="./adminGenMemList.us" method="post">
+                                <input class="form-controlkjh" type="text" placeholder="아이디 검색" name="m_id">
+                                <input type="submit" value="검색" class="btn btn-primary">
+                                <a href="./adminGenMemList.us" class="btn btn-primary">전체보기</a>
+                            </form>
+                            	
                     		</div>
                 		</div>
                 	</div>

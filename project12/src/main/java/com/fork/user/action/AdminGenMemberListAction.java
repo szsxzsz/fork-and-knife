@@ -20,15 +20,24 @@ public class AdminGenMemberListAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
-		int cnt = dao.getGenMemCount();
-		
-		if (!(id.equals("admin"))) {
+
+		//로그인 제어
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-			
-		} // 로그인 제어
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
+		// 로그인 제어
+		String m_id = (String)request.getParameter("m_id");
 		
+		// 일반회원 페이징
+		int cnt = dao.getGenMemCount();
 		int pageSize = 9;
 		
 		// http://localhost:8088/JSP/board/boardList.jsp?pageNum=2
@@ -50,8 +59,18 @@ public class AdminGenMemberListAction implements Action {
 		
 		// 디비에 전체 글 리스트 가져오기
 		//ArrayList boardListAll = dao.getBoardList();
-		List genMemList = dao.adminGetGenMemList(startRow,pageSize);
-		
+		List genMemList = null;
+		StringBuffer sb = new StringBuffer();
+		if (m_id!=null) {
+			m_id = m_id.trim();
+			sb.append(m_id);
+			sb.insert(0, "%");
+			sb.insert(m_id.length()+1, "%");
+			genMemList = dao.adminGetGenMemList(sb.toString());
+		}
+		else {
+			genMemList = dao.adminGetGenMemList(startRow,pageSize);
+		}
 		
 		////////////////////////////////////////////////////////////
 		// 페이징 처리 (2)
@@ -94,6 +113,10 @@ public class AdminGenMemberListAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		// 일반회원 페이징
+		
+		
+		
 		
 		forward.setPath("./admin/adminGenMemberList.jsp");
 		forward.setRedirect(false);

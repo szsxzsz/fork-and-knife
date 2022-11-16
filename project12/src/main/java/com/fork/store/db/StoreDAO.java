@@ -81,10 +81,11 @@ public class StoreDAO {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, it.next());
 				
+				
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 				StoreDTO dto = new StoreDTO();
-				dto.setM_no(rs.getLong("m_no"));
+				dto.setC_no(rs.getLong("c_no"));
 				dto.setS_image(rs.getString("s_image"));
 				dto.setS_name(rs.getString("s_name"));
 				dto.setS_star(rs.getDouble("s_star"));
@@ -130,7 +131,7 @@ public class StoreDAO {
 			while(rs.next()) {
 				// DB -> DTO
 				StoreDTO dto = new StoreDTO();
-				dto.setM_no(rs.getLong("m_no"));
+				dto.setC_no(rs.getLong("c_no"));
 				dto.setS_image(rs.getString("s_image"));
 				dto.setS_name(rs.getString("s_name"));
 				dto.setS_star(rs.getDouble("s_star"));

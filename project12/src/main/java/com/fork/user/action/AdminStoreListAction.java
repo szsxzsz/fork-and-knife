@@ -21,12 +21,18 @@ public class AdminStoreListAction implements Action {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-			
-		} // 로그인 제어
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
+		// 로그인 제어
 		
 		
 		
@@ -55,7 +61,7 @@ public class AdminStoreListAction implements Action {
 		StoreDAO udao = new StoreDAO();
 		// 디비에 전체 글 리스트 가져오기
 //		ArrayList boardListAll =  dao.getBoardList();
-		List<Map> storeListAll = udao.AdminGetBoardList(startRow, pageSize);
+		List<Map> storeListAll = udao.adminGetBoardList(startRow, pageSize);
 		   /////////////////////////////////////////////////////////////////////////////////////////////////
 			// 페이징 처리 (2)
 			

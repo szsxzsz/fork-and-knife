@@ -22,12 +22,18 @@ public class AdminNoticeListAction implements Action {
 		String id = (String)session.getAttribute("id");
 		int cnt = dao.getNoticeCount();
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-			
-		} // 로그인 제어
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
+		// 로그인 제어
 		
 		int pageSize = 9;
 		

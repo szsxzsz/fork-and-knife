@@ -22,12 +22,17 @@ public class AdminNoticeWriteAction implements Action {
 	
 		ActionForward forward = new ActionForward();
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-					
-			} 
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
 		// 로그인 제어
 		
 		NoticeDTO dto = new NoticeDTO();
@@ -77,7 +82,7 @@ public class AdminNoticeWriteAction implements Action {
 		dto.setN_eventEdate(multi.getParameter("eventE"));
 		
 		
-		dao.InsertNotice(dto);
+		dao.insertNotice(dto);
 		
 		forward.setPath("./adminNoticeList.us");
 		forward.setRedirect(true);

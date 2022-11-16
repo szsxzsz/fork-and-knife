@@ -19,18 +19,23 @@ public class AdminDeleteStoreListACtion implements Action {
 	
 		ActionForward forward = new ActionForward();
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-			
-		} // 로그인 제어
-		
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
+		// 로그인 제어
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		
-		dao.AdminDeleteStore(s_no);
+		dao.adminDeleteStore(s_no);
 		
 		
 		forward.setPath("/adminList.us?pageNum="+pageNum);

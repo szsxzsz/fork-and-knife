@@ -17,10 +17,7 @@
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="./adminGenMemList.us">회원 목록(일반)</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="./adminCeoMemList.us">회원 목록(점주)</a>
+                                            <a class="nav-link" href="./adminGenMemList.us">회원 목록</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="./adminStoreList.us">가게 목록</a>

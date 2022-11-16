@@ -19,18 +19,23 @@ public class AdminDeleteReportAction implements Action {
 	
 		ActionForward forward = new ActionForward();
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-					
-			} 
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
 		// 로그인 제어
 		int rep_no = Integer.parseInt(request.getParameter("rep_no"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		
-		dao.AdminDeleteReport(rep_no);
+		dao.adminDeleteReport(rep_no);
 		
 		
 		forward.setPath("/adminReportList.us?pageNum="+pageNum);

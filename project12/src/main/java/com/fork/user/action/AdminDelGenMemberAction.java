@@ -19,12 +19,17 @@ public class AdminDelGenMemberAction implements Action {
 	
 		ActionForward forward = new ActionForward();
 		
-		if (!(id.equals("admin"))) {
+		if(id!=null) {
+			if (!(id.equals("admin"))) {
 			forward.setPath("./main.st");
 			forward.setRedirect(true);
 			return forward;
-					
-			} 
+			}
+		} else{
+			forward.setPath("./main.st");
+			forward.setRedirect(true);
+			return forward;
+		}
 		// 로그인 제어
 		int m_no = Integer.parseInt(request.getParameter("m_no"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
@@ -33,7 +38,7 @@ public class AdminDelGenMemberAction implements Action {
 		dao.AdminDeleteGenMem(m_no);
 		
 		
-		forward.setPath("/adminGenCeoList.us?pageNum="+pageNum);
+		forward.setPath("/adminGenMemList.us?pageNum="+pageNum);
 		forward.setRedirect(false);
 		return forward;
 	}

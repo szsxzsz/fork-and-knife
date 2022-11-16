@@ -296,11 +296,17 @@ public class StoreFrontController extends HttpServlet {
 					}
 					
 				}
-				else if(command.equals("/genMemDetail.us")) {
+				else if(command.equals("/adminGenMemDetail.us")) {
 					
-					forward = new ActionForward();
-					forward.setPath("./admin/genMemDetail.jsp");
-					forward.setRedirect(false);	
+					action = new AdminGenMemdetailAction();
+					
+					try {
+						forward = action.execute(request, response);
+	
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 				
