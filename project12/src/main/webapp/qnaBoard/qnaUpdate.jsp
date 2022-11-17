@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -9,7 +10,7 @@
     <head>
          <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Fork And Knife | QnA ReWrite</title>
+        <title>Fork And Knife | QnA Write</title>
         <meta name="description" content="company is a real-estate template">
         <meta name="author" content="Kimarotec">
         <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -61,52 +62,66 @@
         <!-- End page header -->
 
         <!-- property area -->
+        <%
+          	String pageNum = request.getParameter("pageNum");
+          	int s_no = Integer.parseInt(request.getParameter("s_no"));
+          	int rev_no = Integer.parseInt(request.getParameter("rev_no"));
+          %>
         <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
             <div class="container">  
 
 <!--                 <div class="col-md-9"> -->
 
 <!--                     <div class="" id="contact1">                         -->
-                       
-                        <hr>
-                        <h2>QnA 답변하기</h2>
-                        <form action="./QnaBoardWriteAction.br" method="post" enctype="multipart/form-data">
+      
+   <hr>
+   <h2>QnA 문의 수정하기</h2>
+
+   <form action="./QnaBoardUpdateAction.br?pageNum=${pageNum}&s_no=${dto.s_no}&rev_no=${dto.rev_no}" method="post" enctype="multipart/form-data">
 <!--                             <div class="row"> -->
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
-                                       
+<%-- <input type="hidden" name="s_no" value="${s_no}"> --%>
+<%-- <input type="hidden" name="rev_no" value="${rev_no}"> --%>
+    <label for="firstname">문의분류</label>
+        
+        <input type="radio" value="reser" name="qna_sort" <c:if test="${qna_sort eq 'reser'}">checked</c:if>>예약 문의
+        <input type="radio" name="qna_sort" value="store" <c:if test="${qna_sort eq 'store'}">checked</c:if>>식당 문의
+        <input type="radio" name="qna_sort" value="etc" <c:if test="${qna_sort eq 'etc'}">checked</c:if>>기타 문의
+<!--                                     </div> -->
+<!--                                 </div> -->
+<br>
+<!--                                 <div class="col-sm-6"> -->
+<!--                                     <div class="form-group"> -->
+        <label for="subject">제목</label>
+        <input type="text" class="form-control" id="subject" name="rev_subject" value="${dto.rev_subject}">
 <!--                                     </div> -->
 <!--                                 </div> -->
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
-                                         <label for="subject">제목</label>
-                                        <input type="text" class="form-control" id="subject" name="rev_subject" value="[RE]">
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 <div class="col-sm-6"> -->
-<!--                                     <div class="form-group"> -->
-                                        <label for="subject">첨부파일</label>
-                                        <input type="file" class="form-control" id="file" name="rev_file">
+        <label for="subject">첨부파일</label>
+        <input type="file" class="form-control" id="file" name="rev_file" value="${dto.rev_file}">
 <!--                                     </div> -->
 <!--                                 </div> -->
 <!--                                 <div class="col-sm-12"> -->
 <!--                                     <div class="form-group"> -->
-                                       <label for="message">내용</label>
-                                        <textarea id="message" class="form-control1" name="rev_content"></textarea>
+        <label for="message">내용</label>
+        <textarea id="message" class="form-control1" name="rev_content">${dto.rev_content}</textarea>
 <!--                                     </div> -->
 <!--                                 </div> -->
-									<br>
+<br>
 <!--                                 <div class="col-sm-12 text-center"> -->
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> QnA 답변하기 </button>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> QnA 수정하기 </button>
 <!--                                 </div> -->
 <!--                             </div> -->
-                            <!-- /.row -->
-                        </form>
-                    </div>
+<!-- /.row -->
+    </form>
+</div>
 <!--                 </div> -->
-                <!-- /.col-md-9 -->              
+<!-- /.col-md-9 -->              
 <!--             </div> -->
-        </div>
+</div>
+        
         
          <!-- Footer area-->
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
