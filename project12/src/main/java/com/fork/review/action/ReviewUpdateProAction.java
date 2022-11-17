@@ -35,20 +35,21 @@ public class ReviewUpdateProAction implements Action {
 		// 전달된 데이터 저장(파라미터)
 		// DTO 객체 생성
 		ReviewDTO dto = new ReviewDTO();
-		dto.setS_no(Integer.parseInt(multi.getParameter("s_no")));
-		dto.setRev_no(Integer.parseInt(multi.getParameter("Rev_no")));
+//		dto.setS_no(Integer.parseInt(multi.getParameter("s_no")));
+//		dto.setRev_no(Integer.parseInt(multi.getParameter("Rev_no")));
 		dto.setRev_subject(multi.getParameter("rev_subject"));
 		dto.setRev_content(multi.getParameter("Rev_content"));
-		dto.setRev_star(Integer.parseInt(multi.getParameter("Rev_star")));
+		if(multi.getParameter("rev_star")!=null) {
+			dto.setRev_star(Integer.parseInt(multi.getParameter("rev_star")));
+		}
 		dto.setRev_file(multi.getFilesystemName("rev_file"));
 		
 		String pageNum = multi.getParameter("pageNum");
 		
 		// DB에 가서 수정
 		ReviewDAO dao = new ReviewDAO();
-		int result = dao.updateReview(dto);
+		dao.updateReview(dto);
 		
-		System.out.println(" M : 수정완료 "+result);
 		
 		// 페이지 이동 (컨트롤러 X => 티켓 생성x)	
 		// JS 사용 페이지 이동
@@ -61,31 +62,34 @@ public class ReviewUpdateProAction implements Action {
 		
 		// 아이디 같으면 수정되게 해야함
 		
-		if(result == 1) {
-			out.print("<script>");
-			out.print(" alert('수정 완료!');");
-			out.print(" location.href='./ReviewList.rv?pageNum="+pageNum+"'; ");
-			out.print("</script>");
-			out.close();
-			
-			return null;	// 더이상 실행없이 컨트롤러로 전달		
-		}else if(result == 0) {
-			out.print("<script>");
-			out.print(" alert('로그인하셈'); ");
-			out.print(" history.back(); ");
-			out.print("</script>");
-			out.close();
-			
-			return null;
-		}else { // result == -1
-			out.print("<script>");
-			out.print(" alert('게시판 글없음!! 수정 X '); ");
-			out.print(" history.back(); ");
-			out.print("</script>");
-			out.close();
-			
-			return null;
-		}
+//		if(result == 1) {
+//			out.print("<script>");
+//			out.print(" alert('수정 완료!');");
+//			out.print(" location.href='./ReviewList.rv?pageNum="+pageNum+"'; ");
+//			out.print("</script>");
+//			out.close();
+//			
+//			return null;	// 더이상 실행없이 컨트롤러로 전달		
+//		}else if(result == 0) {
+//			out.print("<script>");
+//			out.print(" alert('로그인하셈'); ");
+//			out.print(" history.back(); ");
+//			out.print("</script>");
+//			out.close();
+//			
+//			return null;
+//		}else { // result == -1
+//			out.print("<script>");
+//			out.print(" alert('게시판 글없음!! 수정 X '); ");
+//			out.print(" history.back(); ");
+//			out.print("</script>");
+//			out.close();
+		ActionForward forward = new ActionForward();
+		forward.setPath("./ReviewList.rv");
+		forward.setRedirect(true);
+		
+		return forward;
+		
 		
 	}
 

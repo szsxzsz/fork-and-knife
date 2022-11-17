@@ -31,7 +31,7 @@ public class BookDAO {
 		// Context 객체 생성 (JNDI API)
 		Context initCTX = new InitialContext();
 		// 디비연동정보 불러오기 (context.xml 파일정보)
-		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/funweb");
+		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/project12");
 		// 디비정보(연결) 불러오기
 		con = ds.getConnection();
 

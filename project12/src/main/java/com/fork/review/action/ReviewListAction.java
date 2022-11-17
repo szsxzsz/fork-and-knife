@@ -38,7 +38,8 @@ public class ReviewListAction implements Action {
 		
 		// 현 페이지가 몇 페이지 인지 확인
 		
-		
+		String s_name = request.getParameter("s_name");
+
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
 			pageNum = "1";

@@ -24,22 +24,27 @@ crossorigin="anonymous"/>
 <!--  eatigo -->
 <link rel="stylesheet" href="assets/css/lightslider.min.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+     
       
 <script src="./board/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(function() {
-	    $('.add-to-fav').on('click', function() {
-	        var heart = $(this).data('heart');    
-	        $(this).closest('li').find('.it_heart').val(heart);
-	    });
-	});
-	function sendMap(){
-    	var address = $('#addrSend').value();
-    	alert('alert');
-    	
-    	
-    }
+	
+	alert('hi');
+	
+	//좋아
+	$('.like-content').one('click','.like-review', function(e) {
+		$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
+		$(this).children('.fa-heart').addClass('animate-like');
+		
+		 var likeValue = $(this).attr("data-rate");
+		/*  5 .like-content 클릭시 
+		 *  6 .like-content 의 html를 변경 (간단하게 문구만 변경)
+		 *  7 .like-content class의 자식인 .fa-heart에 class를 animate-like 추가
+		 *  .one 제이쿼리 함수는 이벤트를 한번만 받아 수행( 다시 눌러도 상태 돌아오지 않음)
+		 */
+		});
+	
 	
 	
 	function clip(){
@@ -55,41 +60,7 @@ $(document).ready(function(){
 	};
 	
 	
-	    var $wrap = $('.totalFn'), 
-	        $btnMinus = $wrap.find('.minus'),
-	        $btnPlus = $wrap.find('.plus');
-	        $cell = $wrap.find('.cell');
-	         
-	    $btnMinus.on('click', function(e){
-	        var $this = $(this);
-	        var num = $this.parent().find('.num').text();
-	        num --;
-	        if (num <= 0) {
-	            num = 0;
-	        }
-	        $this.parent().find('.num').text(num);
-	        totalFn();
-	    });
-	 
-	    $btnPlus.on('click', function(){
-	        var $this = $(this);
-	        var num = $this.parent().find('.num').text();
-	        num ++;
-	        if (20 <= num) {
-	            num = 20; // 최대 인원수 
-	        }
-	        $this.parent().find('.num').text(num);
-	        totalFn();
-	    });
-	 
-	    function totalFn(){
-	        var $total = $(".totalFn .count-box")
-	        var total = 0;
-	        $total.find(".num").each(function(){ 
-	            total += Number($(this).text());
-	        });
-	        $(".count-total").text(total);
-	    };
+	  
 	
 
 	
@@ -173,16 +144,7 @@ $(document).ready(function(){
                                 
                                 
 								
-								<!-- 배너 사진 -->
-			<div class="clearfix padding-top-40" >
-
-                    <div class="col-md-8 single-property-content">
-                        <div class="row">
-                            <div class="light-slide-item">            
-                                <div class="clearfix">
-
-                                    <!-- 이미지--> 
-									<table> 
+								<table> 
 									<ul id="image-gallery" class="gallery list-unstyled cS-hidden">
 										<c:set var="img" value="${dto.s_image }"/>
 										<c:forEach var="i" begin="0" end="2" step="1" >
@@ -195,10 +157,9 @@ $(document).ready(function(){
 									</ul>
 									</table>
                                     <!-- 이미지  -->
-
-                                </div>
-                            </div>
-                        </div>
+                             </div>
+                         </div>
+                     </div>
 
                      <div class="single-property-wrapper">
                          <div class="single-property-header">   
@@ -212,12 +173,12 @@ $(document).ready(function(){
 			 -->
 								<c:forEach var="i" begin="0" end="5" step="1">
 								
-								<div>
-								<tr>
-								<td>  ${dto.s_facility.split(',')[i]}</td>
-								</tr>
+								
+							<tr>
+								<div class="form-group"><td>  ${dto.s_facility.split(',')[i]}</td></div>
+							</tr>
 														
-								</div>
+								
 
 <!--                              <div class="col-xs-3 col-sm-3 col-md-3 p-b-15"> -->
 <!--                                  <span class="property-info-icon icon-tag"> -->
@@ -262,6 +223,10 @@ $(document).ready(function(){
                                      <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">콜키지</span>
                                      <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">콜키지 시 2만원 추가 금액</span>
                                  </li>
+                                 <li>
+                                     <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">노키즈/키즈</span>
+                                     <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">콜키지 시 2만원 추가 금액</span>
+                                 </li>
 
                              </ul>
                          </div>  
@@ -276,13 +241,13 @@ $(document).ready(function(){
 							<li class="active"><a data-toggle="tab" href="#menu">		M E N U		</a></li>
 							<li><a data-toggle="tab" href="#about">		A B O U T	 </a></li>
 							<li><a data-toggle="tab" href="#review">	R E V I E W		</a></li>
-							<li><a data-toggle="tab" href="#qna">	Q n A		</a></li>
+							<li><a data-toggle="tab" href="#qna">   Q n A      </a></li>
 						</ul>
 
 						<div class="tab-content">
 							<div id="menu" class="tab-pane fade in active">
-								<h3>HOME</h3>
-								<p>Some content.</p>
+								<h3>M E N U</h3>
+								<p>메뉴를 고르시오</p>
 
 								
 								
@@ -312,33 +277,29 @@ $(document).ready(function(){
 								
 								<hr><!-- 상품 정보를 들고 가야함. 다시 디테일로 돌아와함 -->
 							<input type="button" value="리뷰 쓰기" class="reviewWrite"
-							onclick="location.href='./ReviewWrite.rv?s_no=${dto.s_no}';">
+							onclick="location.href='./ReviewWrite.rv?s_no=${dto.s_no}&s_name=${dto.s_name}';">
 								
 								<input type="button" value="리뷰 목록" class="reviewList"
-							onclick="location.href='./ReviewList.rv?s_no=${dto.s_no}';">
+							onclick="location.href='./ReviewList.rv?s_no=${dto.s_no}&s_name=${dto.s_name}';">
 								
 						<input type="hidden" value="${dto.s_name }">
 								
 							</div>
-							
-							<div id="qna" class="tab-pane fade">
-								<h3>QnA board</h3>
-								<p>please write QnA for our restaurant.</p>
-								
-								
-									<!-- jsp? 가상주소? -->
-<%-- 							<jsp:include page="../board/reviewList.jsp" /> --%>
-								
-								<hr><!-- 상품 정보를 들고 가야함. 다시 디테일로 돌아와함 -->
-							<input type="button" value="QnA 쓰기" class="qnaWrite"
-							onclick="location.href='./QnaWrite.br?s_no=${dto.s_no}&rev_category=2';">
-								
-								<input type="button" value="QnA 목록" class="qnaList"
-							onclick="location.href='./QnaList.br?s_no=${dto.s_no}&rev_category=2';">
-								
-						<input type="hidden" value="${dto.s_name }">
-								
-							</div>
+						<div id="qna" class="tab-pane fade">
+                        <h3>QnA board</h3>
+                        <p>please write QnA for our restaurant.</p>
+                        
+                        
+                           <!-- jsp? 가상주소? -->
+<%--                      <jsp:include page="../board/reviewList.jsp" /> --%>
+                        
+                        <hr><!-- 상품 정보를 들고 가야함. 다시 디테일로 돌아와함 -->
+                     <input type="button" value="QnA 쓰기" class="qnaWrite"
+                     onclick="location.href='./QnaWrite.br?s_no=${dto.s_no}&rev_category=2';">
+                        
+                        <input type="button" value="QnA 목록" class="qnaList"
+                     onclick="location.href='./QnaList.br?s_no=${dto.s_no}&rev_category=2';">
+						
 						
 						</div>
 
@@ -352,10 +313,11 @@ $(document).ready(function(){
                  <h4 class="s-property-title">M A P </h4>
                 <p>위치 :  ${dto.s_addr }</p>
 				<!--  지도 api -->
-				 
-<div id="map" style="width:100%;height:300px;margin-bottom: 1%;"></div>				
+				   <input type="hidden" id="address223" value="${dto.s_addr }">
+				<div id="map" style="width: 100%; height: 400px;"></div>
+				
 			<br>
-			${dto }
+			
                        
                      </div>
                  </div>
@@ -366,22 +328,19 @@ $(document).ready(function(){
                              <div class="dealer-content">
                                  <div class="inner-wrapper">
 								<!-- 즐겨찾기 -->
-								<div class="favorite-and-print">
-								<form action="" method="post">
-                                     <a class="add-to-fav" href="#login-modal" data-toggle="modal">
-                                         <i class="fa fa-heart-o"></i>
-                                     </a></form>
-                                     <a class="printer-icon " href="javascript:window.print()">
-                                         <i class="fa fa-print"></i> 
-                                     </a>
-                                 </div> 
+								
+									<div class="favorite-and-print">
+										<a class="printer-icon" href="javascript:window.print()">
+											<i class="fa fa-print"></i>
+										</a>
+									</div>
 
 
-                                     <div class="clear">
-                                         <div class="col-xs-12 col-sm-12 dealer-face">
+									<div class="clear">
+                                         <div class="col-xs-8 col-sm-8 dealer-face">
                                              <a href="">
-                                                 <img src="assets/img/octocat.png" class="img-circle">
-                                                 <img src="./upload/${dto.s_image }" />
+                                                 
+                                                 <img src="./upload/${dto.s_image }" class="img-circle">
                                              </a>
                                          </div>
                                          <br>
@@ -389,9 +348,17 @@ $(document).ready(function(){
                                              <h3 class="dealer-name">
                                              
 										<b> ${dto.s_name } </b>
-										 <p>Back end developer ${dto.s_type } 전문점</p>
+										
+										 <p>${dto.s_type } 전문점</p>
                                              </h3>
-                                            
+                                           <form action="" method="post">
+											<!-- 좋아요 기능 -->
+											<div class="like-content">
+												<button class="btn-secondary like-review">
+													<i class="fa fa-heart" aria-hidden="true"></i> Like
+												</button>
+											</div>
+										</form>
 
                                          </div>
                                      </div>
@@ -400,7 +367,7 @@ $(document).ready(function(){
                                          <ul class="dealer-contacts">                                       
                                              <li><i class="pe-7s-map-marker strong pe-2x"> </i><a href="#" onclick="clip(); return false;"> MAP url ${dto.s_addr} </a></li>
                                              <li><i class="pe-7s-call strong pe-2x"> </i> <a href="">Store Tel : ${dto.s_tel } </a></li>
-                                             <li><i class="pe-7s-star strong pe-2x"> </i>  ${dto.s_star }</li>
+                                             <li><i class="pe-7s-star strong pe-2x"> </i>  <fmt:formatNumber value="${dto.s_star }"/></li>
                                          </ul>
                                          <p> ${dto.s_content }</p>
                                      </div>
@@ -462,11 +429,11 @@ $(document).ready(function(){
 					
 										<hr>
 
-				<div class="col-xs-6" style="font-family: Consolas, sans-serif;">
+				<div class="col-xs-6" style="font-family: monospace;">
 					<label for="property-geo">날짜</label> 
 						<input type="date"id="start" name="date"
 					       value="today"
-					       min="2022-01-01" max="2030-12-31">
+					       min="today" max="2030-12-31">
 							
 				</div>
 				
@@ -478,6 +445,7 @@ $(document).ready(function(){
                            </div>
                            </div>
      	<hr>
+     	
                            <input id="input1" type="submit" value="예 약 하 기!" class="submit"> 
 			</fieldset>
 			</form>
@@ -536,8 +504,7 @@ $(document).ready(function(){
 
        <!-- Footer area-->
    <jsp:include page="../inc/bottom.jsp" />
-   
-<!-- 지도 API javascript -->
+   <!-- 지도 API javascript -->
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1900efb9ff28bb0a54c68c9b272a9b10&libraries=services"></script>
 		<script src="ceo/mapAPIBoard.js"/>
@@ -558,6 +525,43 @@ $(document).ready(function(){
        <script type="text/javascript" src="assets/js/lightslider.min.js"></script>
        <script src="assets/js/main.js"></script>
 
+ <style type="text/css">
+      /* 좋아요 버튼  */
+      body{
+      font-family:monospace;
+      }
+      .like-content {
+          display: inline-block;
+          width: auto;
+          margin: 2px auto;
+          padding: 0;
+          font-size: 10px;
+          text-align: center;
+      }
+      .like-content .btn-secondary {
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+          background: #ed2553;
+          border-radius: 80px;
+          box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
+          padding: 5px 15px;
+          font-size: 10px;
+          cursor: pointer;
+          border: none;
+          outline: none;
+          color: #000000;
+          text-decoration: none;
+          -webkit-transition: 0.3s ease;
+          transition: 0.3s ease;
+      }
+      .like-content .btn-secondary:hover {
+        transform: translateY(-3px);
+      }
+      .like-content .btn-secondary .fa {
+        margin-right: 5px;
+      }
+      </style>
       
     </body>
 </html>

@@ -60,7 +60,6 @@ ${totalCnt }
 ${param.s_no }
 ${dto.s_no }
 ${param.rev_no }
-가게 페이지로 돌아가는 버튼도 만들것 
 	<input type="hidden" value="${param.s_no }">
 
 <div class="dot-hr">
@@ -96,7 +95,7 @@ ${param.rev_no }
 											<tr> 
 												<td align="center"><b> Rev No. </b></td>
 												<td align="center"> <b>pic</b> </td>
-												<td align="center"><b> Writer </b></td>
+												<td align="center"><b> starValue  </b></td>
 												<td align="center"> <b>Subject </b></td>
 												<td align="center"> <b>Content </b></td>
 												<td align="center"> <b>Date</b> </td>
@@ -112,12 +111,12 @@ ${param.rev_no }
 													<td align="center">
 													 <img src="./upload/${dto.rev_file }" width="50" height="50">
 													</td>
-													<td align="center">${dto.m_nickName }</td>
+													<td align="center">${dto.rev_star } / 5 점</td>
 													<td align="center">${dto.rev_subject }</td>
 													<td align="center">${dto.rev_content}</td>
 													<td align="center"> <fmt:formatDate value="${dto.rev_date }"/></td>
 													<td align="center">
-												<a href="./ReviewUpdate.rv?rev_no=${dto.rev_no }&s_no=${dto.s_no }&pageNum=${pageNum }&${param.s_name }">수정</a>
+												<a href="./ReviewUpdate.rv?rev_no=${dto.rev_no }&s_no=${dto.s_no }&pageNum=${pageNum }&${s_name }">수정</a>
 												/
 												<a href="./ReviewDelete.rv?rev_no=${dto.rev_no }">삭제</a>
 												</td>

@@ -226,6 +226,8 @@ public class ReviewDAO {
 		
 			// 글정보 가져오기 - getReviewList(int startRow,int pageSize)
 				public ArrayList getReviewList(int startRow,int pageSize) {
+					
+
 					System.out.println(" DAO : getReviewList() 호출 ");
 					// 글정보 모두 저장하는 배열
 					ArrayList reviewList = new ArrayList();
@@ -244,7 +246,6 @@ public class ReviewDAO {
 						rs = pstmt.executeQuery();
 						// 5. 데이터 처리(DB->DTO->List)
 						while(rs.next()) {
-							
 							ReviewDTO dto = new ReviewDTO();
 							dto.setRev_no(rs.getInt("rev_no"));
 							dto.setS_no(rs.getInt("s_no"));
@@ -299,7 +300,7 @@ public class ReviewDAO {
 							dto.setRev_star(rs.getInt("rev_star"));
 							dto.setRev_subject(rs.getString("rev_subject"));
 							dto.setRev_category(rs.getInt("rev_category"));
-//							dto.setM_nickName(rs.getString("m_nickName")); 어케쓰노 
+//							dto.setM_nickName(rs.getString("m_nickName")); 어케쓰
 							//m_no?
 							dto.setM_no(rs.getInt("m_no"));
 
@@ -322,14 +323,13 @@ public class ReviewDAO {
 				// 리뷰 조회 - getBoard(bno)
 				
 //				// 리뷰 수정 - updateBoard(DTO) -> 세션에 아이디값으로 구별..?
-				public int updateReview(ReviewDTO dto) {
-				int result = -1;
-				
+				public void updateReview(ReviewDTO dto) {
+			
 				try {
 				// 1.2. 디비 연결
 					con = getConnection();
 					// 3. sql 작성(select) & pstmt 객체
-					sql = "select m_pw from reviewcs where rev_no=?";
+					sql = "select * from reviewcs where rev_no=?";
 					pstmt = con.prepareStatement(sql);
 					// ???
 					pstmt.setInt(1, dto.getRev_no());
@@ -337,30 +337,21 @@ public class ReviewDAO {
 					rs = pstmt.executeQuery();
 					// 5. 데이터 처리
 						if(rs.next()) {
-							if(dto.getM_pw().equals(rs.getString("m_pw"))) {
-								// 3. sql 작성(update) & pstmt 객체
-								sql = "update reviewcs set rev_subject=?,rev_content=?,rev_file=? where rev_no=?";
+//							if(dto.getM_pw().equals(rs.getString("m_pw"))) { //나중에 살리기
+								 //3. sql 작성(update) & pstmt 객체
+								sql = "update reviewcs set rev_subject=?,rev_content=?,rev_file=?,rev_star=? where rev_no=?";
 								pstmt = con.prepareStatement(sql);
 								
 								//??? 
 								pstmt.setString(1, dto.getRev_subject());
 								pstmt.setString(2, dto.getRev_content());
 								pstmt.setString(3, dto.getRev_file()); //이거 아닐지도
+								pstmt.setInt(4, dto.getRev_star());
+								pstmt.setInt(5, dto.getRev_no());
 								
-								pstmt.setInt(4, dto.getRev_no());
 								
-								// 4. sql 실행
-								result = pstmt.executeUpdate();
-							}else {
-								// 비밀번호 오류
-								result = 0;
-							}				
-						}else {
-							// 게시판글 없음
-							result = -1;
 						}
 						
-						System.out.println(" DAO : 게시판 정보 수정완료 ("+result+")");
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -368,7 +359,6 @@ public class ReviewDAO {
 						closeDB();
 					}
 					
-					return result;
 				}
 				// 리뷰 수정 - updateReview(DTO)
 				

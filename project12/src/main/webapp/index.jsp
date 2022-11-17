@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%
 	// 	response.sendRedirect("./board.re"); 	
-	response.sendRedirect("StoreJoin.st");
+	response.sendRedirect("main.st");
 %>
