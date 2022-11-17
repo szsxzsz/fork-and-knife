@@ -74,7 +74,6 @@ $('#star a').click(function(){
 <!--         </div> -->
         <!-- Body content -->
 
-
             
         <!--End top header -->
 
@@ -102,10 +101,9 @@ $('#star a').click(function(){
                   <div align="center">
                         <hr>
                         <h2>리뷰 쓰세오</h2>
-                        <form action="./ReviewWriteAction.rv?s_no=${param.s_no }&?s_name=${param.s_name }" method="post" enctype="multipart/form-data">
+                        <form action="./ReviewUpdateProAction.rv?pageNum=${pageNum }" method="post" enctype="multipart/form-data">
                       
-                       <input type="hidden" value="${param.s_no }" name="s_no">
-                       <input type="hidden" value="${param.s_name }" name="s_name">
+                       
 <!--                             <div class="row">
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
@@ -114,7 +112,9 @@ $('#star a').click(function(){
                                 <br>
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
-${param.s_name }
+
+
+${rev_no }
 
 의 별점은?
 
@@ -128,9 +128,10 @@ ${param.s_name }
 
 <input type="hidden" name="rev_star" value="starValue">
 
-								
+									<input type="hidden" name="rev_no" value="${rev_no }">
+									<input type="hidden" name="s_no" value="${s_no }">
                                     <label for="subject">제목</label>
-                                  	  <input type="text" class="form-control" id="subject" name="rev_subject" placeholder="제목을 적으세요">
+                                  	  <input type="text" class="form-control" id="subject" name="rev_subject" value="${dto.rev_subject }">
 <!--                                     </div> -->
 <!--                                 </div> -->
 <!--                                 <div class="col-sm-6"> -->
@@ -142,15 +143,15 @@ ${param.s_name }
 <!--                                 <div class="col-sm-12"> -->
 <!--                                     <div class="form-group"> -->
                                     <label for="message">내용</label>
-                                    <textarea id="message" class="form-control" name="rev_content" width="730px" placeholder="간단한 리뷰를 적어주세요"></textarea>
+                                    <textarea id="message" class="form-control" name="rev_content" width="730px" placeholder="${dto.rev_content }"></textarea>
 <!--                                     </div> -->
 <!--                                 </div> -->
 					<br>
 <!--                                 <div class="col-sm-12 text-center"> -->
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                               review 등록하기 </button></form>
+                               review 수정 하기 </button></form>
 							
-							<form action="./ReviewList.rv?s_no=${param.s_no }&s_name=${param.s_name }"> 
+							<form action="./ReviewList.rv?s_no=${dto.s_no }&s_name=${dto.s_name }"> 
 							<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
                                review 목록으로~ </button></form>
                                

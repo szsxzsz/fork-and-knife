@@ -28,18 +28,18 @@ crossorigin="anonymous"/>
 <script src="./board/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
-	alert('hi');
-	
-	
-	
 	$(function() {
 	    $('.add-to-fav').on('click', function() {
 	        var heart = $(this).data('heart');    
 	        $(this).closest('li').find('.it_heart').val(heart);
 	    });
 	});
-	
+	function sendMap(){
+    	var address = $('#addrSend').value();
+    	alert('alert');
+    	
+    	
+    }
 	
 	
 	function clip(){
@@ -173,24 +173,32 @@ $(document).ready(function(){
                                 
                                 
 								
-								배너 사진
-                                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[0] }"> 
-                                         <img src="./upload/${dto.s_menuImg.split(',')[0] }" />
-                                     </li>
-                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[1] }"> 
-                                         <img src="./upload/${dto.s_menuImg.split(',')[1] }" />
-                                     </li>
-                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[2] }"> 
-                                         <img src="./upload/${dto.s_menuImg.split(',')[2] }" />
-                                     </li>
-                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[3] }"> 
-                                         <img src="./upload/${dto.s_menuImg.split(',')[3] }" />
-                                     </li>                                       
-                                 </ul>
-                             </div>
-                         </div>
-                     </div>
+								<!-- 배너 사진 -->
+			<div class="clearfix padding-top-40" >
+
+                    <div class="col-md-8 single-property-content">
+                        <div class="row">
+                            <div class="light-slide-item">            
+                                <div class="clearfix">
+
+                                    <!-- 이미지--> 
+									<table> 
+									<ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+										<c:set var="img" value="${dto.s_image }"/>
+										<c:forEach var="i" begin="0" end="2" step="1" >
+											<c:if test="${img.split(',')[i]!='null'}">
+												<li data-thumb="./upload/${img.split(',')[i] }"> 
+												<img src="./upload/${img.split(',')[i] }" />
+												</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+									</table>
+                                    <!-- 이미지  -->
+
+                                </div>
+                            </div>
+                        </div>
 
                      <div class="single-property-wrapper">
                          <div class="single-property-header">   
@@ -345,8 +353,7 @@ $(document).ready(function(){
                 <p>위치 :  ${dto.s_addr }</p>
 				<!--  지도 api -->
 				 
-				<div id="map" style="width: 730px; height: 400px;"></div>
-				
+<div id="map" style="width:100%;height:300px;margin-bottom: 1%;"></div>				
 			<br>
 			${dto }
                        
@@ -530,39 +537,11 @@ $(document).ready(function(){
        <!-- Footer area-->
    <jsp:include page="../inc/bottom.jsp" />
    
-<!-- 지도 api-->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc"></script>
-<!-- 지도 라이브러리 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc&libraries=LIBRARY"></script>
-<!-- services 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc&libraries=services"></script>
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc&libraries=services,clusterer,drawing"></script>
-
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
-
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-// 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
-// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-// marker.setMap(null);    
-</script>
+<!-- 지도 API javascript -->
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1900efb9ff28bb0a54c68c9b272a9b10&libraries=services"></script>
+		<script src="ceo/mapAPIBoard.js"/>
+	    <!-- 지도 API javascript -->
 
 
        <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>

@@ -56,11 +56,19 @@
             </div>
         </div>
         <!-- End page header -->
-
-	${reviewListAll }
-
+${totalCnt }
+${param.s_no }
+${dto.s_no }
+${param.rev_no }
+가게 페이지로 돌아가는 버튼도 만들것 
 	<input type="hidden" value="${param.s_no }">
 
+<div class="dot-hr">
+				<h4> &nbsp; ${sdto.s_name } ${param.s_name }의 리뷰를 남겨주세요. </h4>						
+		</div>
+<div class="dealer-action pull-right">
+<h5>전체 글 개수 : ${requestScope.totalCnt } 개&nbsp; </h5>
+		</div>
 	<!-- property area -->
 	<div class="content-area recent-property"
 		style="background-color: #FFF;">
@@ -68,7 +76,7 @@
 			<div class="row">
 
 				<div
-					class="col-md-9 pr-30 padding-top-40 properties-page user-properties">
+					class="col-md-12 pr-30 padding-top-80 properties-page user-properties">
 
 					<div class="section">
 						<div class="page-subheader sorting pl0 pr-10"></div>
@@ -80,30 +88,47 @@
 							<div class="col-md-4 p0">
 								<div class="box-two proerty-item">
 
-									<div class="item-entry overflow">
-										<table border="1">
-											<tr>
-												<td> Rev No. </td>
-												<td>[글번호] 제목</td>
-												<td>작성자</td>
-												<td>작성일</td>
+									<div class="form-group">
+										
+								
+										<table border="1" width="1110" >
+											<span class="col-xs-6 col-sm-4 col-md-4 add-d-title">
+											<tr> 
+												<td align="center"><b> Rev No. </b></td>
+												<td align="center"> <b>pic</b> </td>
+												<td align="center"><b> Writer </b></td>
+												<td align="center"> <b>Subject </b></td>
+												<td align="center"> <b>Content </b></td>
+												<td align="center"> <b>Date</b> </td>
+												<td align="center"> <b>ㅇㅅㅇ </b></td>
+												
 											</tr>
+											</span>
+											</div>
+											<div class="form-group">
 											<c:forEach var="dto" items="${reviewListAll }">
 												<tr>
-													<td>${dto.rev_no }</td>
-													<td>${dto.rev_subject }</td>
-													<td>${dto.m_nickName }</td>
-													<td>${dto.rev_date }</td>
+													<td align="center"><b>${dto.rev_no }</b></td>
+													<td align="center">
+													 <img src="./upload/${dto.rev_file }" width="50" height="50">
+													</td>
+													<td align="center">${dto.m_nickName }</td>
+													<td align="center">${dto.rev_subject }</td>
+													<td align="center">${dto.rev_content}</td>
+													<td align="center"> <fmt:formatDate value="${dto.rev_date }"/></td>
+													<td align="center">
+												<a href="./ReviewUpdate.rv?rev_no=${dto.rev_no }&s_no=${dto.s_no }&pageNum=${pageNum }&${param.s_name }">수정</a>
+												/
+												<a href="./ReviewDelete.rv?rev_no=${dto.rev_no }">삭제</a>
+												</td>
 												</tr>
 											</c:forEach>
+											
+
+						
 										</table>
-										<div class="dot-hr"></div>
-										<div class="dealer-action pull-right"></div>
+										
 									</div>
-
-
-
-
 
 
 								</div>
@@ -116,28 +141,36 @@
 			</div>
 		</div>
 	</div>
-		
-	
+	<div class="form-group" align="center">
+	<a href="./ReviewWrite.rv?s_no=${param.s_no }&s_name=${param.s_name}">
 	<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                        <a href="/ReviewWrite.rv">	review 작성 하기</a> </button>
+                       	review 작성 하기 </button></a></div>
+                       	
+                       	<form action="./storeDetails.st?s_no=${param.s_no }&s_name=${param.s_name }"> 
+							<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
+                               상세 페이지로~ </button></form>
 
 	<div class="section">
 		<div class="pull-right">
 			<div class="pagination">
 				<ul>
-					<c:if test="${totalCnt != 0}">
-
-						<c:if test="${startPage > pageBlock }">
-							<li><a
-								href="./ReviewList.rv?pageNum=${startPage-pageBlock }">Prev</a></li>
-						</c:if>
-						<li><a href="./ReviewList.rv?pageNum=${i }">${i }</a></li>
-						<c:if test="${endPage < pageCount }">
-							<li><a
-								href="./ReviewList.rv?pageNum=${startPage+pageBlock }">Next</a></li>
-						</c:if>
-
-					</c:if>
+					
+	  <c:if test="${totalCnt != 0}">
+	    <!-- 이전 -->
+	    <c:if test="${startPage > pageBlock }">
+	    	<a href="./ReviewList.rv?pageNum=${startPage-pageBlock }">[이전]</a>
+	    </c:if>
+	    <!-- 페이지 번호(1,2,3....) -->	  
+	    <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+	          <a href="./ReviewList.rv?pageNum=${i }">${i }</a> 
+	    </c:forEach>  
+	    
+	    <!-- 다음 -->	
+	    <c:if test="${endPage < pageCount }">
+	        <a href="./ReviewList.rv?pageNum=${startPage+pageBlock }">[다음]</a>
+	    </c:if>
+	
+	</c:if>
 				</ul>
 			</div>
 		</div>
