@@ -131,7 +131,7 @@
 <!--                                                         <td> -->
 <!--                                                             <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div> -->
 <!--                                                         </td> -->
-                                                        <td><a href="./adminGenMemDetail.us?m_no=${gml.m_no }">${gml.m_id }</a></td>
+                                                        <td><a href="./adminGenMemDetail.us?m=${gml.m_no }">${gml.m_id }</a></td>
                                                         <td>${gml.m_nickName }</td>
                                                         <td>${gml.m_name}</td>
                                                         
@@ -139,6 +139,7 @@
                                                         <td>${gml.m_gender }</td>
                                                         <td>${gml.m_tel }</td>
                                                       
+                               
                                                         <td>${gml.m_birth }</td>
                                                         <td>${gml.m_regdate }
                                                         <td>
@@ -183,80 +184,7 @@
                             				</div>
                             
                             			</div>
-                            		<div class="tab-pane fade" id="pills-ceo" role="tabpanel" aria-labelledby="pills-ceo-tab">
-                            		<div class="card">
-                                    <h5 class="card-header">CEO Member List</h5>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0">No.</th>
-                                                        <th class="border-0">아이디</th>
-                                                        <th class="border-0">이름</th>
-                                                        <th class="border-0">이메일</th>
-                                                        <th class="border-0">닉네임</th>
-                                                        <th class="border-0">전화번호</th>
-                                        
-                                                        <th class="border-0">생성일자</th>
-                                                        <th class="border-0">관리</th>
-                                                    </tr>
-                                                </thead>
-                                                <!-- 가게 정보입력 -->
-                                                <tbody>
-                                                    <c:forEach var="cml" items="${ceoMemList }">
-                                                    <tr>
-                                                    
-                                                        <td>${cml.c_no}</td>
-<!--                                                         <td> -->
-<!--                                                             <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div> -->
-<!--                                                         </td> -->
-                                                        <td>${cml.c_id }</td>
-                                                        <td>${cml.c_name }</td>
-                                                        <td>${cml.c_email }
-                                                        <td>${cml.c_nickName }</td>
-                                                        <td>${cml.c_tel }</td>
-                                                        <td>${cml.c_regdate }</td>
-                                                        
-                                                        <td>
-                                                        	<a href="#">수정</a> 
-                                                        	
-                                                        	<a href="javascript: isDelete(${cml.c_no },${pageNum })">삭제</a>
-                                                         </td>
-                                                    </tr>
-                                                   </c:forEach>
-                                                    <tr>
-                                                    	<td colspan="4"> <!-- 페이지 -->
-                                                    	<div>
-                                                    		<c:if test="${reqeustScope.totalCnt != 0 }">
-	
-																<!-- 이전 -->
-																<c:if test="${startPage > pageBlock }">
-																	<a href="./adminGenMemList.us?pageNum=${startPage-pageBlock }">Prev</a>
-																</c:if>
-																<!-- 페이지 번호(1,2,3....) -->
-																<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-																	<a href="./adminGenMemList.us?pageNum=${i }">${i }&nbsp;&nbsp;</a>
-																</c:forEach>
-																<!-- 다음 -->
-																<c:if test="${endPage < pageCount }">
-																	<a href="./adminGenMemList.us?pageNum=${startPage+pageBlock }">[다음]</a>
-																</c:if>
-															</c:if>
-														</div>
-														<!-- 페이지 위치 확인  -->
-														
-														<!-- 페이지 위치 확인  -->
-														<td>
-                                                        <td colspan="5"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
-                                                    </tr>
-                                                </tbody>
-                                                <!-- 가게 정보입력 -->
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                        			</div>
+                            		
 
             						</div>
                         		</div>

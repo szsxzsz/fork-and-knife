@@ -4,12 +4,14 @@ import java.io.IOException;
 
 
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 @WebServlet("*.us")
 public class StoreFrontController extends HttpServlet {
@@ -309,6 +311,17 @@ public class StoreFrontController extends HttpServlet {
 					}
 					
 				}
+				else if(command.equals("/genMemReservMsg.us")) {
+					
+					
+					forward = new ActionForward();
+					forward.setPath("./admin/genMemReservMsg.jsp");
+					forward.setRedirect(false);
+				}
+				
+				
+				
+				
 				
 				
 				// 관리자페이지

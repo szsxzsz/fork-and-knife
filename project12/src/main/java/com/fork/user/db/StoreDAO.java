@@ -1107,5 +1107,86 @@ public class StoreDAO {
 			
 			// 어드민 회원 상세, 각종 횟수
 			
+			// 어드민 공지 갯수 조회
+			public int getGenMemReservCount() {
+				int cnt = 0;
+				
+				// 1.2. 디비연결
+				try {
+					con = getConnection();
+					// 3. sql
+					sql = "select count(*) from reservation";
+					pstmt = con.prepareStatement(sql);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					if(rs.next()) {
+						
+//												cnt = rs.getInt(1);
+						cnt = rs.getInt("count(*)");
+					}
+					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
+			// 어드민 공지 갯수 조회
+			
+			// 어드민 점주 회원리스트 받기
+			
+			public List<Map<String, Object>> adminGetGenMemReservList(int startRow, int pageSize, int m_no) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				List<Map<String,Object>> reservList = new ArrayList<Map<String,Object>>();
+				HashMap<String, Object> hm = null;
+				
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+					sql = "select B.s_name, A.*  from reservation A, store B where A.s_no=B.s_no and A.m_no=? limit ?,?;";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, m_no);
+					pstmt.setInt(2, startRow-1); // 시작행-1
+					pstmt.setInt(3, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						hm = new HashMap<String,Object>();
+						hm.put("s_name", rs.getString("s_name"));
+						hm.put("res_no", rs.getInt("res_no"));
+						hm.put("s_no", rs.getInt("s_no"));
+						hm.put("m_no", rs.getInt("m_no"));
+						hm.put("res_num", rs.getInt("res_num"));
+						hm.put("res_time",rs.getInt("res_time"));
+						hm.put("res_date",rs.getString("res_date"));
+						hm.put("res_name", rs.getString("res_name"));
+						hm.put("res_msg", rs.getString("res_msg"));
+						hm.put("res_status", rs.getInt("res_status"));
+						
+						reservList.add(hm);
+					}//while
+					
+					
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return reservList;
+			}
+			
+			// 어드민 점주 회원리스트 받기
 			
 }
