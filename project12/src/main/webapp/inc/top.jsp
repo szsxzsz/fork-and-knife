@@ -83,7 +83,7 @@
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
                     </c:when>
                     <c:otherwise>
-                    	<button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">마이페이지</button>
+                    	<button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./MemberMypageMain.us'" data-wow-delay="0.4s">마이페이지</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
                     </c:otherwise>
                     </c:choose>
