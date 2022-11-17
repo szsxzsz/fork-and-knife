@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 import com.fork.store.db.StoreDTO;
 
-public class StoreDAO {
+public class UserDAO {
 
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
@@ -109,59 +109,6 @@ public class StoreDAO {
 				}
 
 			} // 회원가입 - memberJoin(DTO)
-			
-			
-			// 회원가입 - ceoJoin(DTO)
-			/**
-			 * 회원가입 메서드, 실행할 때 회원정보(DTO) 받아서 사용
-			 * 리턴 X
-			 * @param dto
-			 * @param hid
-			 */
-			public void ceoJoin(StoreDTO dto) {
-				int c_no = 0;
-				
-				try {
-					con = getConnection();
-					
-					sql = "select max(c_no) from ceo";
-					pstmt = con.prepareStatement(sql);
-					
-					rs = pstmt.executeQuery();
-					
-					if(rs.next()) {
-						c_no = rs.getInt(1)+1;
-					} // 회원번호 증가
-					
-					System.out.println(" DAO : c_no : " + c_no);
-					
-					// 회원가입
-					sql = "insert into ceo(c_no,c_id,c_name,c_email,c_nickname,c_pw) "
-							+ "values(?,?,?,?,?,?)";
-					pstmt = con.prepareStatement(sql);
-					
-					// ??
-					pstmt.setInt(1, c_no);
-//					pstmt.setString(2, dto.getC_id());
-//					pstmt.setString(3, dto.getC_name());
-//					pstmt.setString(4, dto.getC_email());
-//					pstmt.setString(5, dto.getC_nickName());
-//					pstmt.setString(6, dto.getC_pw());
-					
-					int result = pstmt.executeUpdate();
-					
-					if(result > 0 ) {
-						System.out.println(" DAO : 회원가입 성공! ");
-					}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					closeDB();
-				}
-
-			} // 회원가입 - ceoJoin(DTO)
-			
 			
 			// 아이디 중복확인 - checkId(id)
 			/**
@@ -1188,5 +1135,348 @@ public class StoreDAO {
 			}
 			
 			// 어드민 점주 회원리스트 받기
+			
+			/** 연락처 중복확인 checkTel(tel)
+			 * 이메일 중복확인 메서드, 실행할 때(tel) 받아서 사용
+			 * 리턴값 있음. 1-중복, 0-중복x
+			 * @param tel
+			 * @return
+			 */
+			public int checkTel(String tel) {
+				int result=0;
+				
+				try {
+					con = getConnection();
+					
+					sql = "select m_pw from member where m_tel=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, tel);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						result = 1;  // 이미 존재, 생성 불가
+						
+						System.out.println(" DAO : 이메일 중복결과 ("+result+")");
+					} else {
+						sql = "select c_pw from ceo where c_tel=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setString(1, tel);
+						
+						rs = pstmt.executeQuery();
+						
+						if(rs.next()) {
+							result = 1;  // 이미 존재, 생성 불가
+							
+							System.out.println(" DAO : 이메일 중복결과 ("+result+")");
+						}
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} closeDB();
+				
+				return result;
+			}
+			
+			
+			/** 로그인여부 체크 userLogin(id,pw)
+			 * 로그인 여부 체크 메서드. id, pw 값 받아서 사용
+			 * 리턴값 있음 -1: 회원정보 없음, 0:비밀번호 오류
+			 * 				1: 일반회원  2: 사업자회원
+			 * @param id
+			 * @param pw
+			 * @return
+			 */
+			public int userLogin(String id, String pw) {
+				int result = -1;
+				
+				try {
+					// 1.2. 디비연결
+					con = getConnection();
+					// 3. sql & pstmt
+					sql = "select m_pw from member where m_id=?";
+					pstmt = con.prepareStatement(sql);
+					//???
+					pstmt.setString(1, id);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					
+					if(rs.next()) {
+						// 회원
+						if(pw.equals(rs.getString("m_pw"))) {
+							// 로그인 성공
+							result = 1;
+						}else {
+							// 로그인 실패
+							result = 0;
+						}
+					} else {
+						sql = "select c_pw from ceo where c_id=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setString(1, id);
+						
+						rs = pstmt.executeQuery();
+						
+						// 데이터처리
+						if(rs.next()) {
+							if(pw.equals(rs.getString("c_pw"))) {
+								// 사업자 로그인 성공
+								result = 2;
+								
+							} else {
+								// 실패
+								result = 0;
+							}
+						} 
+					}
+					
+					System.out.println(" DAO : 로그인 체크 ("+result+")");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return result;
+			}
+			// 로그인여부 체크 userLogin(id,pw)
+			
+			
+			/** 사업자 회원정보 가져오기 - getCEO(id)
+			 * 사업자 회원정보 저장하여 조회하는 메서드. id 값 받아서 사용
+			 * 리턴값 없음
+			 * @param id
+			 * @return
+			 */
+			public CeoDTO getCEO(String id) {
+				CeoDTO cdto = null;
+				
+				try {
+					con = getConnection();
+					sql = "select * from ceo where c_id=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, id);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						cdto = new CeoDTO();
+						
+						cdto.setC_no(rs.getInt("c_no"));
+						cdto.setC_id(rs.getString("c_id"));
+						cdto.setC_name(rs.getString("c_name"));
+						cdto.setC_email(rs.getString("c_email"));
+						cdto.setC_nickName(rs.getString("c_nickName"));
+						cdto.setC_tel(rs.getString("c_tel"));
+						cdto.setC_pw(rs.getString("c_pw"));
+						cdto.setC_regdate(rs.getTimestamp("c_regdate"));
+					}
+					
+					System.out.println(" DAO : 회원정보 저장 완료! ");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cdto;
+			} // 사업자 회원정보 가져오기 - getCEO(id)
+			
+			
+			
+			/** 업자 가지고 있는 가게 수 확인 - getStoreCount(id)
+			 * 사업자가 가지고 있는 가게 수 확인 메서드. id 받음
+			 * 리턴값 o , 카운트 리턴
+			 * @param id
+			 * @return
+			 */
+			public int getStoreCount(String id) {
+				int snt=0;
+				
+				try {
+					con = getConnection();
+					
+					sql = "select count(s.s_no) from store s "
+							+ "join ceo c on s.c_no=c.c_no "
+							+ "where c.c_id=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, id);
+					
+					rs=pstmt.executeQuery();
+					
+					// 데이터처리
+					if(rs.next()) {
+						snt = rs.getInt(1);
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return snt;
+			}
+			
+			
+			
+			/** 가게 정보 가져오기 - getStoreList(id, listType, startRow,pageSize)
+			 *  가게 정보를 저장하여 조회와 정렬,
+			 *  페이징 처리하는 메서드. id, listType, startRowm pageSize
+			 *  리턴값 o, List 배열
+			 * @param id
+			 * @param listType
+			 * @param startRowm
+			 * @param pageSize
+			 * @return
+			 */
+			public List getStoreList(String id,String listType,int startRow,int pageSize) {
+				// 가게 목록 저장 List
+				List storeList = new ArrayList();
+				
+				
+				try {
+					con = getConnection();
+					sql = "select c.c_id, s.*, "
+							+ "(select count(*) from bookmark b where s.s_no = b.s_no) bcount, "
+							+ "(select count(*) from reviewcs r where s.s_no = r.s_no) rcount "
+							+ "from store s Join ceo c "
+							+ "on c.c_no = s.c_no where c.c_id=? "
+							+ "order by " + listType + " desc, s.s_no desc limit ?,?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, id);
+					pstmt.setInt(2, startRow-1); // 시작행 -1
+					pstmt.setInt(3, pageSize); // 개수
+					
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						// DB -> DTO -> List
+						StoreDTO sdto = new StoreDTO();
+						
+						sdto.setS_no(rs.getInt("s_no"));
+						sdto.setS_name(rs.getString("s_name"));
+						sdto.setS_addr(rs.getString("s_addr"));
+						sdto.setS_tel(rs.getString("s_tel"));
+						sdto.setS_hours(rs.getString("s_hours"));
+						sdto.setS_type(rs.getString("s_type"));
+						sdto.setS_image(rs.getString("s_image"));
+						sdto.setS_content(rs.getString("s_content"));
+						sdto.setS_facility(rs.getString("s_facility"));
+						sdto.setS_latitude(rs.getString("s_latitude"));
+						sdto.setS_longtude(rs.getString("s_longtude"));
+						sdto.setS_menuname(rs.getString("s_menuname"));
+						sdto.setS_menuprice(rs.getString("s_menuprice"));
+						sdto.setS_menuImg(rs.getString("s_menuImg"));
+						sdto.setS_number(rs.getInt("s_number"));
+						sdto.setC_no(rs.getInt("c_no"));
+						sdto.setS_star(rs.getDouble("s_star"));
+						sdto.setS_regdate(rs.getTimestamp("s_regdate"));
+						sdto.setBcount(rs.getInt("bcount"));
+						sdto.setRcount(rs.getInt("rcount"));
+						
+						// DTO -> List
+						storeList.add(sdto);
+						
+					} // while
+					
+//					System.out.println(" DAO : 가지고 있는 가게 수 : "+storeList.size());
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return storeList;
+			}
+			
+			
+			/** 등록한 가게 삭제 - deleteStore(s_no)
+			 *  ceo 마이페이지에서 등록 가게 삭제 메서드. s_no 받음
+			 *  리턴값 x
+			 * @param s_no
+			 */
+			public void deleteStore(int s_no) {
+				try {
+					con = getConnection();
+					
+					sql = "delete from store where s_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, s_no);
+					
+					pstmt.executeUpdate();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+			}
+			
+			
+			// 사업자 가게 총 예약 개수
+			
+			// 사업자회원가입 - ceoJoin(DTO)
+			/**
+			 * 회원가입 메서드, 실행할 때 회원정보(DTO) 받아서 사용
+			 * 리턴 X
+			 * @param dto
+			 * @param hid
+			 */
+			public void ceoJoin(CeoDTO dto) {
+				int c_no = 0;
+				
+				try {
+					con = getConnection();
+					
+					sql = "select max(c_no) from ceo";
+					pstmt = con.prepareStatement(sql);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						c_no = rs.getInt(1)+1;
+					} // 회원번호 증가
+					
+					System.out.println(" DAO : c_no : " + c_no);
+					
+					// 회원가입
+					sql = "insert into ceo(c_no,c_id,c_name,c_email,c_nickname,c_pw,c_tel) "
+							+ "values(?,?,?,?,?,?,?)";
+					pstmt = con.prepareStatement(sql);
+					
+					// ??
+					pstmt.setInt(1, c_no);
+					pstmt.setString(2, dto.getC_id());
+					pstmt.setString(3, dto.getC_name());
+					pstmt.setString(4, dto.getC_email());
+					pstmt.setString(5, dto.getC_nickName());
+					pstmt.setString(6, dto.getC_pw());
+					pstmt.setString(7, dto.getC_tel());
+					
+					int result = pstmt.executeUpdate();
+					
+					if(result > 0 ) {
+						System.out.println(" DAO : 회원가입 성공! ");
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+
+			} // 회원가입 - ceoJoin(DTO)
 			
 }

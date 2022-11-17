@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fork.user.db.StoreDAO;
+import com.fork.user.db.UserDAO;
 
 
 
@@ -58,7 +58,7 @@ public class AdminStoreListAction implements Action {
 		int endRow = currentPage * pageSize;
 		//////////////////////////////////////////////////////////////////////////////////////////////
 		
-		StoreDAO udao = new StoreDAO();
+		UserDAO udao = new UserDAO();
 		// 디비에 전체 글 리스트 가져오기
 //		ArrayList boardListAll =  dao.getBoardList();
 		List<Map> storeListAll = udao.adminGetBoardList(startRow, pageSize);

@@ -198,7 +198,7 @@ $(function(){
           </tr>
           <tr>
           <td rowspan="3"><b>소개</b></td>
-          <td colspan="3">${sdto.s_contents }</td>
+          <td colspan="3">${sdto.s_content }</td>
           </tr>
           </table>
           </div>

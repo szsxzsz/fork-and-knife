@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fork.user.db.MemberDTO;
-import com.fork.user.db.StoreDAO;
+import com.fork.user.db.UserDAO;
 
 public class AdminGenMemdetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		StoreDAO dao = new StoreDAO();
+		UserDAO dao = new UserDAO();
 		int m_no = Integer.parseInt(request.getParameter("m"));
 		ActionForward forward = new ActionForward();
 		

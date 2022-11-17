@@ -7,6 +7,8 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> 
+
+<!-- 포트 8080 으로 맞춰야함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <html class="no-js"> <!--<![endif]-->
     <head>
        <meta charset="utf-8">

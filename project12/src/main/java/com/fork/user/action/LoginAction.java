@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fork.user.db.StoreDAO;
+import com.fork.user.db.UserDAO;
 
 public class LoginAction implements Action {
 
@@ -16,25 +16,18 @@ public class LoginAction implements Action {
 		String id = (String)request.getParameter("id");
 		String pw = (String)request.getParameter("pw");
 		System.out.println(id+", "+pw);
-		ActionForward forward = new ActionForward();
 		
-		HttpSession session = request.getSession();
+		// DOA 객체 생성
+		UserDAO dao = new UserDAO();
 		
-		if(session.getAttribute("id")!=null) {
-			forward.setPath("./main.st");
-			forward.setRedirect(true);
-			return forward;
-		}
-		
-		StoreDAO dao = new StoreDAO();
-		
-		int result = dao.memberLogin(id, pw);
+		int result = dao.userLogin(id, pw);
 		System.out.println("result="+result);
+		
 		if(result == 0) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();		
 			out.print("<script>");
-			out.print("alert('비밀번호 오류!");
+			out.print("alert('비밀번호 오류!');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -45,7 +38,7 @@ public class LoginAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();		
 			out.print("<script>");
-			out.print("alert('회원정보 없음!");
+			out.print("alert('회원정보 없음!');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -56,12 +49,15 @@ public class LoginAction implements Action {
 		// 로그인 성공 -> 아이디 세션영역에 저장
 //		}
 			
-			session.setAttribute("id", id);
+		HttpSession session = request.getSession();
+		session.setAttribute("id", id);
+		session.setAttribute("result", result);
 		
-		
-		
+		ActionForward forward = new ActionForward();
 		forward.setPath("./main.st");
 		forward.setRedirect(true);
+		
+		
 		
 		
 		

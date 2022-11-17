@@ -25,4 +25,8 @@ public class StoreDTO {
 	private Double s_star;
 	private Timestamp s_regdate;
 	
+	private int bcount;
+	private int rcount;
+	
+	
 }

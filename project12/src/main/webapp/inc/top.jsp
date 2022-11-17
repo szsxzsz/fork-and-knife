@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
+       
     </head>
     <body>
     
@@ -42,12 +43,10 @@
                     <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
                         <div class="header-half header-social">
                             <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            	<c:if test="${id!=null }">
+                            	<li>${id }님 어서오세요.</li>
+                            	</c:if>
+                                
                             </ul>
                         </div>
                     </div>
@@ -75,15 +74,19 @@
                     <div class="button navbar-right">
                     <c:choose>
                     <c:when test="${id==null }">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">로그인</button>
+                        <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./Login.us'" data-wow-delay="0.4s">로그인</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./Join.us'" data-wow-delay="0.5s">회원가입</button>
                     </c:when>
                     <c:when test="${id.equals('admin') }">
-                    <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./adminStoreList.us'" data-wow-delay="0.4s">관리자페이지</button>
+                    <button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./loginForm.st'" data-wow-delay="0.4s">관리자페이지</button>
+                        <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
+                    </c:when>
+                    <c:when test="${result==1}">
+                    	<button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./MemberMyPage.us'" data-wow-delay="0.4s">마이페이지</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
                     </c:when>
                     <c:otherwise>
-                    	<button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./MemberMypageMain.us'" data-wow-delay="0.4s">마이페이지</button>
+                    	<button class="navbar-btn nav-button wow bounceInRight login" onclick="location.href='./CeoMyPage.us'" data-wow-delay="0.4s">마이페이지</button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick="location.href='./LogoutAction.us'" data-wow-delay="0.5s">로그아웃</button>
                     </c:otherwise>
                     </c:choose>

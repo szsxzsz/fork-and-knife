@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fork.user.db.NoticeDTO;
-import com.fork.user.db.StoreDAO;
+import com.fork.user.db.UserDAO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -36,7 +36,7 @@ public class AdminNoticeWriteAction implements Action {
 		// 로그인 제어
 		
 		NoticeDTO dto = new NoticeDTO();
-		StoreDAO dao = new StoreDAO();
+		UserDAO dao = new UserDAO();
 		
 		ServletContext CTX = request.getServletContext();
 		String realPath = CTX.getRealPath("/upload");
