@@ -40,7 +40,6 @@
         <link rel="stylesheet" href="assets/css/responsive.css">
     </head>
     <body>
-
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -145,7 +144,7 @@ ${param.rev_no }
 	<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
                        	review 작성 하기 </button></a></div>
                        	
-                       	<form action="./storeDetails.st?s_no=${param.s_no }&s_name=${param.s_name }"> 
+                       	<form action="./storeDetails.st?s_no=${param.s_no }&s_name=${param.s_name }" method="post"> 
 							<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
                                상세 페이지로~ </button></form>
 
