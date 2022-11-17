@@ -36,7 +36,7 @@
 	
 	if(isMove){
 		// 장바구니 페이지 이동
-		location.href="./adminDeleteGenMemAction.us?m_no="+x+"&pageNum="+y;
+		location.href="./adminDeleteCeoMemAction.us?c_no="+x+"&pageNum="+y;
 	}
 	
 	}
@@ -102,87 +102,7 @@
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
-                                <div class="card">
-                                    <h5 class="card-header">General Member List</h5>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0">No.</th>
-                                                        <th class="border-0">아이디</th>
-                                                        <th class="border-0">닉네임</th>
-                                                        <th class="border-0">이름</th>
-                                                        <th class="border-0">이메일</th>
-                                                        <th class="border-0">성별</th>
-                                                        <th class="border-0">전화번호</th>
-                                                        <th class="border-0">생년월일</th>
-                                                        <th class="border-0">생성일자</th>
-                                                        <th class="border-0">관리</th>
-                                                    </tr>
-                                                </thead>
-                                                <!-- 가게 정보입력 -->
-                                                <tbody>
-                                                    <c:forEach var="gml" items="${genMemList }">
-                                                    <tr>
-                                                    
-                                                        <td>${gml.m_no}</td>
-<!--                                                         <td> -->
-<!--                                                             <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div> -->
-<!--                                                         </td> -->
-                                                        <td><a href="./genMemDetail.us?m_no=${gml.m_no }">${gml.m_id }</a></td>
-                                                        <td>${gml.m_nickName }</td>
-                                                        <td>${gml.m_name}</td>
-                                                        
-                                                        <td>${gml.m_email }</td>
-                                                        <td>${gml.m_gender }</td>
-                                                        <td>${gml.m_tel }</td>
-                                                      
-                                                        <td>${gml.m_birth }</td>
-                                                        <td>${gml.m_regdate }
-                                                        <td>
-                                                        	<a href="#">수정</a> 
-                                                        	
-                                                        	<a href="javascript: isGenDelete(${gml.m_no },${pageNum })">삭제</a>
-                                                         </td>
-                                                    </tr>
-                                                   </c:forEach>
-                                                    <tr>
-                                                    	<td colspan="4"> <!-- 페이지 -->
-                                                    	
-                                                    		
-										<nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                            	<c:if test="${reqeustScope.totalCnt != 0 }">
-                                            		<c:if test="${startPage > pageBlock }">
-		                                                <li class="page-item"><a class="page-link" href="./adminGenMemList.us?pageNum=${startPage-pageBlock }">Previous</a></li>
-		                                            </c:if>
-		                                            <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-		                                                <li class="page-item"><a class="page-link"  href="./adminGenMemList.us?pageNum=${i }">${i }</a></li>
-		                                            </c:forEach>   
-		                                            <c:if test="${endPage < pageCount }">
-		                                                <li class="page-item"><a class="page-link"  href="./adminGenMemList.us?pageNum=${startPage+pageBlock }">[Next]]</a></li>
-		                                            </c:if>
-		                                        </c:if>
-                                            </ul>
-                                        </nav>
-														
-														<!-- 페이지 위치 확인  -->
-														
-														<!-- 페이지 위치 확인  -->
-														</td>
-                                                        
-                                                    </tr>
-                                                </tbody>
-                                                <!-- 가게 정보입력 -->
-                                            	</table>
-                                            		</div>
-                                        		</div>
-                                    
-                            				</div>
-                            
-                            			</div>
+                                
                             		<div class="tab-pane fade show active" id="pills-ceo" role="tabpanel" aria-labelledby="pills-ceo-tab">
                             		<div class="card">
                                     <h5 class="card-header">CEO Member List</h5>

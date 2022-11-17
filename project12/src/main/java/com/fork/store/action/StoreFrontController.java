@@ -72,9 +72,14 @@ public class StoreFrontController extends HttpServlet {
 				
 				else if(command.equals("/storeDetails.st")) {
 					
-					forward = new ActionForward();
-					forward.setPath("./board/storeDetails.jsp");
-					forward.setRedirect(false);
+					action = new StoreDetailsAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					
 				}
