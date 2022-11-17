@@ -439,6 +439,31 @@ public class UserFrontController extends HttpServlet {
 					forward.setRedirect(false);
 				} 
 				
+				else if(command.equals("/GenMemDetailReport.us")) {
+					
+					action = new AdminReportListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/detailGenMemDetailReview.us")) {
+					
+					action = new AdminGenMemDetailReviewAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} 
+				
 				
 				
 				

@@ -735,6 +735,37 @@ public class UserDAO {
 			}
 			// 어드민 신고 갯수 조회
 			
+			// 어드민 신고 갯수 조회
+			public int getReportCount(int m_no) {
+				int cnt = 0;
+				
+				// 1.2. 디비연결
+				try {
+					con = getConnection();
+					// 3. sql
+					sql = "select count(*) from report where m_no=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, m_no);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					if(rs.next()) {
+						
+//									cnt = rs.getInt(1);
+						cnt = rs.getInt("count(*)");
+					}
+					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
+			// 어드민 신고 갯수 조회
+			
 			// 어드민 신고 목록 조히
 			public List<Map> adminGetReportList(int startRow, int pageSize) {
 				System.out.println(" DAO : getBoardList() 호출 ");
@@ -786,6 +817,60 @@ public class UserDAO {
 				return reportList;
 			}
 			// 어드민 신고 목록 조회
+			
+			// 어드민 신고 목록 조히
+			public List<Map> adminGetReportList(int startRow, int pageSize, int m_no) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				List<Map> reportList = new ArrayList<Map>();
+				HashMap<String,Object> hm = null;
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+	//								sql = "select * from itwill_board";
+					sql = "SELECT r.rep_no, s.s_name,c.c_name, m.m_id, m.m_name, r.rep_reason, r.rep_howmany, r.rep_date "
+							+ "FROM report r, member m, store s, ceo c "
+							+ "where r.s_no = s.s_no "
+							+ "and r.m_no = m.m_no "
+							+ "and s.c_no = c.c_no "
+							+ "and m.m_no=? limit ?,?;";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, m_no);
+					pstmt.setInt(2, startRow-1); // 시작행-1
+					pstmt.setInt(3, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						hm = new HashMap<String,Object>();
+						hm.put("rep_no", rs.getInt("rep_no"));
+						hm.put("s_name", rs.getString("s_name"));
+						hm.put("c_name", rs.getString("c_name"));
+						hm.put("m_id", rs.getString("m_id"));
+						hm.put("m_name", rs.getString("m_name"));
+						hm.put("rep_reason",rs.getString("rep_reason"));
+						hm.put("rep_howmany",rs.getInt("rep_howmany"));
+						hm.put("rep_date", rs.getTimestamp("rep_date"));
+						//DTO -> List
+						
+						reportList.add(hm);
+					}//while
+					System.out.println(reportList);
+					System.out.println(" DAO : 게시판 목록 저장완료!");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return reportList;
+			}
+			// 어드민 신고 목록 조회 with m_no
 			
 			// 어드민 신고 삭제
 			public void adminDeleteReport(int rep_no) {			
@@ -1479,4 +1564,83 @@ public class UserDAO {
 
 			} // 회원가입 - ceoJoin(DTO)
 			
+			// 어드민 디테일 리뷰 갯수 조회
+			public int getGenReviewCount(int m_no) {
+				int cnt = 0;
+				
+				// 1.2. 디비연결
+				try {
+					con = getConnection();
+					// 3. sql
+					sql = "select count(*) from reviewcs where m_no=? and rev_category=1";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, m_no);
+					
+					// 4. sql 실행
+					rs = pstmt.executeQuery();
+					// 5. 데이터처리
+					if(rs.next()) {
+						
+//												cnt = rs.getInt(1);
+						cnt = rs.getInt("count(*)");
+					}
+					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
+			// 어드민 디테일 리뷰 갯수 조회
+			
+			// 어드민 멤버 디테일 리뷰
+				
+			public List<Map<String,Object>> adminGetGenReivewList(int startRow, int pageSize, int m_no) {
+				System.out.println(" DAO : getBoardList() 호출 ");
+				// 글정보 모두 저장하는 배열
+				List<Map<String,Object>> revList = new ArrayList<Map<String,Object>>();
+				HashMap<String, Object> hm = null;
+				
+				try {
+				// 1.2. 디비 연결
+					con = getConnection();
+				// 3. sql 작성(select) & pstmt 객체
+//						sql = "select * from itwill_board";
+					sql = "select A.rev_subject, A.rev_content, B.s_name, B.s_no, A.rev_star"
+							+ " from reviewcs A, store B where m_no=? and rev_category=1 limit ?,?";
+					pstmt = con.prepareStatement(sql);
+				// ?????
+					pstmt.setInt(1, m_no);
+					pstmt.setInt(2, startRow-1); // 시작행-1
+					pstmt.setInt(3, pageSize); // 개수
+				// 4. sql 실행
+					rs = pstmt.executeQuery();
+				// 5. 데이터 처리 (DB -> DTO -> List)
+					while(rs.next()) {
+						// DB -> DTO
+						hm = new HashMap<String,Object>();
+						
+						hm.put("rev_subject", rs.getString("rev_subject"));
+						hm.put("rev_content", rs.getString("rev_content"));
+						hm.put("s_name", rs.getString("s_name"));
+						hm.put("s_no", rs.getInt("s_no"));
+						hm.put("rev_star", rs.getInt("rev_star"));
+						
+						revList.add(hm);
+					}//while
+					
+//						System.out.println(" DAO : 게시판 목록 저장완료!"+noticeList);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					closeDB();
+				}
+				
+				return revList;
+			}
+				
+				// 어드민 멤버 디테일 리뷰
 }
