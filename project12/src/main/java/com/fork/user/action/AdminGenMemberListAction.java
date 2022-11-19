@@ -60,8 +60,9 @@ public class AdminGenMemberListAction implements Action {
 		// 디비에 전체 글 리스트 가져오기
 		//ArrayList boardListAll = dao.getBoardList();
 		List genMemList = null;
-		StringBuffer sb = new StringBuffer();
+		
 		if (m_id!=null) {
+			StringBuffer sb = new StringBuffer();
 			m_id = m_id.trim();
 			sb.append(m_id);
 			sb.insert(0, "%");

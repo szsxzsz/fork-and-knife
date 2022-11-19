@@ -494,7 +494,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//						cnt = rs.getInt(1);
+//						cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -558,7 +558,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//						cnt = rs.getInt(1);
+//						cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -721,7 +721,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//						cnt = rs.getInt(1);
+//						cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -752,7 +752,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//									cnt = rs.getInt(1);
+//									cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -968,7 +968,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//									cnt = rs.getInt(1);
+//									cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -1155,7 +1155,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//												cnt = rs.getInt(1);
+//												cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -1399,7 +1399,7 @@ public class UserDAO {
 					
 					// 데이터처리
 					if(rs.next()) {
-						snt = rs.getInt(1);
+						snt = rs.getInt("count(*)");
 					}
 					
 				} catch (Exception e) {
@@ -1581,7 +1581,7 @@ public class UserDAO {
 					// 5. 데이터처리
 					if(rs.next()) {
 						
-//												cnt = rs.getInt(1);
+//												cnt = rs.getInt(count(*));
 						cnt = rs.getInt("count(*)");
 					}
 					System.out.println(" DAO : 전체 일반 회원 수 : " +cnt+"개");
@@ -1608,8 +1608,9 @@ public class UserDAO {
 					con = getConnection();
 				// 3. sql 작성(select) & pstmt 객체
 //						sql = "select * from itwill_board";
-					sql = "select A.rev_subject, A.rev_content, B.s_name, B.s_no, A.rev_star"
-							+ " from reviewcs A, store B where m_no=? and rev_category=1 limit ?,?";
+					sql = "select A.rev_subject, A.rev_content, B.s_name, B.s_no, A.rev_star from reviewcs A, store B where A.m_no=? "
+							+ "and rev_category=1 "
+							+ "and A.s_no = B.s_no limit ?,?;";
 					pstmt = con.prepareStatement(sql);
 				// ?????
 					pstmt.setInt(1, m_no);

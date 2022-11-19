@@ -160,31 +160,42 @@
                                             <h5 class="card-header">등록된 리뷰</h5>
 <!--                                             1 card -->
 										<c:forEach var="rev" items="${revList }">
-                                            <div class="card-body">
+                                            <div class="card-body border-top">
                                                 <div class="review-block">
                                                     <span class="text-dark font-weight-bold">제목 : ${rev.rev_subject }</span>
                                                     <p class="review-text font-italic m-0">"${rev.rev_content }"</p>
                                                     <div class="rating-star mb-4">
                                                         <c:forEach begin="1" end="${rev.rev_star }" step="1">
                                                         <i class="fa fa-fw fa-star"></i>
-                                                        </c:forEach>
+                                                       
+                                                        </c:forEach>  
+                                 						 <strong>${rev.rev_star } / 5</strong>
                                                     </div>
                                                     <a href="./storeDetails.st?s_no=${rev.s_no }" class="text-dark font-weight-bold">${rev.s_name }</a><small class="text-mute"> (가게명)</small>
                                                 </div>
                                             </div>
 <!--                                             1 card -->
+										 
 										</c:forEach>
+                                            </div>
+                                       
+                                   	<nav aria-label="Page navigation example">
+                                          <ul class="pagination">
+                                          	<c:if test="${reqeustScope.totalCnt != 0 }">
+                                          		<c:if test="${startPage > pageBlock }">
+                                                <li class="page-item"><a class="page-link" href="./detailGenMemDetailReview.us?pageNum=${startPage-pageBlock }&m=${param.m}">Previous</a></li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+                                                <li class="page-item"><a class="page-link"  href="./detailGenMemDetailReview.us?pageNum=${i }&m=${param.m}">${i }</a></li>
+                                            </c:forEach>   
+                                            <c:if test="${endPage < pageCount }">
+                                                <li class="page-item"><a class="page-link"  href="./detailGenMemDetailReview.us?pageNum=${startPage+pageBlock }&m=${param.m}">[Next]]</a></li>
+                                            </c:if>
                                             
-                                        </div>
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active"><a class="page-link " href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                            </ul>
-                                        </nav>
+                                        </c:if>
+                                          </ul>
+                                     </nav>
+				                                        
                                     </div>
                             <!-- ============================================================== -->
                             <!-- end campaign tab one -->

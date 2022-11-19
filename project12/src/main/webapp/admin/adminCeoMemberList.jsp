@@ -72,12 +72,12 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
                                 <h2 class="pageheader-title">관리자 Dashboard</h2>
-                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">일반 회원 관리</li>
+                                            <li class="breadcrumb-item"><a class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">점주 회원 관리 (아이디 클릭시 상세 보기 가능)</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -131,7 +131,7 @@
 <!--                                                         <td> -->
 <!--                                                             <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div> -->
 <!--                                                         </td> -->
-                                                        <td>${cml.c_id }</td>
+                                                        <td><a href="./adminCeoMemDetail.us?c=${cml.c_no }">${cml.c_id }</a></td>
                                                         <td>${cml.c_name }</td>
                                                         <td>${cml.c_email }
                                                         <td>${cml.c_nickName }</td>

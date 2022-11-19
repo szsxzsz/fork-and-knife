@@ -107,6 +107,13 @@ public class StoreFrontController extends HttpServlet {
 					forward.setRedirect(false);
 				}
 				
+				else if(command.equals("/gu.st")) {
+					forward= new ActionForward();
+					forward.setPath("./board/gu.xml");
+					forward.setRedirect(false);
+					
+				}
+				
 				System.out.println(" C : 2. 가상주소 매핑 끝 \n");
 				// 3. 페이지 이동
 				if(forward != null) {

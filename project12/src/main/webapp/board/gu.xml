@@ -3,21 +3,27 @@
 <busan>
 	<gus>
 		<gu>사하구</gu>
+		<gu2>saha</gu2>
 	</gus>
 	<gus>
 		<gu>사상구</gu>
+		<gu2>sasang</gu2>
 	</gus>
 	<gus>
 		<gu>동래구</gu>
+		<gu2>dongrae</gu2>
 	</gus>
 	<gus>
 		<gu>남구</gu>
+		<gu2>nam</gu2>
 	</gus>
 	<gus>
 		<gu>북구</gu>
+		<gu2>buk</gu2>
 	</gus>
 	<gus>
 		<gu>철구</gu>
+		<gu2>chul</gu2>
 	</gus>
 </busan>
 

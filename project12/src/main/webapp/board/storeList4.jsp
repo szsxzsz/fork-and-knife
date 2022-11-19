@@ -20,29 +20,55 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script type="text/javascript">
-// 			$(document).ready(function() {
-// 				$('#lunchBegins').change(function() {
-// 					$('#basic12').children("option").remove();
-// // 					
-// 					var city = $(this).val();
-// 					$.ajax({
-// 						url:"gu.st",
-// 						type:"get",
-// 						datatype:"xml",
-// 						success:function(data) {
-// 						var v = $(data).find(city);
-// 						v.find("gus").each(function() {
-// 							var info = "<option>"+$(this).find("gu").text()+"</option>";
-// 							$('#basic12').append(info);
-// 							});
-// 						},
-// 						error:function(request,status,error){
-// 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 				       }
+			$(document).ready(function() {
+				
+				if (${param.city}!=null) {
+					var city2= ${param.city}
+				}
+				if (${param.gu}!=null) {
+					var gu = ${param.gu}
+				}
+				if (var!=null) {
+					city2 = $(this).val();
+					$.ajax({
+						url:"gu.st",
+						type:"get",
+						datatype:"xml",
+						success:function(data) {
+						var v = $(data).find(city);
+						v.find("gus").each(function() {
+							var info = "<option value='"+$(this).find("gu2").text()+"' <c:if test='"+${param.gu}+"!=null'> selected='selected'</c:if>>"+$(this).find("gu").text()+"</option>";
+							$('#basic12').append(info);
+							});
+						},
+						error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       }
+				}
+				
+				}
+				$('#lunchBegins').change(function() {
+					$('#basic12').children("option").remove();
+					alert('dd');
+					var city = $(this).val();
+					$.ajax({
+						url:"gu.st",
+						type:"get",
+						datatype:"xml",
+						success:function(data) {
+						var v = $(data).find(city);
+						v.find("gus").each(function() {
+							var info = "<option value='"+$(this).find("gu").text()+"' <c:if test='"+${param.gu}+"!=null'>selected='selected'</c:if>>"+$(this).find("gu").text()+"</option>";
+							$('#basic12').append(info);
+							});
+						},
+						error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       }
 						
-// 					}); // end of ajax
-// 				});
-// 			});
+					}); // end of ajax
+				});
+			});
 		
 		</script>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -77,7 +103,7 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="가게 검색" name="kw" value="${kw2 }">
+                                                <input type="text" class="form-control" placeholder="가게 검색" name="kw">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -86,70 +112,28 @@
                                         <div class="row">
                                             <div class="col-xs-6">
 
-                                                <select id="lunchBegins" class="show-tick form-control" name="city">
-                                                    <option value="busan" selected>부산</option>
+                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="시" name="city">
+													<option selected>시</option>
+                                                    <option value="busan"
+                                                    <c:if test="${busan!=null }">
+                                                    selected="selected"
+                                                    </c:if>
+                                                    >부산</option>
+                                                    <option value="seoul"
+                                                    <c:if test="${seoul!=null }">
+                                                    selected="selected"
+                                                    </c:if>>서울</option>
+                                                    <option value="daejeon"
+                                                    <c:if test="${daejeon!=null }">
+                                                    selected="selected"
+                                                    </c:if>>대전</option>
+                                                    
                                                 </select>
                                             </div>
                                             <div class="col-xs-6">
-                                                <select id="basic12" class="show-tick form-control" name="gu" >
-                                                    <option value="no">구</option>
-                                                    <option value="강서구"
-                                                    <c:if test="${gang!=null }">
-                                                    selected="selected"
-                                                    </c:if>>강서구</option>
-                                                    <option value="금정구"
-                                                    <c:if test="${gold!=null }">
-                                                    selected="selected"
-                                                    </c:if>>금정구</option>
-                                                    <option value="남구"
-                                                    <c:if test="${nam!=null }">
-                                                    selected="selected"
-                                                    </c:if>>남구</option>
-                                                    <option value="동래구"
-                                                    <c:if test="${dong!=null }">
-                                                    selected="selected"
-                                                    </c:if>>동래구</option>
-                                                    <option value="부산진구"
-                                                    <c:if test="${jin!=null }">
-                                                    selected="selected"
-                                                    </c:if>>부산진구</option>
-                                                    <option value="북구"
-                                                    <c:if test="${buk!=null }">
-                                                    selected="selected"
-                                                    </c:if>>북구</option>
-                                                    <option value="사상구"
-                                                    <c:if test="${sang!=null }">
-                                                    selected="selected"
-                                                    </c:if>>사상구</option>
-                                                    <option value="사하구"
-                                                    <c:if test="${saha!=null }">
-                                                    selected="selected"
-                                                    </c:if>>사하구</option>
-                                                    <option value="서구"
-                                                    <c:if test="${seo!=null }">
-                                                    selected="selected"
-                                                    </c:if>>서구</option>
-                                                    <option value="수영구"
-                                                    <c:if test="${swim!=null }">
-                                                    selected="selected"
-                                                    </c:if>>수영구</option>
-                                                    <option value="연제구"
-                                                    <c:if test="${yeon!=null }">
-                                                    selected="selected"
-                                                    </c:if>>연제구</option>
-                                                    <option value="영도구"
-                                                    <c:if test="${zero!=null }">
-                                                    selected="selected"
-                                                    </c:if>>영도구</option>
-                                                    <option value="중구"
-                                                    <c:if test="${middle!=null }">
-                                                    selected="selected"
-                                                    </c:if>>중구</option>
-                                                    <option value="해운대구"
-                                                    <c:if test="${sun!=null }">
-                                                    selected="selected"
-                                                    </c:if>>해운대구</option>
-													
+                                                <select id="basic12" class="show-tick form-control" name="gu">
+                                                     <option selected>구</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -167,7 +151,7 @@
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="checkbox">
-                                                    <br><label> <input type="checkbox" name="prnon" value="1" checked><br>상관없음</label>
+                                                    <br><label> <input type="checkbox" name="pr-non" value="price-non" checked><br>상관없음</label>
                                                 </div>
                                             </div>
                                             </div>
@@ -179,19 +163,16 @@
 										<div class="row">
                                             <div class="col-xs-6">
                                                 <label for="property-geo">인원 :</label>
-                								<select id="" class="show-tick form-control" name="nums">
-                                                     <option value="0" selected></option>
+                								<select id="" class="show-tick form-control" >
+                                                     <option selected>명</option>
 													<c:forEach var="i" begin="1" end="10" step="1">
-													<option value="${i}"
-                                                    <c:if test="${nums==i}">
-                                                    selected="selected"
-                                                    </c:if>>${i}명</option>
+													<option value="${i}">${i}명</option>
 													</c:forEach>
                                                 </select>
                                                </div>
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <br><label> <input type="checkbox" name="numsnon" value="1" checked> 상관없음</label>
+                                                    <br><label> <input type="checkbox" checked> 상관없음</label>
                                                 </div>
                                             </div>
                                                                                     

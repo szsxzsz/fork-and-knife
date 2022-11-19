@@ -17,9 +17,13 @@ public class StoreListAction implements Action {
 		
 		StoreDAO dao = new StoreDAO();
 		
-		int cnt = dao.getBoardCount();
+		int cnt=0;
 		System.out.println(cnt);		
 		int pageSize = 9;
+		
+		if (request.getParameter("per_page")!=null) {
+			pageSize = Integer.parseInt(request.getParameter("per_page"));
+		}
 		
 		// 	http://localhost:8088/JSP/board/boardList.jsp?pageNum=3 
 		
@@ -29,6 +33,108 @@ public class StoreListAction implements Action {
 			pageNum = "1";
 		}
 		
+		String price=null;
+		String[] category= {};
+		ArrayList boardListAll = null;
+		String kw = null;
+		String gu = null;
+		StringBuffer sb = null;
+		if (request.getParameter("prnon")==null) {
+			price = (String)request.getParameter("pr"); // price
+		}
+		
+		if (request.getParameter("kw")!=null) {
+			kw = (String)request.getParameter("kw"); // price
+			request.setAttribute("kw2", kw);
+			
+			sb = new StringBuffer();
+			kw = kw.trim();
+			sb.append(kw);
+			sb.insert(0, "%");
+			sb.insert(kw.length()+1, "%");
+			
+		}
+		
+		if (request.getParameter("nemsnon")==null) {
+			request.setAttribute("nums", request.getParameter("nums"));
+		}
+		
+		if (request.getParameter("gu")!=null) {
+			gu = (String)request.getParameter("gu"); 
+			if (gu.equals("no")) {
+				gu = null;
+			}
+			else if (gu.equals("강서구")) {
+				request.setAttribute("gang", gu);
+			}
+			else if (gu.equals("금정구")) {
+				request.setAttribute("gold", gu);
+			}
+			else if (gu.equals("남구")) {
+				request.setAttribute("nam", gu);
+			}
+			else if (gu.equals("동래구")) {
+				request.setAttribute("dong", gu);
+			}
+			else if (gu.equals("부산진구")) {
+				request.setAttribute("jin", gu);
+			}
+			else if (gu.equals("북구")) {
+				request.setAttribute("buk", gu);
+			}
+			else if (gu.equals("사상구")) {
+				request.setAttribute("sang", gu);
+			}
+			else if (gu.equals("사하구")) {
+				request.setAttribute("saha", gu);
+			}
+			else if (gu.equals("서구")) {
+				request.setAttribute("seo", gu);
+			}
+			else if (gu.equals("수영구")) {
+				request.setAttribute("swim", gu);
+			}
+			else if (gu.equals("연제구")) {
+				request.setAttribute("yeon", gu);
+			}
+			else if (gu.equals("영도구")) {
+				request.setAttribute("zero", gu);
+			}
+			else if (gu.equals("중구")) {
+				request.setAttribute("middle", gu);
+			}
+			else {
+				request.setAttribute("sun", gu);
+			}
+		} // 검색 후 구 셀렉트를 위한 부분
+		
+		if (request.getParameter("cg")!=null) {
+			category = request.getParameterValues("cg");
+			for (int i=0;i<category.length;i++) {
+				if (category[i].equals("한식")) {
+					request.setAttribute("ko", category[i]);
+				}
+				else if (category[i].equals("양식")) {
+					request.setAttribute("am", category[i]);
+				}
+				else if (category[i].equals("중식")) {
+					request.setAttribute("ch", category[i]);
+				}
+				else if (category[i].equals("일식")) {
+					request.setAttribute("ja", category[i]);
+				}
+				else {
+					request.setAttribute("om", category[i]);
+				}
+			}
+		} // 검색 후 체크박스 체크를 위한 부분
+		
+		
+		if (request.getParameter("city")!=null) {
+			String city = (String)request.getParameter("city");
+			request.setAttribute(city, city);
+		}
+		
 		// 시작행 번호 계산하기 1   11   21   31   41   .....
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage -1)*pageSize + 1;
@@ -36,11 +142,103 @@ public class StoreListAction implements Action {
 		// 끝행 번호 계산하기 10   20   30   40   .....
 		int endRow = currentPage * pageSize;
 		//////////////////////////////////////////////////////////////////////////////////////////////
+		// 가격대, 카테고리, 키워드, 구
+//		0 0 0 1
+//		0 0 1 0
+//		0 1 0 0
+//		1 0 0 0
+//		0 0 1 1
+//		0 1 0 1
+//		1 0 0 1
+//		0 1 1 0
+//		1 0 1 0
+//		1 1 0 0
 		
+		
+//		0 1 1 1
+//		1 1 1 0
+//		1 1 0 1
+//		1 0 1 1
+//		1 1 1 1
+		
+		// sb = keyword
+	
+		if(price!=null&category.length==0&kw==null&gu==null) {
+			boardListAll = dao.getBoardList(startRow, pageSize, price);
+//			cnt = dao.getCntPrBoardList(startRow, pageSize, price);
+		}
+		else if (price==null & category.length>0&kw==null&gu==null) {
+			boardListAll = dao.getBoardList(startRow, pageSize, category);
+//			cnt = dao.getCntCtBoardList(startRow, pageSize, category);
+		}
+		else if (price==null & category.length==0&kw!=null&gu==null) {
+			boardListAll = dao.getKwBoardList(startRow, pageSize, sb.toString());
+//			cnt = dao.getCntKwBoardList(startRow, pageSize, sb.toString());
+		}
+		else if (price==null & category.length==0&kw==null&gu!=null) {
+			boardListAll = dao.getGuBoardList(startRow, pageSize, gu);
+//			cnt = dao.getCntGuBoardList(startRow, pageSize, gu);
+		}
+		// 1
+		
+		else if (price!=null&category.length>0&kw==null&gu==null) {
+			boardListAll = dao.getBoardList(startRow, pageSize, category, price);
+//			cnt = dao.getCtPrCnt(startRow, pageSize, category, price);
+		}// 1 1 0 0 
+		else if (price!=null&category.length==0&kw!=null&gu==null) {
+			boardListAll = dao.getKwPrBoardList(startRow, pageSize, sb.toString(), price);
+//			cnt = dao.getKwPrCnt(startRow, pageSize, sb.toString(), price);
+		}// 1 0 1 0
+		else if (price!=null&category.length==0&kw==null&gu!=null) {
+			boardListAll = dao.getGuPrBoardList(startRow, pageSize, gu, price);
+//			cnt = dao.getGuPrCnt(startRow, pageSize, gu, price);
+		}// 1 0 0 1
+		else if (price==null&category.length>0&kw!=null&gu==null) {
+			boardListAll = dao.getCtKwBoardList(startRow, pageSize, category, sb.toString());
+//			cnt = dao.getCtKwCnt(startRow, pageSize, category, sb.toString());
+		}// 0 1 1 0
+		else if (price==null&category.length>0&kw==null&gu!=null) {
+			boardListAll = dao.getCtGuBoardList(startRow, pageSize, category, gu);
+//			cnt = dao.getCtGuCnt(startRow, pageSize, category, gu);
+		}// 0 1 0 1
+		else if (price==null&category.length==0&kw!=null&gu!=null) {
+			boardListAll = dao.getKwGuBoardList(startRow, pageSize, sb.toString(), gu);
+//			cnt = dao.getKwGuCnt(startRow, pageSize, sb.toString(), gu);
+		}// 0 0 1 1
+		// 2
+		
+		else if (price!=null&category.length>0&kw!=null&gu==null) {
+			boardListAll = dao.getKwCtPrBoardList(startRow, pageSize, sb.toString(), category, price);
+//			cnt = dao.getKwCtPrCnt(startRow, pageSize, sb.toString(), category, price);
+		}// 1 1 1 0
+		else if (price!=null&category.length==0&kw!=null&gu!=null) {
+			boardListAll = dao.getKwGuPrBoardList(startRow, pageSize, sb.toString(), gu, price);
+//			cnt = dao.getKwGuPrCnt(startRow, pageSize, sb.toString(), gu, price);
+		}// 1 0 1 1
+		else if (price!=null&category.length>0&kw==null&gu!=null) {
+			boardListAll = dao.getPrGuCtBoardList(startRow, pageSize, price, gu, category);
+//			cnt = dao.getPrGuCtCnt(startRow, pageSize, price, gu, category);
+		}// 1 1 0 1
+		else if (price==null&category.length>0&kw!=null&gu!=null) {
+			boardListAll = dao.getKwGuCtBoardList(startRow, pageSize, sb.toString(), gu, category);
+//			cnt = dao.getKwGuCtCnt(startRow, pageSize, sb.toString(), gu, category);
+		}// 0 1 1 1
+		// 3
+		
+		else if (price!=null&category.length>0&kw!=null&gu!=null) {
+			boardListAll = dao.getPrGuCtKwBoardList(startRow, pageSize, price, gu, category, sb.toString());
+//			cnt = dao.getPrGuCtKwCnt(startRow, pageSize, price, gu, category, sb.toString());
+		}// 1 1 0 1
+		// 4
+		
+		else{   
+			boardListAll = dao.getBoardList(startRow, pageSize);
+			cnt = dao.getBoardCount();
+		}
 		
 		// 디비에 전체 글 리스트 가져오기
 //		ArrayList boardListAll =  dao.getBoardList();
-		ArrayList boardListAll = dao.getBoardList(startRow, pageSize);
+		
 		ArrayList recStore = dao.getBoardList(cnt);
 		   /////////////////////////////////////////////////////////////////////////////////////////////////
 			// 페이징 처리 (2)
@@ -87,7 +285,7 @@ public class StoreListAction implements Action {
 		
 //		request.setAttribute("boardListAll", dao.getBoardList()); // 디비에 있는 정보를 그대로 출력만 할 경우
 		
-		System.out.println(recStore);
+		
 		// 페이지 이동준비(티켓 생성)
 		ActionForward forward = new ActionForward();
 		forward.setPath("./board/storeList.jsp");
