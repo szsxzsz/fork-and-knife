@@ -53,7 +53,7 @@ public class StoreDAO {
 	// getStoreList(페이징) 가게 목록 불러오기 start
 	
 	public ArrayList getBoardList(int cnt) {
-		System.out.println(" DAO : getBoardList() 호출 ");
+		System.out.println(" DAO : getRecBoardList() 호출 ");
 		// 글정보 모두 저장하는 배열
 		ArrayList boardList = new ArrayList();
 		
@@ -92,7 +92,7 @@ public class StoreDAO {
 				}
 		
 			} // for
-			System.out.println(" DAO : 게시판 목록 저장완료!");
+			System.out.println(" DAO : Rec게시판 목록 저장완료!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -481,7 +481,7 @@ public class StoreDAO {
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select * from itwill_board";
 				sql = "select * from store where ?<s_price and s_price<? and s_name Like ? limit ?,?";
-				
+				pstmt = con.prepareStatement(sql);
 				
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);
@@ -685,7 +685,7 @@ public class StoreDAO {
 		}
 		
 		public ArrayList getKwGuBoardList(int startRow, int pageSize, String kw, String gu) {
-			System.out.println(" DAO : getBoardList() 호출 ");
+			System.out.println(" DAO : getKwGuBoardList() 호출 ");
 			// 글정보 모두 저장하는 배열
 			ArrayList boardList = new ArrayList();
 			
@@ -722,7 +722,7 @@ public class StoreDAO {
 					boardList.add(dto);
 				}//while
 				
-				System.out.println(" DAO : 게시판 목록 저장완료!");
+				System.out.println(" DAO : KwGu게시판 목록 저장완료!");
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -744,7 +744,7 @@ public class StoreDAO {
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select * from itwill_board";
 				sql = "select * from store where ?<s_price and s_price<? and s_name Like ? and substring(s_addr,7,?)=? limit ?,?";
-				
+				pstmt = con.prepareStatement(sql);
 				
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);
@@ -1338,7 +1338,7 @@ public class StoreDAO {
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select count(*) from itwill_board";
 				sql = "select count(*) from store where ?<s_price and s_price<? and s_name Like ? limit ?,?";
-				
+				pstmt=con.prepareStatement(sql);
 				
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);
@@ -1620,7 +1620,7 @@ public class StoreDAO {
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select count(*) from itwill_board";
 				sql = "select count(*) from store where ?<s_price and s_price<? and s_name Like ? and substring(s_addr,7,?)=? limit ?,?";
-				
+				pstmt = con.prepareStatement(sql);
 				
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);

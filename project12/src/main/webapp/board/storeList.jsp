@@ -44,6 +44,13 @@
 // 				});
 // 			});
 		
+		$(document).ready(function() {
+			
+			${"#page"}.click(function() {
+				alert('dd');
+			});
+			
+		});
 		</script>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <jsp:include page="../inc/top.jsp"/>
@@ -73,7 +80,8 @@
                                 <h3 class="panel-title">가게 검색</h3>
                             </div>
                             <div class="panel-body search-widget">
-                                <form action="./storeList.st" class=" form-inline"> 
+                                <form action="./storeList.st" class=" form-inline" name="fr"> 
+                                <input type="hidden" class="hid" value="">
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -161,13 +169,23 @@
                                                 <label for="price-range">1인당 가격대 : </label>
                                                 <input type="text" class="span2 ddkjh" data-slider-min="0" 
                                                        data-slider-max="100000" data-slider-step="5000" 
-                                                       data-slider-value="[0,50000]" id="price-range" name="pr" value="0,50000"><br />
+                                                       <c:if test="${pr1==null }">
+                                                       data-slider-value="[0,50000]"
+                                                       </c:if>
+                                                       <c:if test="${pr1!=null }">
+                                                        data-slider-value="[${Integer.parseInt(pr1.split(",")[0]) },${Integer.parseInt(pr1.split(",")[1]) }]"
+                                                       </c:if>
+                                                        id="price-range" name="pr" value="0,50000">
                                                 <b class="pull-left color">0</b> 
                                                 <b class="pull-right color">100000</b>                                                
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="checkbox">
-                                                    <br><label> <input type="checkbox" name="prnon" value="1" checked><br>상관없음</label>
+                                                    <br><label> <input type="checkbox" name="prnon" value="1" 
+                                                    <c:if test="${param.prnon!=null }">
+                                                    checked
+                                                    </c:if>
+                                                    ><br>상관없음</label>
                                                 </div>
                                             </div>
                                             </div>
@@ -180,7 +198,7 @@
                                             <div class="col-xs-6">
                                                 <label for="property-geo">인원 :</label>
                 								<select id="" class="show-tick form-control" name="nums">
-                                                     <option value="0" selected></option>
+                                                     <option value="0" selected>명</option>
 													<c:forEach var="i" begin="1" end="10" step="1">
 													<option value="${i}"
                                                     <c:if test="${nums==i}">
@@ -191,7 +209,10 @@
                                                </div>
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <br><label> <input type="checkbox" name="numsnon" value="1" checked> 상관없음</label>
+                                                    <br><label> <input type="checkbox" name="numsnon" value="1" 
+                                                    <c:if test="${param.numsnon!=null }">
+                                                    checked
+                                                    </c:if>> 상관없음</label>
                                                 </div>
                                             </div>
                                                                                     
@@ -368,18 +389,17 @@
                             <div class="pagination">
                                 <ul>
     <c:if test="${reqeustScope.totalCnt != 0 }">
-	
 	<!-- 이전 -->
-	<c:if test="${startPage > pageBlock }">
-		<li><a href="./storeList.st?pageNum=${startPage-pageBlock }">Prev</a></li>
+	<c:if test="${startPage > pageBlock }">${startPage-pageBlock }
+		<li><a href="#" id="prev">Prev</a></li>
 	</c:if>
-	<!-- 페이지 번호(1,2,3....) -->
+	<!-- 페이지 번호(1,2,3....) -->${i }
 	<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-		<li><a href="./storeList.st?pageNum=${i }">${i }</a><li>
+		<li><a href="#" id="page">${i }</a><li>
 	</c:forEach>
 	<!-- 다음 -->
 	<c:if test="${endPage < pageCount }">
-		<li><a href="./storeList.st?pageNum=${startPage+pageBlock }">[다음]</a><li>
+		<li><a href="#" onclick="page(${startPage+pageBlock } })">[다음]</a><li>
 	</c:if>
 </c:if>
                                 </ul>

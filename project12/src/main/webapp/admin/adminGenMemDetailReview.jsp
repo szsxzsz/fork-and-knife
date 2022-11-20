@@ -165,9 +165,13 @@
                                                     <span class="text-dark font-weight-bold">제목 : ${rev.rev_subject }</span>
                                                     <p class="review-text font-italic m-0">"${rev.rev_content }"</p>
                                                     <div class="rating-star mb-4">
-                                                        <c:forEach begin="1" end="${rev.rev_star }" step="1">
-                                                        <i class="fa fa-fw fa-star"></i>
-                                                       
+                                                        <c:forEach var="i" begin="1" end="5" step="1">
+                                                       	 	<c:if test="${rev.rev_star>=i }">
+                                                        		<i class="fa fa-fw fa-star"></i>
+                                                       		</c:if>
+                                                       		<c:if test="${rev.rev_star<i }">
+                                                       			<i class="far fa-fw fa-star"></i>
+                                                       		</c:if>
                                                         </c:forEach>  
                                  						 <strong>${rev.rev_star } / 5</strong>
                                                     </div>

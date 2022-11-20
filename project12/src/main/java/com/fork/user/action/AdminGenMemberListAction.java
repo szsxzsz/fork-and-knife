@@ -63,6 +63,7 @@ public class AdminGenMemberListAction implements Action {
 		
 		if (m_id!=null) {
 			StringBuffer sb = new StringBuffer();
+			request.setAttribute("keyword", m_id);
 			m_id = m_id.trim();
 			sb.append(m_id);
 			sb.insert(0, "%");

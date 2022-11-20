@@ -319,6 +319,14 @@ public class UserFrontController extends HttpServlet {
 				forward.setRedirect(false);
 				}
 				
+				else if(command.equals("/adminCeoMemDetail.us")) {
+					
+					
+					forward = new ActionForward();
+					forward.setPath("./admin/adminCeoMemDetail.jsp");
+					forward.setRedirect(false);
+				}
+				
 				//회원 마이 페이지(메인페이지)
 			else if(command.equals("/MemberMypageMain.us")) {
 			System.out.println(" C : /MemberMypageMain.us 호출 ");
