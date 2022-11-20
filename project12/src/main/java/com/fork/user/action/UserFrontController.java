@@ -460,7 +460,7 @@ public class UserFrontController extends HttpServlet {
 					
 				}
 				
-				else if(command.equals("/detailGenMemDetailReview.us")) {
+				else if(command.equals("/adminGenMemDetailReview.us")) {
 					
 					action = new AdminGenMemDetailReviewAction();
 					

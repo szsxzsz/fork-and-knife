@@ -149,7 +149,7 @@
                                         <a class="nav-link active" id="pills-packages-tab" href="#">신고 목록</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-packages-tab" href="./detailGenMemDetailReview.us?m=${param.m }">리뷰 목록</a>
+                                        <a class="nav-link" id="pills-packages-tab" href="./adminGenMemDetailReview.us?m=${param.m }">리뷰 목록</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
