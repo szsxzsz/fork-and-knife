@@ -476,6 +476,11 @@ public class UserFrontController extends HttpServlet {
 					}
 				} 
 				
+				else if(command.equals("/ceoMemLocation.us")) {
+					forward = new ActionForward();
+					forward.setPath("./admin/ceoMemStoreLocation.jsp");
+					forward.setRedirect(false);
+				}
 				
 				
 				

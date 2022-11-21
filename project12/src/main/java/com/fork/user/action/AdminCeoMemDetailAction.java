@@ -33,7 +33,7 @@ public class AdminCeoMemDetailAction implements Action {
 		}
 		// 로그인 제어
 		
-		int pageSize = 9;
+		int pageSize = 3;
 		
 		// http://localhost:8088/JSP/board/boardList.jsp?pageNum=2
 		

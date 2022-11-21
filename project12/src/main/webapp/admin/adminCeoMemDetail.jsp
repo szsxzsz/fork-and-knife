@@ -241,13 +241,29 @@
                                                     <p>가격대</p>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">${s.s_addr }</h4>
+                                                    <h4 class="mb-0"><a href="#" onclick="window.open('./ceoMemLocation.us?loc=${s.s_addr}&name=${s.s_name }','예약 메세지','width=450px, height=350px, left=700, top=400')">
+                                                    보기</a></h4>
                                                     <p>주소</p>
                                                 </div>
                                             </div>
                                         </div>
 <!--                                         1 card end -->
                                         </c:forEach>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                            	<c:if test="${reqeustScope.totalCnt != 0 }">
+                                            		<c:if test="${startPage > pageBlock }">
+		                                                <li class="page-item"><a class="page-link" href="./adminCeoMemDetail.us?pageNum=${startPage-pageBlock }&c=${param.c}">Previous</a></li>
+		                                            </c:if>
+		                                            <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+		                                                <li class="page-item"><a class="page-link"  href="./adminCeoMemDetail.us?pageNum=${i }&c=${param.c}">${i }</a></li>
+		                                            </c:forEach>   
+		                                            <c:if test="${endPage < pageCount }">
+		                                                <li class="page-item"><a class="page-link"  href="./adminCeoMemDetail.us?pageNum=${startPage+pageBlock }&c=${param.c}">[Next]]</a></li>
+		                                            </c:if>
+		                                        </c:if>
+                                            </ul>
+                                        </nav>
                                     </div>
                                     <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
                                         <div class="row">
