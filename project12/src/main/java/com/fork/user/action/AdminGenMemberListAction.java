@@ -36,7 +36,7 @@ public class AdminGenMemberListAction implements Action {
 		// 로그인 제어
 		String m_id = (String)request.getParameter("m_id");
 		
-		// 일반회원 페이징
+		
 		int cnt = dao.getGenMemCount();
 		int pageSize = 9;
 		

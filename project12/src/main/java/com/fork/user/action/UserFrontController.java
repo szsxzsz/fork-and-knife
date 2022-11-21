@@ -321,10 +321,14 @@ public class UserFrontController extends HttpServlet {
 				
 				else if(command.equals("/adminCeoMemDetail.us")) {
 					
+					action = new AdminCeoMemDetailAction();
 					
-					forward = new ActionForward();
-					forward.setPath("./admin/adminCeoMemDetail.jsp");
-					forward.setRedirect(false);
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				
 				//회원 마이 페이지(메인페이지)

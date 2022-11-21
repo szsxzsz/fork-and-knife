@@ -17,7 +17,7 @@ public class StoreDetailsAction implements Action {
 		int s_no=  (Integer.parseInt(request.getParameter("s_no")));
 		StoreDAO dao = new StoreDAO();
 		int cnt = dao.getBoardCount();
-		ArrayList recStore = dao.getBoardList(cnt);
+		ArrayList recStore = dao.getRecStoreList();
 		//request저장
 		
 		System.out.println("ddddddddddddddddddddddddddddddddddddd"+dao.getStoreDetails(s_no));

@@ -52,33 +52,22 @@ public class StoreDAO {
 	
 	// getStoreList(페이징) 가게 목록 불러오기 start
 	
-	public ArrayList getBoardList(int cnt) {
+	public ArrayList getRecStoreList() {
 		System.out.println(" DAO : getRecBoardList() 호출 ");
 		// 글정보 모두 저장하는 배열
 		ArrayList boardList = new ArrayList();
-		
-		
 		
 		try {
 		// 1.2. 디비 연결
 			con = getConnection();
 		// 3. sql 작성(select) & pstmt 객체
 //			sql = "select * from itwill_board";
-			Set set = new TreeSet<>();
-			while(set.size()<4) {
-				int a = (int)(Math.random()*cnt+1);
-				set.add(a);
-			}
-			Iterator<Integer> it = set.iterator();
+			sql = "select * from store order by rand() limit 0,4";
+			pstmt = con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
 			
-				while(it.hasNext()) {
-				sql = "select * from store where s_no=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, it.next());
+			while(rs.next()) {
 				
-				
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
 				StoreDTO dto = new StoreDTO();
 				dto.setC_no(rs.getInt("c_no"));
 				dto.setS_image(rs.getString("s_image"));
@@ -89,9 +78,10 @@ public class StoreDAO {
 				//DTO -> List
 				
 				boardList.add(dto);
-				}
-		
-			} // for
+			}
+	
+			
+		// for
 			System.out.println(" DAO : Rec게시판 목록 저장완료!");
 			
 		} catch (Exception e) {

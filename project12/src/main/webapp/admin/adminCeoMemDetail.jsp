@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -164,32 +165,32 @@
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">9</h1>
-                                                        <p>Campaign Invitations</p>
+                                                        <h1 class="mb-1">${cnt.store }</h1>
+                                                        <p>등록 가게 수</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">35</h1>
-                                                        <p>Finished Campaigns</p>
+                                                        <h1 class="mb-1">${cnt.read }</h1>
+                                                        <p>등록된 가게 조회수 총합</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">8</h1>
-                                                        <p>Accepted Campaigns</p>
+                                                        <h1 class="mb-1">${cnt.star.substring(0,3) }</h1>
+                                                        <p>등록된 가게 별점 평균</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h1 class="mb-1">1</h1>
-                                                        <p>Declined Campaigns</p>
+                                                        <h1 class="mb-1">${cnt.reserv }</h1>
+                                                        <p>등록된 가게 예약 수</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,6 +198,8 @@
                                         <div class="section-block">
                                             <h3 class="section-title">Campaign List</h3>
                                         </div>
+<!--                                         1 card  -->
+										<c:forEach var="s" items="${sList }">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
@@ -207,16 +210,12 @@
                                                             </div>
                                                             <div class="media-body ">
                                                                 <div class="influencer-profile-data">
-                                                                    <h3 class="m-b-10">Your Campaign Title Here</h3>
+                                                                    <h3 class="m-b-10">${s.s_name }</h3>
                                                                     <p>
-                                                                        <span class="m-r-20 d-inline-block">Draft Due Date
-                                                                            <span class="m-l-10 text-primary">24 Jan 2018</span>
+                                                                        <span class="m-r-20 d-inline-block">가게 등록일
+                                                                            <span class="m-l-10 text-primary">${s.s_regdate.toString().substring(0,19)}</span>
                                                                         </span>
-                                                                        <span class="m-r-20 d-inline-block"> Publish Date
-                                                                            <span class="m-l-10 text-secondary">30 Feb 2018</span>
-                                                                        </span>
-                                                                            <span class="m-r-20 d-inline-block">Ends <span class="m-l-10  text-info">30 May, 2018</span>
-                                                                        </span>
+                                                                        
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -226,110 +225,29 @@
                                             </div>
                                             <div class="border-top card-footer p-0">
                                                 <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">45k</h4>
-                                                    <p>Total Reach</p>
+                                                    <h4 class="mb-0">${s.s_star.toString().substring(0,3) }</h4>
+                                                    <p>평균 별점</p>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">29k</h4>
-                                                    <p>Total Views</p>
+                                                    <h4 class="mb-0">${s.s_readcount }</h4>
+                                                    <p>조회수</p>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">5k</h4>
-                                                    <p>Total Click</p>
+                                                    <h4 class="mb-0">${s.s_type }</h4>
+                                                    <p>식당 분류</p>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">4k</h4>
-                                                    <p>Engagement</p>
+                                                    <h4 class="mb-0">${s.s_price }</h4>
+                                                    <p>가격대</p>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">2k</h4>
-                                                    <p>Conversion</p>
+                                                    <h4 class="mb-0">${s.s_addr }</h4>
+                                                    <p>주소</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                        <div class="media influencer-profile-data d-flex align-items-center p-2">
-                                                            <div class="mr-4">
-                                                                <img src="assets/images/dribbble.png" alt="User Avatar" class="rounded-circle user-avatar-lg">
-                                                            </div>
-                                                            <div class="media-body">
-                                                                 <h3 class="m-b-10">Your Campaign Title Here</h3>
-                                                                <p><span class="m-r-20 d-inline-block">Draft Due Date<span class="m-l-10 d-inline-block text-primary">28 Jan 2018</span></span><span class="m-r-20 d-inline-block"> Publish Date<span class="m-l-10 text-secondary">20 March 2018</span></span><span class="m-r-20">Ends<span class="m-l-10 text-info">10 July, 2018</span></span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="border-top card-footer p-0">
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0 ">35k</h4>
-                                                    <p>Total Reach</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0 ">45k</h4>
-                                                    <p>Total Views</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">8k</h4>
-                                                    <p>Total Click</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0 ">10k</h4>
-                                                    <p>Engagement</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">3k</h4>
-                                                    <p>Conversion</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                        <div class="media influencer-profile-data d-flex align-items-center p-2">
-                                                            <div class="mr-4">
-                                                                <img src="assets/images/dropbox.png" alt="User Avatar" class="user-avatar-lg">
-                                                            </div>
-                                                            <div class="media-body">
-                                                                  <h3 class="m-b-10">Your Campaign Title Here</h3>
-                                                                <p><span class="m-r-20 d-inline-block">Draft Due Date
-                                                                    <span class="m-l-10 text-primary">05 Feb 2018</span></span>
-                                                                    <span class="m-r-20 d-inline-block"> Publish Date
-                                                                        <span class="m-l-10 text-secondary">14 May 2018</span></span><span class="m-r-20 d-inline-block">Ends<span class="m-l-10 text-info">16 Aug, 2018</span></span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="border-top card-footer p-0">
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">40k</h4>
-                                                    <p>Total Reach</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0 ">35k</h4>
-                                                    <p>Total Views</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">5k</h4>
-                                                    <p>Total Click</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">15k</h4>
-                                                    <p>Engagement</p>
-                                                </div>
-                                                <div class="campaign-metrics d-xl-inline-block">
-                                                    <h4 class="mb-0">14k</h4>
-                                                    <p>Conversion</p>
-                                                </div>
-                                            </div>
-                                        </div>
+<!--                                         1 card end -->
+                                        </c:forEach>
                                     </div>
                                     <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
                                         <div class="row">

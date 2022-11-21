@@ -1139,6 +1139,43 @@ public class UserDAO {
 			
 			// 어드민 회원 상세, 각종 횟수
 			
+			// 어드민 점주 상세, 각종 횟수
+			
+			public HashMap<String, Object> adminGetCeoCount(int c_no) {
+				
+				HashMap<String, Object> hs = new HashMap<String, Object>();
+				
+				try {
+					con=getConnection();
+					sql = "SELECT (select count(*) from store where c_no=?) A," 
+							+"(select sum(s_readcount) from store where c_no=?) B,"
+							+"(select avg(s_star) from store where c_no=? and s_star!=0) C,"
+							+"(select count(*) from reservation A, store B where A.s_no=B.s_no and B.c_no=?) D";
+					pstmt = con.prepareStatement(sql);
+					for (int i=1;i<5;i++) {
+						pstmt.setInt(i, c_no);
+					}
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						hs.put("store", rs.getInt("A"));
+						hs.put("read", rs.getInt("B"));
+						hs.put("star", rs.getString("C"));
+						hs.put("reserv", rs.getInt("D"));
+					}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return hs;
+			}
+						
+			// 어드민 점주 상세, 각종 횟수			
+			
 			// 어드민 공지 갯수 조회
 			public int getGenMemReservCount() {
 				int cnt = 0;
@@ -1419,7 +1456,7 @@ public class UserDAO {
 			 *  리턴값 o, List 배열
 			 * @param id
 			 * @param listType
-			 * @param startRowm
+			 * @param startRow
 			 * @param pageSize
 			 * @return
 			 */
@@ -1642,6 +1679,78 @@ public class UserDAO {
 				
 				return revList;
 			}
+			
+			public List getCeoStoreList(int c_no, int startRow, int pageSize) {
+				// 가게 목록 저장 List
+				List storeList = new ArrayList();
 				
-				// 어드민 멤버 디테일 리뷰
+				
+				try {
+					con = getConnection();
+					sql = "select * from store where c_no=? limit ?,?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, c_no);
+					pstmt.setInt(2, startRow-1); // 시작행 -1
+					pstmt.setInt(3, pageSize); // 개수
+					
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						// DB -> DTO -> List
+						StoreDTO sdto = new StoreDTO();
+						
+						sdto.setS_no(rs.getInt("s_no"));
+						sdto.setS_name(rs.getString("s_name"));
+						sdto.setS_addr(rs.getString("s_addr"));
+						sdto.setS_price(rs.getInt("s_price"));
+						sdto.setS_type(rs.getString("s_type"));
+						sdto.setS_readcount(rs.getInt("s_readcount"));
+						sdto.setS_star(rs.getDouble("s_star"));
+						sdto.setS_regdate(rs.getTimestamp("s_regdate"));
+						// DTO -> List
+						storeList.add(sdto);
+						
+					} // while
+					
+//					System.out.println(" DAO : 가지고 있는 가게 수 : "+storeList.size());
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return storeList;
+			}
+				
+			public int getCntCeoStoreList(int c_no, int startRow, int pageSize) {
+				// 가게 목록 저장 List
+				int cnt=0;
+				
+				try {
+					con = getConnection();
+					sql = "select count(*) from store where c_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, c_no);
+					
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						cnt = rs.getInt(1);
+						
+					} // while
+					
+//					System.out.println(" DAO : 가지고 있는 가게 수 : "+storeList.size());
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+				return cnt;
+			}
 }
