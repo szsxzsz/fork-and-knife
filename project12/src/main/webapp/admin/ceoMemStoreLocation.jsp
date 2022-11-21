@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
  
 <head>
     <!-- Required meta tags -->
@@ -49,6 +48,11 @@
 					    map: map,
 					    position: new kakao.maps.LatLng(33.450701, 126.570667)
 				});
+				 marker.setTitle('${param.name}');
+				 var infowindow = new kakao.maps.InfoWindow({
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">${param.name}</div>'
+			        });
+					infowindow.open(map, marker);
 			 }
 			
 			

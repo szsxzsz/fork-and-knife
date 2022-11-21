@@ -159,7 +159,7 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="section-block">
-                                                    <h3 class="section-title">My Campaign State</h3>
+                                                    <h3 class="section-title">가게 등록 정보</h3>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -210,7 +210,7 @@
                                                             </div>
                                                             <div class="media-body ">
                                                                 <div class="influencer-profile-data">
-                                                                    <h3 class="m-b-10">${s.s_name }</h3>
+                                                                    <h3 class="m-b-10"><a href="./storeDetails.st?s_no=${s.s_no}">${s.s_name }</a></h3>
                                                                     <p>
                                                                         <span class="m-r-20 d-inline-block">가게 등록일
                                                                             <span class="m-l-10 text-primary">${s.s_regdate.toString().substring(0,19)}</span>
