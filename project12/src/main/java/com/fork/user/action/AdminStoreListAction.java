@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fork.store.db.StoreDAO;
 import com.fork.user.db.UserDAO;
 
 
@@ -36,10 +37,10 @@ public class AdminStoreListAction implements Action {
 		
 		
 		
-		com.fork.store.db.StoreDAO dao = new com.fork.store.db.StoreDAO();
+		StoreDAO dao = new StoreDAO();
 		
 		int cnt = dao.getBoardCount();
-		System.out.println(cnt);		
+		String s_name = (String)request.getParameter("s_name");
 		int pageSize = 9;
 		
 		// 	http://localhost:8088/JSP/board/boardList.jsp?pageNum=3 
@@ -61,7 +62,23 @@ public class AdminStoreListAction implements Action {
 		UserDAO udao = new UserDAO();
 		// 디비에 전체 글 리스트 가져오기
 //		ArrayList boardListAll =  dao.getBoardList();
-		List<Map> storeListAll = udao.adminGetBoardList(startRow, pageSize);
+		List<Map> storeListAll = null;
+		
+		StringBuffer sb = new StringBuffer();
+		if (s_name!=null) {
+			request.setAttribute("keyword",s_name );
+			s_name = s_name.trim();
+			sb.append(s_name);
+			sb.insert(0, "%");
+			sb.insert(s_name.length()+1, "%");
+			storeListAll = udao.adminGetBoardList(startRow, pageSize, sb.toString());
+			cnt = udao.adminCntGetBoardList(startRow, pageSize, sb.toString());
+			
+		}
+		else {
+			storeListAll = udao.adminGetBoardList(startRow, pageSize);
+		}
+		
 		   /////////////////////////////////////////////////////////////////////////////////////////////////
 			// 페이징 처리 (2)
 			

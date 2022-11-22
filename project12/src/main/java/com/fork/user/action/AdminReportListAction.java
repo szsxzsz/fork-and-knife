@@ -68,6 +68,19 @@ public class AdminReportListAction implements Action {
 			forward.setRedirect(false);
 			
 		}
+		String keyword;
+		StringBuffer sb = new StringBuffer();
+		if (request.getParameter("keyword")!=null) {
+			keyword = (String)request.getParameter("keyword");
+			keyword.trim();
+			sb.append(keyword);
+			sb.insert(0, "%");
+			sb.insert(keyword.length()+1, "%");
+			repList = dao.adminGetReportList(startRow, pageSize, sb.toString());
+			
+			
+			
+		}
 		
 		
 		

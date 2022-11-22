@@ -95,17 +95,17 @@
                                 <div class="influence-profile-content pills-regular">
                                 <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#">공지</a>
+                                        <a class="nav-link" href="./adminNoticeList.us">공지</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./adminEventList.us">이벤트</a>
+                                        <a class="nav-link active" href="#">이벤트</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                 
                             		<div class="tab-pane fade show active" id="pills-ceo" role="tabpanel" aria-labelledby="pills-ceo-tab">
                             		<div class="card">
-                                    <h5 class="card-header">Notice List</h5>
+                                    <h5 class="card-header">Event List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table class="table">
@@ -176,10 +176,10 @@
                         		</div>
                     		</div>
                     		<div class="col-xl-9">
-                    		<form action="./adminNoticeList.us" method="post">
-                                <input class="form-controlkjh" type="text" placeholder="제목 검색" name="keyword" value="${keyword }">
+                    		<form action="./adminEventList.us" method="post">
+                                <input class="form-controlkjh" type="text" placeholder="아이디 검색" name="keyword" value="${keyword }">
                                 <input type="submit" value="검색" class="btn btn-primary">
-                                <a href="./adminNoticeList.us" class="btn btn-primary">전체보기</a>
+                                <a href="./adminEventList.us" class="btn btn-primary">전체보기</a>
                             </form>
                             	
                     		</div>

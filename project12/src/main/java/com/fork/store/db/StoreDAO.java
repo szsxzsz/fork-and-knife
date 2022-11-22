@@ -193,7 +193,7 @@ public class StoreDAO {
 			con = getConnection();
 		// 3. sql 작성(select) & pstmt 객체
 //			sql = "select * from itwill_board";
-			sql = "select count(*) from store where s_name Like ? limit ?,? ";
+			sql = "select count(*) from store where s_name Like ?";
 			pstmt = con.prepareStatement(sql);
 		// ?????
 			pstmt.setString(1, kw);
@@ -364,7 +364,7 @@ public class StoreDAO {
 				con = getConnection();
 			// 3. sql 작성(select) & pstmt 객체
 //				sql = "select * from itwill_board";
-				sql = "select count(*) from store where ? < s_price and s_price<?" + "limit ?,? ";
+				sql = "select count(*) from store where ? < s_price and s_price<?";
 				pstmt = con.prepareStatement(sql);
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);
@@ -1098,15 +1098,14 @@ public class StoreDAO {
 					sql2.append(" s_type=? or");
 				}
 				sql2.delete(sql2.length()-2,sql2.length());
-				sql2.append("limit ?,?");
+				
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i, category[i-1]);
 				}
-				pstmt.setInt(category.length+1, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+2, pageSize); // 개수
+				
 				
 			// 4. sql 실행
 				rs = pstmt.executeQuery();

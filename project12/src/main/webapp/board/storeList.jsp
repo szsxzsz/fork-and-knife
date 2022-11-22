@@ -44,18 +44,16 @@
 // 				});
 // 			});
 		
-		$(document).ready(function() {
-			
-			${"#page"}.click(function() {
-				alert('dd');
-			});
-			
-		});
+		
 		</script>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <jsp:include page="../inc/top.jsp"/>
+<!-- 		검색 파라미터 -->
 		
 		
+		
+		
+<!-- 		검색 파라미터 end -->
         <div class="page-head"> 
             <div class="container">
                 <div class="row">
@@ -390,16 +388,16 @@
                                 <ul>
     <c:if test="${reqeustScope.totalCnt != 0 }">
 	<!-- 이전 -->
-	<c:if test="${startPage > pageBlock }">${startPage-pageBlock }
-		<li><a href="#" id="prev">Prev</a></li>
+	<c:if test="${startPage > pageBlock }">
+		<li><a href="./storeList.st?pageNum=${startPage-pageBlock }<c:if test='${param.kw!=null }'>&kw=${param.kw }</c:if><c:if test='${param.gu!=null }'>&gu=${param.gu }</c:if><c:if test='${param.nums!=null }'>&nums=${param.nums }</c:if><c:if test='${param.pr!=null }'>&pr=${param.pr }</c:if><c:if test='${param.prnon!=null }'>&prnon=${param.prnon }</c:if>">Prev</a></li>
 	</c:if>
 	<!-- 페이지 번호(1,2,3....) -->${i }
 	<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-		<li><a href="#" id="page">${i }</a><li>
+		<li><a href="./storeList.st?pageNum=${i }<c:if test='${param.kw!=null }'>&kw=${param.kw }</c:if><c:if test='${param.gu!=null }'>&gu=${param.gu }</c:if><c:if test='${param.nums!=null }'>&nums=${param.nums }</c:if><c:if test='${param.pr!=null }'>&pr=${param.pr }</c:if><c:if test='${param.prnon!=null }'>&prnon=${param.prnon }</c:if>">${i }</a><li>
 	</c:forEach>
 	<!-- 다음 -->
 	<c:if test="${endPage < pageCount }">
-		<li><a href="#" onclick="page(${startPage+pageBlock } })">[다음]</a><li>
+		<li><a href="./storeList.st?pageNum=${startPage+pageBlock }">[다음]</a><li>
 	</c:if>
 </c:if>
                                 </ul>

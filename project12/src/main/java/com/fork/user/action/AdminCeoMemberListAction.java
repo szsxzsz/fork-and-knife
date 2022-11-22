@@ -71,8 +71,8 @@ public class AdminCeoMemberListAction implements Action {
 			sb.append(c_id);
 			sb.insert(0, "%");
 			sb.insert(c_id.length()+1, "%");
-			ceoMemList = dao.adminGetCeoMemList(sb.toString());
-			
+			ceoMemList = dao.adminGetCeoMemList(startRow, pageSize, sb.toString());
+			cnt = dao.adminCntGetCeoMemList(startRow, pageSize, sb.toString());
 		}
 		else {
 			ceoMemList = dao.adminGetCeoMemList(startRow,pageSize);

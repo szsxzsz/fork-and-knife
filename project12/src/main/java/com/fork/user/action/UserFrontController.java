@@ -264,6 +264,18 @@ public class UserFrontController extends HttpServlet {
 					
 				}
 				
+				else if(command.equals("/adminEventList.us")) {
+									
+					action = new AdminEventListAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
 				
 				else if(command.equals("/adminDeleteNoticeAction.us")) {
 					
@@ -482,7 +494,12 @@ public class UserFrontController extends HttpServlet {
 					forward.setRedirect(false);
 				}
 				
-				
+				else if(command.equals("/adminStoreDetail.us")) {
+					
+					forward = new ActionForward();
+					forward.setPath("./admin/adminStoreDetail.jsp");
+					forward.setRedirect(false);
+				}
 				
 				// 관리자페이지
 				System.out.println(" C : 2. 가상주소 매핑(패턴 1,2,3) 끝 \n");

@@ -68,7 +68,8 @@ public class AdminGenMemberListAction implements Action {
 			sb.append(m_id);
 			sb.insert(0, "%");
 			sb.insert(m_id.length()+1, "%");
-			genMemList = dao.adminGetGenMemList(sb.toString());
+			genMemList = dao.adminGetGenMemList(startRow,pageSize,sb.toString());
+			cnt = dao.adminCntGetGenMemList(startRow,pageSize,sb.toString());
 		}
 		else {
 			genMemList = dao.adminGetGenMemList(startRow,pageSize);
