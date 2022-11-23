@@ -1212,7 +1212,7 @@ public class StoreDAO {
 			if(rs.next()) {
 				
 //				cnt = rs.getInt("count(*)");
-				cnt = rs.getInt("count(*)");
+				cnt = rs.getInt(1);
 			}
 			System.out.println(" DAO : 전체 글 개수 : " +cnt+"개");
 		} catch (Exception e) {
