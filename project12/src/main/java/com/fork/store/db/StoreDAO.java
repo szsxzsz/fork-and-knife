@@ -122,6 +122,7 @@ public class StoreDAO {
 				dto.setS_star(rs.getDouble("s_star"));
 				dto.setS_no(rs.getInt("s_no"));
 				dto.setS_type(rs.getString("s_type"));
+				dto.setS_content(rs.getString("s_content"));
 				//DTO -> List
 				
 				boardList.add(dto);
@@ -160,6 +161,7 @@ public class StoreDAO {
 			while(rs.next()) {
 				// DB -> DTO
 				StoreDTO dto = new StoreDTO();
+				dto.setS_content(rs.getString("s_content"));
 				dto.setC_no(rs.getInt("c_no"));
 				dto.setS_image(rs.getString("s_image"));
 				dto.setS_name(rs.getString("s_name"));
@@ -197,8 +199,7 @@ public class StoreDAO {
 			pstmt = con.prepareStatement(sql);
 		// ?????
 			pstmt.setString(1, kw);
-			pstmt.setInt(2, startRow-1); // 시작행-1
-			pstmt.setInt(3, pageSize); // 개수
+			
 		// 4. sql 실행
 			rs = pstmt.executeQuery();
 		// 5. 데이터 처리 (DB -> DTO -> List)
@@ -248,6 +249,7 @@ public class StoreDAO {
 				dto.setS_star(rs.getDouble("s_star"));
 				dto.setS_no(rs.getInt("s_no"));
 				dto.setS_type(rs.getString("s_type"));
+				dto.setS_content(rs.getString("s_content"));
 				//DTO -> List
 				
 				boardList.add(dto);
@@ -280,8 +282,6 @@ public class StoreDAO {
 		// ?????
 			pstmt.setInt(1, gu.length());
 			pstmt.setString(2, gu);
-			pstmt.setInt(3, startRow-1); // 시작행-1
-			pstmt.setInt(4, pageSize); // 개수
 		// 4. sql 실행
 			rs = pstmt.executeQuery();
 		// 5. 데이터 처리 (DB -> DTO -> List)
@@ -337,6 +337,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -369,8 +370,7 @@ public class StoreDAO {
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);
 				pstmt.setString(2, price.split(",")[1]);
-				pstmt.setInt(3, startRow-1); // 시작행-1
-				pstmt.setInt(4, pageSize); // 개수
+				
 			// 4. sql 실행
 				
 				rs = pstmt.executeQuery();
@@ -442,6 +442,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -493,6 +494,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -543,6 +545,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -601,6 +604,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -658,6 +662,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -707,6 +712,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -758,6 +764,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -818,6 +825,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -879,6 +887,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -944,6 +953,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -1007,6 +1017,7 @@ public class StoreDAO {
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_no(rs.getInt("s_no"));
 					dto.setS_type(rs.getString("s_type"));
+					dto.setS_content(rs.getString("s_content"));
 					//DTO -> List
 					
 					boardList.add(dto);
@@ -1056,6 +1067,7 @@ public class StoreDAO {
 						while(rs.next()) {
 							// DB -> DTO
 							StoreDTO dto = new StoreDTO();
+							dto.setS_content(rs.getString("s_content"));
 							dto.setC_no(rs.getInt("c_no"));
 							dto.setS_image(rs.getString("s_image"));
 							dto.setS_name(rs.getString("s_name"));
@@ -1247,7 +1259,7 @@ public class StoreDAO {
 		
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_regdate(rs.getTimestamp("s_regdate"));
-					dto.setS_price(rs.getInt("s_price"));
+					
 					
 					
 				}
@@ -1281,7 +1293,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1291,8 +1303,7 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+2, category[i-1]);
 				}
-				pstmt.setInt(category.length+3, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+4, pageSize); // 개수
+				
 			// 4. sql 실행
 				
 				rs = pstmt.executeQuery();
@@ -1326,18 +1337,17 @@ public class StoreDAO {
 				con = getConnection();
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select count(*) from itwill_board";
-				sql = "select count(*) from store where ?<s_price and s_price<? and s_name Like ? limit ?,?";
+				sql = "select count(*) from store where ?<s_price and s_price<? and s_name Like ?";
 				pstmt=con.prepareStatement(sql);
 				
 			// ?????
 				pstmt.setString(1, price.split(",")[0]);
 				pstmt.setString(2, price.split(",")[1]);
 				pstmt.setString(3, kw);
-				pstmt.setInt(4, startRow-1); // 시작행-1
-				pstmt.setInt(5, pageSize);
+				
 				
 			// 4. sql 실행
-				System.out.println("dddddddddddddddddddddddddddddddddd"+pstmt);
+				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
 				if(rs.next()) {
@@ -1369,7 +1379,7 @@ public class StoreDAO {
 				con = getConnection();
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select count(*) from itwill_board";
-				sql = "select count(*) from store where ?<s_price and s_price<? and substring(s_addr,7,?)=? limit ?,?";
+				sql = "select count(*) from store where ?<s_price and s_price<? and substring(s_addr,7,?)=?";
 				
 				
 			// ?????
@@ -1377,8 +1387,7 @@ public class StoreDAO {
 				pstmt.setString(2, price.split(",")[1]);
 				pstmt.setInt(3, gu.length());
 				pstmt.setString(4, gu);
-				pstmt.setInt(5, startRow-1); // 시작행-1
-				pstmt.setInt(6, pageSize);
+				
 				
 			// 4. sql 실행
 				
@@ -1420,7 +1429,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1429,8 +1438,7 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+1, category[i-1]);
 				}
-				pstmt.setInt(category.length+2, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+3, pageSize); // 개수
+				
 				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
@@ -1471,7 +1479,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1480,8 +1488,6 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+1, category[i-1]);
 				}
-				pstmt.setInt(category.length+2, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+3, pageSize); // 개수
 				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
@@ -1513,15 +1519,13 @@ public class StoreDAO {
 				con = getConnection();
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select count(*) from itwill_board";
-				sql = "select count(*) from store where s_name like ? and substring(s_addr,7,?)=? limit ?,?";
+				sql = "select count(*) from store where s_name like ? and substring(s_addr,7,?)=?";
 				pstmt = con.prepareStatement(sql);
 				
 			// ?????
 				pstmt.setString(1, kw);
 				pstmt.setInt(2, gu.length());
 				pstmt.setString(3, gu);
-				pstmt.setInt(4, startRow-1); // 시작행-1
-				pstmt.setInt(5, pageSize);
 				
 			// 4. sql 실행
 				
@@ -1565,7 +1569,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1576,8 +1580,6 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+3, category[i-1]);
 				}
-				pstmt.setInt(category.length+4, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+5, pageSize); // 개수
 				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
@@ -1608,7 +1610,7 @@ public class StoreDAO {
 				con = getConnection();
 			// 3. sql 작성(select) & pstmt 객체
 //					sql = "select count(*) from itwill_board";
-				sql = "select count(*) from store where ?<s_price and s_price<? and s_name Like ? and substring(s_addr,7,?)=? limit ?,?";
+				sql = "select count(*) from store where ?<s_price and s_price<? and s_name Like ? and substring(s_addr,7,?)=?";
 				pstmt = con.prepareStatement(sql);
 				
 			// ?????
@@ -1617,8 +1619,6 @@ public class StoreDAO {
 				pstmt.setString(3, kw);
 				pstmt.setInt(4,gu.length());
 				pstmt.setString(5, gu);
-				pstmt.setInt(6, startRow-1); // 시작행-1
-				pstmt.setInt(7, pageSize);
 				
 			// 4. sql 실행
 				
@@ -1660,7 +1660,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1672,8 +1672,7 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+4, category[i-1]);
 				}
-				pstmt.setInt(category.length+5, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+6, pageSize); // 개수
+				
 				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
@@ -1715,7 +1714,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1726,8 +1725,6 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+3, category[i-1]);
 				}
-				pstmt.setInt(category.length+4, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+5, pageSize); // 개수
 				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
@@ -1769,7 +1766,7 @@ public class StoreDAO {
 				}
 				sql2.delete(sql2.length()-3,sql2.length());
 				
-				sql2.append(") limit ?,?");
+				sql2.append(")");
 				
 				pstmt = con.prepareStatement(sql2.toString());
 			// ?????
@@ -1782,8 +1779,6 @@ public class StoreDAO {
 				for (int i=1;i<category.length+1;i++) {
 					pstmt.setString(i+5, category[i-1]);
 				}
-				pstmt.setInt(category.length+6, startRow-1); // 시작행-1
-				pstmt.setInt(category.length+7, pageSize); // 개수
 				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)

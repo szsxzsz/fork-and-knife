@@ -239,6 +239,11 @@ public class StoreListAction implements Action {
 			cnt = dao.getBoardCount();
 		}
 		
+		if (request.getParameter("dto")!=null) {
+			String a = (String)request.getParameter("dto");
+			System.out.println(a);
+		}
+		
 		// 디비에 전체 글 리스트 가져오기
 //		ArrayList boardListAll =  dao.getBoardList();
 		
