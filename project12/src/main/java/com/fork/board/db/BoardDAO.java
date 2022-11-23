@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.fork.user.db.MemberDTO;
 
 public class BoardDAO {
 	private Connection con = null;
@@ -259,9 +263,142 @@ public class BoardDAO {
 		}
 		// 글 확인 - getQnaBoard()
 	
+		public int insertReserv(BookDTO boDTO) {
+			int res_no = 1; // 
+			
+//			Calendar cal = Calendar.getInstance();
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			
+			try {
+				con = getConnection();
+				// res_no 계산하기
+				sql = "select max(res_no) from reservation";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					res_no = rs.getInt(1)+1;
+				}
+				
+
+				// 예약번호 생성 
+				// 예약정보 저장(최소 1개 이상)
+					
+					// insert
+					sql ="insert into reservation "
+							+ "values("
+							+ "?,?,?,?,?,"
+							+ "?,?,?,?,?)";
+					
+					pstmt = con.prepareStatement(sql);
+					
+					// ???
+					pstmt.setInt(1, res_no); // 예약번호
+					pstmt.setInt(2, boDTO.getS_no()); // 식당번호 
+					pstmt.setInt(3, boDTO.getM_no()); // 회원번호
+					pstmt.setInt(4, boDTO.getRes_num()); // 인원
+					pstmt.setString(5, boDTO.getRes_date() );// 시간
+					pstmt.setString(6, boDTO.getRes_name()); // 방문일자
+					pstmt.setString(7, boDTO.getRes_msg()); // 
+					pstmt.setInt(8,0); // 
+					pstmt.setInt(9, boDTO.getRes_time()); // 
+					pstmt.setString(10, boDTO.getRes_tel());
+					pstmt.executeUpdate();
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			return res_no;
+		}
+		// 예약 정보 저장 - insertReserv(BookDTO)xecuteUpdate();
 	
-	
-	
+		public void insertPayment(PaymentDTO dto) {
+			int p_no=1;
+			
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			
+			try {
+				con = getConnection();
+				// res_no 계산하기
+				
+				sql = "select max(p_no) from payment";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					p_no = rs.getInt(1)+1;
+				}
+				
+
+				// 예약번호 생성 
+				// 예약정보 저장(최소 1개 이상)
+					
+					// insert
+					sql ="insert into payment "
+							+ "values("
+							+ "?,?,?,?,?,"
+							+ "0,now())";
+					
+					pstmt = con.prepareStatement(sql);
+					
+					// ???
+//					pstmt.setString(1, sdf.format(cal.getTime())+"-"+dto.getRes_no()); // 예약번호
+					pstmt.setString(1, dto.getP_no());
+					pstmt.setInt(2, dto.getM_no()); // 식당번호 
+					pstmt.setInt(3, dto.getRes_no()); // 회원번호
+					pstmt.setInt(4, dto.getP_price()); // 인원
+					pstmt.setString(5, dto.getP_info());// 시간
+					
+					pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+		}
+		// 예약 정보 저장 - insertReserv(BookDTO)xecuteUpdate();
+		
+		// getUserInfo 회원 정보 가져오기
+		
+		public MemberDTO getUserInfo(String id) {
+			MemberDTO dto = null;
+			
+			try {
+				con = getConnection();
+				
+				sql = "select * from member where m_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					dto = new MemberDTO();
+					
+					dto.setM_birth(rs.getString("m_birth"));
+					dto.setM_email(rs.getString("m_email"));
+					dto.setM_gender(rs.getString("m_gender"));
+					dto.setM_id(rs.getString("m_id"));
+					dto.setM_name(rs.getString("m_name"));
+					dto.setM_nickName(rs.getString("m_nickname"));
+					dto.setM_no(rs.getInt("m_no"));
+					dto.setM_pw(rs.getString("m_pw"));
+					dto.setM_regdate(rs.getTimestamp("m_regdate"));
+					
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return dto;
+		}
+		
+		// getUserInfo 회원 정보 가져오기
 	
 	
 	

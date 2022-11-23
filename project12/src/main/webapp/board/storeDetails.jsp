@@ -24,7 +24,6 @@ crossorigin="anonymous"/>
 <!--  eatigo -->
 <link rel="stylesheet" href="assets/css/lightslider.min.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
-     
       
 <script src="./board/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -32,18 +31,9 @@ $(document).ready(function(){
 	
 	alert('hi');
 	
-	//좋아
-	$('.like-content').one('click','.like-review', function(e) {
-		$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
-		$(this).children('.fa-heart').addClass('animate-like');
-		
-		 var likeValue = $(this).attr("data-rate");
-		/*  5 .like-content 클릭시 
-		 *  6 .like-content 의 html를 변경 (간단하게 문구만 변경)
-		 *  7 .like-content class의 자식인 .fa-heart에 class를 animate-like 추가
-		 *  .one 제이쿼리 함수는 이벤트를 한번만 받아 수행( 다시 눌러도 상태 돌아오지 않음)
-		 */
-		});
+	
+	
+	
 	
 	
 	
@@ -60,7 +50,41 @@ $(document).ready(function(){
 	};
 	
 	
-	  
+	    var $wrap = $('.totalFn'), 
+	        $btnMinus = $wrap.find('.minus'),
+	        $btnPlus = $wrap.find('.plus');
+	        $cell = $wrap.find('.cell');
+	         
+	    $btnMinus.on('click', function(e){
+	        var $this = $(this);
+	        var num = $this.parent().find('.num').text();
+	        num --;
+	        if (num <= 0) {
+	            num = 0;
+	        }
+	        $this.parent().find('.num').text(num);
+	        totalFn();
+	    });
+	 
+	    $btnPlus.on('click', function(){
+	        var $this = $(this);
+	        var num = $this.parent().find('.num').text();
+	        num ++;
+	        if (20 <= num) {
+	            num = 20; // 최대 인원수 
+	        }
+	        $this.parent().find('.num').text(num);
+	        totalFn();
+	    });
+	 
+	    function totalFn(){
+	        var $total = $(".totalFn .count-box")
+	        var total = 0;
+	        $total.find(".num").each(function(){ 
+	            total += Number($(this).text());
+	        });
+	        $(".count-total").text(total);
+	    };
 	
 
 	
@@ -144,19 +168,21 @@ $(document).ready(function(){
                                 
                                 
 								
-								<table> 
-									<ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-										<c:set var="img" value="${dto.s_image }"/>
-										<c:forEach var="i" begin="0" end="2" step="1" >
-											<c:if test="${img.split(',')[i]!='null'}">
-												<li data-thumb="./upload/${img.split(',')[i] }"> 
-												<img src="./upload/${img.split(',')[i] }" />
-												</li>
-											</c:if>
-										</c:forEach>
-									</ul>
-									</table>
-                                    <!-- 이미지  -->
+								배너 사진
+                                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[0] }"> 
+                                         <img src="./upload/${dto.s_menuImg.split(',')[0] }" />
+                                     </li>
+                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[1] }"> 
+                                         <img src="./upload/${dto.s_menuImg.split(',')[1] }" />
+                                     </li>
+                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[2] }"> 
+                                         <img src="./upload/${dto.s_menuImg.split(',')[2] }" />
+                                     </li>
+                                     <li data-thumb="./upload/${dto.s_menuImg.split(',')[3] }"> 
+                                         <img src="./upload/${dto.s_menuImg.split(',')[3] }" />
+                                     </li>                                       
+                                 </ul>
                              </div>
                          </div>
                      </div>
@@ -173,12 +199,12 @@ $(document).ready(function(){
 			 -->
 								<c:forEach var="i" begin="0" end="5" step="1">
 								
-								
-							<tr>
-								<div class="form-group"><td>  ${dto.s_facility.split(',')[i]}</td></div>
-							</tr>
+								<div>
+								<tr>
+								<td>  ${dto.s_facility.split(',')[i]}</td>
+								</tr>
 														
-								
+								</div>
 
 <!--                              <div class="col-xs-3 col-sm-3 col-md-3 p-b-15"> -->
 <!--                                  <span class="property-info-icon icon-tag"> -->
@@ -223,10 +249,6 @@ $(document).ready(function(){
                                      <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">콜키지</span>
                                      <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">콜키지 시 2만원 추가 금액</span>
                                  </li>
-                                 <li>
-                                     <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">노키즈/키즈</span>
-                                     <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">콜키지 시 2만원 추가 금액</span>
-                                 </li>
 
                              </ul>
                          </div>  
@@ -241,13 +263,12 @@ $(document).ready(function(){
 							<li class="active"><a data-toggle="tab" href="#menu">		M E N U		</a></li>
 							<li><a data-toggle="tab" href="#about">		A B O U T	 </a></li>
 							<li><a data-toggle="tab" href="#review">	R E V I E W		</a></li>
-							<li><a data-toggle="tab" href="#qna">   Q n A      </a></li>
 						</ul>
 
 						<div class="tab-content">
 							<div id="menu" class="tab-pane fade in active">
-								<h3>M E N U</h3>
-								<p>메뉴를 고르시오</p>
+								<h3>HOME</h3>
+								<p>Some content.</p>
 
 								
 								
@@ -275,32 +296,12 @@ $(document).ready(function(){
 									<!-- jsp? 가상주소? -->
 <%-- 							<jsp:include page="../board/reviewList.jsp" /> --%>
 								
-								<hr><!-- 상품 정보를 들고 가야함. 다시 디테일로 돌아와함 -->
-							<input type="button" value="리뷰 쓰기" class="reviewWrite"
-							onclick="location.href='./ReviewWrite.rv?s_no=${dto.s_no}&s_name=${dto.s_name}';">
+								<hr>
+								<input type="submit" value="리뷰목록" onclick="location.href='/ReviewList.rv';">
+								<input type="submit" value="리뷰쓰기" onclick="location.href='/ReviewWrite.rv';">
 								
-								<input type="button" value="리뷰 목록" class="reviewList"
-							onclick="location.href='./ReviewList.rv?s_no=${dto.s_no}&s_name=${dto.s_name}';">
-								
-						<input type="hidden" value="${dto.s_name }">
-								
+
 							</div>
-						<div id="qna" class="tab-pane fade">
-                        <h3>QnA board</h3>
-                        <p>please write QnA for our restaurant.</p>
-                        
-                        
-                           <!-- jsp? 가상주소? -->
-<%--                      <jsp:include page="../board/reviewList.jsp" /> --%>
-                        
-                        <hr><!-- 상품 정보를 들고 가야함. 다시 디테일로 돌아와함 -->
-                     <input type="button" value="QnA 쓰기" class="qnaWrite"
-                     onclick="location.href='./QnaWrite.br?s_no=${dto.s_no}&rev_category=2';">
-                        
-                        <input type="button" value="QnA 목록" class="qnaList"
-                     onclick="location.href='./QnaList.br?s_no=${dto.s_no}&rev_category=2';">
-						
-						
 						</div>
 
 					</div> <br>
@@ -313,11 +314,11 @@ $(document).ready(function(){
                  <h4 class="s-property-title">M A P </h4>
                 <p>위치 :  ${dto.s_addr }</p>
 				<!--  지도 api -->
-				   <input type="hidden" id="address223" value="${dto.s_addr }">
-				<div id="map" style="width: 100%; height: 400px;"></div>
+				 
+				<div id="map" style="width: 730px; height: 400px;"></div>
 				
 			<br>
-			
+			${dto }
                        
                      </div>
                  </div>
@@ -328,19 +329,21 @@ $(document).ready(function(){
                              <div class="dealer-content">
                                  <div class="inner-wrapper">
 								<!-- 즐겨찾기 -->
-								
-									<div class="favorite-and-print">
-										<a class="printer-icon" href="javascript:window.print()">
-											<i class="fa fa-print"></i>
-										</a>
-									</div>
+								<div class="favorite-and-print">
+                                     <a class="add-to-fav" href="#login-modal" data-toggle="modal">
+                                         <i class="fa fa-heart-o"></i>
+                                     </a>
+                                     <a class="printer-icon " href="javascript:window.print()">
+                                         <i class="fa fa-print"></i> 
+                                     </a>
+                                 </div> 
 
 
-									<div class="clear">
-                                         <div class="col-xs-8 col-sm-8 dealer-face">
+                                     <div class="clear">
+                                         <div class="col-xs-12 col-sm-12 dealer-face">
                                              <a href="">
-                                                 
-                                                 <img src="./upload/${dto.s_image }" class="img-circle">
+                                                 <img src="assets/img/octocat.png" class="img-circle">
+                                                 <img src="./upload/${dto.s_image }" />
                                              </a>
                                          </div>
                                          <br>
@@ -348,17 +351,9 @@ $(document).ready(function(){
                                              <h3 class="dealer-name">
                                              
 										<b> ${dto.s_name } </b>
-										
-										 <p>${dto.s_type } 전문점</p>
+										 <p>Back end developer ${dto.s_type } 전문점</p>
                                              </h3>
-                                           <form action="" method="post">
-											<!-- 좋아요 기능 -->
-											<div class="like-content">
-												<button class="btn-secondary like-review">
-													<i class="fa fa-heart" aria-hidden="true"></i> Like
-												</button>
-											</div>
-										</form>
+                                            
 
                                          </div>
                                      </div>
@@ -367,7 +362,7 @@ $(document).ready(function(){
                                          <ul class="dealer-contacts">                                       
                                              <li><i class="pe-7s-map-marker strong pe-2x"> </i><a href="#" onclick="clip(); return false;"> MAP url ${dto.s_addr} </a></li>
                                              <li><i class="pe-7s-call strong pe-2x"> </i> <a href="">Store Tel : ${dto.s_tel } </a></li>
-                                             <li><i class="pe-7s-star strong pe-2x"> </i>  <fmt:formatNumber value="${dto.s_star }"/></li>
+                                             <li><i class="pe-7s-star strong pe-2x"> </i>  ${dto.s_star }</li>
                                          </ul>
                                          <p> ${dto.s_content }</p>
                                      </div>
@@ -375,7 +370,6 @@ $(document).ready(function(){
                                  </div>
                              </div>
                          </div>
-                        
                          
      <!--  가게 검색 기능-->
      <!-- 사람수, 인원을 hidden으로 폼태그안에 만들어서 제이쿼리로 submit되게 해야함  -->
@@ -388,8 +382,8 @@ $(document).ready(function(){
          </div>
          <div class="panel-body search-widget">
          
-             <form action="./reservation.st" class="form-inline" method="get"> 
-               
+             <form action="./reservation.br" class="form-inline" method="post"> 
+             <input type="hidden" name="s_price" value="${dto.s_price }">
                <hr>
 			<fieldset>
 			
@@ -429,11 +423,11 @@ $(document).ready(function(){
 					
 										<hr>
 
-				<div class="col-xs-6" style="font-family: monospace;">
+				<div class="col-xs-6" style="font-family: Consolas, sans-serif;">
 					<label for="property-geo">날짜</label> 
 						<input type="date"id="start" name="date"
 					       value="today"
-					       min="today" max="2030-12-31">
+					       min="2022-01-01" max="2030-12-31">
 							
 				</div>
 				
@@ -441,11 +435,14 @@ $(document).ready(function(){
                            <div class="col-xs-6">
 								<label for="price-range"> 몇시에 오시나요? </label>
 								<input type="time" value="now" min="11:00" max="21:00" step="3600000" name="time" required >
-
+								<input type="hidden" value="${dto.s_addr }" name="s_addr">
+								<input type="hidden" value="${dto.s_name }" name="s_name">
+								<input type="hidden" value="${dto.s_tel }" name="s_tel">
+								<input type="hidden" value="${dto.s_facility }" name="s_facility">
+								<input type="hidden" value="${dto.s_no }" name="s_no">
                            </div>
                            </div>
      	<hr>
-     	
                            <input id="input1" type="submit" value="예 약 하 기!" class="submit"> 
 			</fieldset>
 			</form>
@@ -466,7 +463,7 @@ $(document).ready(function(){
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
                                                 <span class="property-seeker">
-                                                    <b class="b-1"></b>
+<!--                                                     <b class="b-1"></b> -->
                                                     <b class="b-2">${rec.s_type }</b>
                                                 </span>
                                             </div>
@@ -504,11 +501,40 @@ $(document).ready(function(){
 
        <!-- Footer area-->
    <jsp:include page="../inc/bottom.jsp" />
-   <!-- 지도 API javascript -->
-		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1900efb9ff28bb0a54c68c9b272a9b10&libraries=services"></script>
-		<script src="ceo/mapAPIBoard.js"/>
-	    <!-- 지도 API javascript -->
+   
+<!-- 지도 api-->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc"></script>
+<!-- 지도 라이브러리 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc&libraries=LIBRARY"></script>
+<!-- services 라이브러리 불러오기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc&libraries=services"></script>
+<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d08d4bdd291cf5f6208d58b1b6ac74fc&libraries=services,clusterer,drawing"></script>
+
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+// marker.setMap(null);    
+</script>
 
 
        <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
@@ -525,43 +551,6 @@ $(document).ready(function(){
        <script type="text/javascript" src="assets/js/lightslider.min.js"></script>
        <script src="assets/js/main.js"></script>
 
- <style type="text/css">
-      /* 좋아요 버튼  */
-      body{
-      font-family:monospace;
-      }
-      .like-content {
-          display: inline-block;
-          width: auto;
-          margin: 2px auto;
-          padding: 0;
-          font-size: 10px;
-          text-align: center;
-      }
-      .like-content .btn-secondary {
-          display: block;
-          margin: 0 auto;
-          text-align: center;
-          background: #ed2553;
-          border-radius: 80px;
-          box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
-          padding: 5px 15px;
-          font-size: 10px;
-          cursor: pointer;
-          border: none;
-          outline: none;
-          color: #000000;
-          text-decoration: none;
-          -webkit-transition: 0.3s ease;
-          transition: 0.3s ease;
-      }
-      .like-content .btn-secondary:hover {
-        transform: translateY(-3px);
-      }
-      .like-content .btn-secondary .fa {
-        margin-right: 5px;
-      }
-      </style>
       
     </body>
 </html>

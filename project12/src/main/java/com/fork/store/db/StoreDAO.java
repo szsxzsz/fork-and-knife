@@ -1247,7 +1247,7 @@ public class StoreDAO {
 		
 					dto.setS_star(rs.getDouble("s_star"));
 					dto.setS_regdate(rs.getTimestamp("s_regdate"));
-					
+					dto.setS_price(rs.getInt("s_price"));
 					
 					
 				}
