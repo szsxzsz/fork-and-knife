@@ -1480,6 +1480,8 @@ public class StoreDAO {
 				
 			// 4. sql 실행
 				
+				
+				
 				rs = pstmt.executeQuery();
 			// 5. 데이터 처리 (DB -> DTO -> List)
 				if(rs.next()) {

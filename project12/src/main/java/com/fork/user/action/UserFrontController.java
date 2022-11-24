@@ -520,6 +520,63 @@ public class UserFrontController extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+				
+				else if(command.equals("/CeoMyPage_reDetail.us")) {
+					System.out.println(" C : /CeoMyPage_reDetail.us 호출 ");
+					System.out.println(" C : 패턴3) DB사용o, 페이지출력 ");
+					
+					action = new CeoMypage_revDetailAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} 
+				
+				// ceo 회원정보 관리
+				else if(command.equals("/CeoMyPage_Info.us")) {
+					System.out.println(" C : CeoMyPage_Info.us 호출");
+					System.out.println(" C : 패턴3 ");
+					
+					action = new CeoInfoUpdateAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} 
+				
+				// ceo 회원정보 수정
+				else if(command.equals("/CeoMyPage_InfoUpdate.us")) {
+					System.out.println(" C : /CeoMyPage_InfoUpdate.us 호출 ");
+					System.out.println(" C : 패턴2 ");
+					
+					// MemberUpdatePro 객체 생성
+					action = new CeoInfoUpdateProAction();
+					
+					try {
+						forward=action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				// ceo 회원정보 삭제
+				else if(command.equals("/CeoDeleteAction.us")) {
+					System.out.println(" C : /CeoDeleteAction 호출 ");
+					System.out.println(" C : 패턴2 ");
+					
+					// MemberUpdatePro 객체 생성
+					action = new CeoDeleteAction();
+					
+					try {
+						forward=action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				// 관리자페이지
 				System.out.println(" C : 2. 가상주소 매핑(패턴 1,2,3) 끝 \n");
 				
