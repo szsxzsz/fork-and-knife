@@ -9,31 +9,22 @@ import com.fork.board.db.BoardDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class QnaBoardUpdateAction implements Action {
+public class QnaBoardReWriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("M : QnaBoardReWriteAction 호출");
+		
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("m_id");
+		String id = (String) session.getAttribute("c_id");
 		ActionForward forward = new ActionForward();
-		if(id == null) {
+		if(!id.contains("ceo") || !id.contains("store")) {
 			forward.setPath("./loginAction.us");
 			forward.setRedirect(true);
 		}
-		// 정보 저장
-		BoardDTO dto = new BoardDTO();
-		
-//		dto.setS_no(Integer.parseInt(request.getParameter("s_no")));
-//		dto.setRev_no(Integer.parseInt(request.getParameter("rev_no")));
-//		dto.setQna_sort(request.getParameter("qna_sort"));
-//		dto.setRev_subject(request.getParameter("rev_subject"));
-//		dto.setRev_file(request.getParameter("rev_file"));
-//		dto.setRev_content(request.getParameter("rev_content"));
 		
 		String pageNum = request.getParameter("pageNum");
-		
-		
-		String realPath = request.getRealPath("/upload");
+		 String realPath = request.getRealPath("/upload");
 	      System.out.println(" M : realPath : "+realPath);
 	      int maxSize = 10 * 1024 * 1024;
 	      
@@ -47,29 +38,21 @@ public class QnaBoardUpdateAction implements Action {
 	                                );
 	      
 	      System.out.println(" M : 첨부파일 업로드 성공! ");
-		
-		
-		// 가게 상세페이지에서 받아오는거 확인 후 수정 필요!
-		 dto.setS_no(Integer.parseInt(multi.getParameter("s_no")));
-		 dto.setRev_no(Integer.parseInt(multi.getParameter("rev_no")));
-		// dto.setInt(multi.getRev_category());
-		// dto.setInt(multi.getM_no())
-		dto.setQna_sort(multi.getParameter("qna_sort"));
+		BoardDTO dto = new BoardDTO();
+		dto.setRev_ref(Integer.parseInt(multi.getParameter("rev_ref")));
+		dto.setRev_seq(Integer.parseInt(multi.getParameter("rev_seq")));
+		dto.setS_no(Integer.parseInt(multi.getParameter("s_no")));
 		dto.setRev_subject(multi.getParameter("rev_subject"));
-		dto.setRev_content(multi.getParameter("rev_content"));
 		dto.setRev_file(multi.getParameter("rev_file"));
+		dto.setRev_content(multi.getParameter("rev_content"));
 		
-		//DAO
 		BoardDAO dao = new BoardDAO();
-		dao.updateQnaBoard(dto);
+		dao.reInsertBoard(dto);
 		
-		request.setAttribute("pageNum", pageNum);
-		      
+		forward.setPath("./QnaList.br?pageNum="+pageNum);
+		forward.setRedirect(true);
 		
-    forward.setPath("./QnaList.br?pageNum="+pageNum);
-    forward.setRedirect(true);
-    
-    return forward;
+		return forward;
 	}
 
 }

@@ -34,12 +34,14 @@ public class StoreFrontController extends HttpServlet {
 				
 				// 2. 가상주소 매핑(패턴1,2,3)
 				if(command.equals("/main.st")) {
-					System.out.println("C : /main.st 호출");
-					System.out.println("C : [패턴1] DB X, view");
+					System.out.println("C :  main.st 호출");
 					
-					forward = new ActionForward();
-					forward.setPath("./main/main.jsp");
-					forward.setRedirect(false);
+					action = new MainAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 				
 				else if(command.equals("/loginForm.st")) {
