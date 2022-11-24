@@ -1225,55 +1225,6 @@ public class StoreDAO {
 	}
 	
 	// getStoreCount 가게 갯수 end
-	
-	// getStoreDetails 가게 상세보기 (s_no) - 추가함
-		public StoreDTO getStoreDetails(int s_no) {
-			StoreDTO dto = null;
-			try {
-				con = getConnection();
-				sql = "select * from store where s_no=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1,s_no);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					dto = new StoreDTO();
-					dto.setS_no(rs.getInt("s_no"));
-					dto.setS_name(rs.getString("s_name"));
-					dto.setS_addr(rs.getString("s_addr"));
-					dto.setS_tel(rs.getString("s_tel"));
-					dto.setS_hours(rs.getString("s_hours"));
-					dto.setS_type(rs.getString("s_type"));
-
-					dto.setC_no(rs.getInt("c_no"));
-					dto.setS_image(rs.getString("s_image"));
-					
-					dto.setS_content(rs.getString("s_content"));
-					dto.setS_facility(rs.getString("s_facility"));
-					dto.setS_latitude(rs.getString("s_latitude"));
-					dto.setS_longtude(rs.getString("s_longtude"));
-					dto.setS_menuname(rs.getString("s_menuname"));
-					dto.setS_menuprice(rs.getString("s_menuprice"));
-					dto.setS_menuImg(rs.getString("s_menuImg"));
-					dto.setS_number(rs.getInt("s_number"));
-		
-					dto.setS_star(rs.getDouble("s_star"));
-					dto.setS_regdate(rs.getTimestamp("s_regdate"));
-					
-					
-					
-				}
-				
-				
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}finally {
-				closeDB();
-				
-			}
-			return dto;
-		}
 
 		public int getCtPrCnt(int startRow, int pageSize, String[] category, String price) {
 			System.out.println(" DAO : getcnt() 호출 ");
@@ -1844,6 +1795,86 @@ public class StoreDAO {
 			
 		}
 				// 점주의 가게수정 메서드 - getStore(s_no)
+		// getStoreDetails 가게 상세보기 (s_no) - 추가함
+		public StoreDTO getStoreDetails(int s_no) {
+			StoreDTO dto = null;
+			try {
+				con = getConnection();
+				sql = "select * from store where s_no=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,s_no);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					dto = new StoreDTO();
+					dto.setS_name(rs.getString("s_name"));
+					dto.setS_no(rs.getInt("s_no"));
+					dto.setS_name(rs.getString("s_name"));
+					dto.setS_addr(rs.getString("s_addr"));
+					dto.setS_tel(rs.getString("s_tel"));
+					dto.setS_hours(rs.getString("s_hours"));
+					dto.setS_type(rs.getString("s_type"));
+	
+					dto.setC_no(rs.getInt("c_no"));
+					dto.setS_image(rs.getString("s_image"));
+					
+					dto.setS_content(rs.getString("s_content"));
+					dto.setS_facility(rs.getString("s_facility"));
+					dto.setS_latitude(rs.getString("s_latitude"));
+					dto.setS_longtude(rs.getString("s_longtude"));
+					dto.setS_menuname(rs.getString("s_menuname"));
+					dto.setS_menuprice(rs.getString("s_menuprice"));
+					dto.setS_menuImg(rs.getString("s_menuImg"));
+					dto.setS_number(rs.getInt("s_number"));
+		
+					dto.setS_star(rs.getDouble("s_star"));
+					dto.setS_regdate(rs.getTimestamp("s_regdate"));
+					dto.setS_readcount(rs.getInt("s_readcount"));
+					
+					
+					
+				}
+				
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}finally {
+				closeDB();
+				
+			}
+			return dto;
+		}
+
+				
+				
+				// getStoreDetails 가게 상세보기 (s_no)
+				
+				// 조회수 1증가 - updateReadcount(bno)
+		public void updateReadcount(int s_no) {
+			
+			try {
+				// 1.2. 디비연결
+				con = getConnection();
+				// 3. sql 작성(update) & pstmt 객체
+				sql = "update store set s_readcount=s_readcount+1 "
+						+ " where s_no=?";
+				pstmt = con.prepareStatement(sql);
+				// ???
+				pstmt.setInt(1, s_no);
+				
+				// 4. sql 실행
+				pstmt.executeUpdate();
+				
+				System.out.println(" DAO : 조회수 1증가 완료! ");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+		}
+				// 조회수 1증가 - updateReadcount(bno)
 	
 	
 }

@@ -50,18 +50,6 @@
 $(document).ready(function(){
 	
 
-  
-$('#star a').click(function(){ 
-	 $(this).parent().children("a").removeClass("on");    
-	 $(this).addClass("on").prevAll("a").addClass("on");
-	 var starValue = $(this).attr("data-rate");
-// 	$('.star p').append('<input type = "hidden" name="star" />');
-	
-	  alert(starValue +'점을 주셨네요');
-	  $('input[name=rev_star]').attr('value',starValue);
-	  return starValue;
-	  
-});
 });
 </script>
     </head>
@@ -73,7 +61,6 @@ $('#star a').click(function(){
 <!--             <div id="status">&nbsp;</div> -->
 <!--         </div> -->
         <!-- Body content -->
-
 
             
         <!--End top header -->
@@ -98,69 +85,37 @@ $('#star a').click(function(){
                 <div class="col-md-9">
 
                     <div class="" id="contact1">                        
-                  ${dto }
+                  
                   <div align="center">
                         <hr>
-                        <h2>리뷰 쓰세오</h2>
-                        <form action="./ReviewWriteAction.rv?s_no=${param.s_no }" method="post" enctype="multipart/form-data">
-                       <input type="hidden" value="${param.s_no }" name="s_no">
-<!--                             <div class="row">
-<!--                                 <div class="col-sm-6"> -->
-<!--                                     <div class="form-group"> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
+                        <h2>답글 달기</h2>
+                        <form action="./ReviewReplyAction.rv?pageNum=${param.pageNum }&s_no=${param.s_no }" method="post">
+                     ${param.s_no } / ${param.pageNum }
+
                                 <br>
-<!--                                 <div class="col-sm-6"> -->
-<!--   
+${param.rev_no}/
+	<input type="hidden" name="rev_no" value="${param.rev_no }">
+	<input type="hidden" name="rev_ref" value="${param.rev_ref }">
+	<input type="hidden" name="rev_seq" value="${param.rev_seq }">
+	<input type="hidden" name="s_no" value="${param.s_no }">
+	
+		
+									
+                   <label for="subject">제목</label>
+                 <input type="text" class="form-control" id="subject" name="rev_subject" value="${param.rev_no } -[관리자 답글] ${param.rev_subject }">
 
-                               <div class="form-group"> -->
- 
-별점을 입력해주세요
 
-<P id="star"> <!-- 부모 -->
-<a href="#" id="starrate" data-rate="1">★</a> <!-- 자식들--> 
-<a href="#" id="starrate" data-rate="2">★</a> 
-<a href="#" id="starrate" data-rate="3">★</a>
-<a href="#" id="starrate" data-rate="4">★</a>
-<a href="#" id="starrate" data-rate="5">★</a>
- <p>
-
-<input type="hidden" name="rev_star" value="starValue">
-
-								
-                                    <label for="subject">제목</label>
-                                  	  <input type="text" class="form-control" id="subject" name="rev_subject" placeholder="제목을 적으세요">
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 <div class="col-sm-6"> -->
-<!--                                     <div class="form-group"> -->
-                                    <label for="subject">첨부파일</label>
-                                  	  <input type="file" class="form-control" id="file" name="rev_file">
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 <div class="col-sm-12"> -->
-<!--                                     <div class="form-group"> -->
                                     <label for="message">내용</label>
-                                    <textarea id="message" class="form-control" name="rev_content" width="730px" placeholder="간단한 리뷰를 적어주세요"></textarea>
+                  <textarea id="rev_content" class="form-control" name="rev_content" width="730px" placeholder="답글을 입력하세요." 
+                  								value="rev_content"></textarea>
 <!--                                     </div> -->
 <!--                                 </div> -->
 					<br>
 <!--                                 <div class="col-sm-12 text-center"> -->
-							
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                               review 등록하기 </button></form>
+                               답글 달기 </button></form>
 							
-							<form action="./ReviewList.rv"> 
-							<input type="hidden" name="s_no" value="${param.s_no }">
-							<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                               review 목록으로~ </button></form>
-                               
-                              
-							 
-<!--                                 </div> -->
-<!--                             </div> -->
-                            <!-- /.row -->
-                        
+							
                     </div>
                 </div>
                 <!-- /.col-md-9 -->    
@@ -189,28 +144,6 @@ $('#star a').click(function(){
         <script src="assets/js/gmaps.init.js"></script>
 
         <script src="assets/js/main.js"></script>
-	
-
-
-
-
-<style type="text/css">
-  #star a{
-   text-decoration: none;
-   color: gray;
-  }
-  #star a.on{
-   color: red;
-  } 
-
-@media (min-width: 992px)
-.col-md-9 {
-    width: 100%;
-}
-
-</style>
-
-
 
     </body>
 </html>
