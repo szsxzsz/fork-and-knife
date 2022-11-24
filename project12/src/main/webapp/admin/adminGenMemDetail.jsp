@@ -250,6 +250,10 @@
                                                     <h4 class="mb-0">노쇼 하심</h4>
                                                     <p>상태</p>
                                                     </c:if>
+                                                    <c:if test="${res.res_status==3 }">
+                                                    <h4 class="mb-0">점장 거절</h4>
+                                                    <p>상태</p>
+                                                    </c:if>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
                                                     <h4 class="mb-0"><a href="#" onclick="window.open('./genMemReservMsg.us?msg=${res.res_msg}','예약 메세지','width=600, height=150, left=700, top=400')">
