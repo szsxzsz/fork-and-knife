@@ -35,7 +35,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>		
 
 <script type="text/javascript">
-
 $(document).ready(function(){
 	$('#telInput').keyup(function (event) {
 	  event = event || window.event;
@@ -44,8 +43,6 @@ $(document).ready(function(){
 	  
 	});
 });
-
-
 function autoHypenTel(str) {
 	  str = str.replace(/[^0-9]/g, '') // 숫자를 제외한 모든 문자 제거 
 	 
@@ -103,7 +100,6 @@ function autoHypenTel(str) {
 	
 	  return str;
 }
-
 function bussCK(){
 	
 	if(document.fr.necessity.checked == false){
@@ -149,7 +145,7 @@ function bussCK(){
                 <div class="clearfix" > 
                     <div class="wizard-container"> 
                         <div class="wizard-card ct-wizard-orange" id="wizardProperty" > <!-- onsubmit="return bussNo();" -->
-	                        <form action="./StoreJoinAction.st" method="post" enctype="multipart/form-data" name="fr" onsubmit="bussCK();">
+	                        <form action="./StoreJoinProAction.st" method="post" enctype="multipart/form-data" name="fr" onsubmit="bussCK();">
                                 <div class="wizard-header">
                                     <h3>
                                         <b>Submit</b> YOUR STORE <br>
@@ -173,6 +169,7 @@ function bussCK(){
 	                                    <div class="col-sm-6">
 		                                    <!-- 가게 메인이미지 -->
 		                                    <div class="picture-container">
+		                                    <h5><label>M A I N &nbsp; I M A G E</label></h5>
 		                                        <div class="picture">
 		                                            <img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" style="height: 100%;" />
 		                                            <input type="file" id="wizard-picture" name="stfile1">
@@ -224,6 +221,23 @@ function bussCK(){
                                               </select>
                                            </div>
                                            <div class="form-group">
+											<label>가격대 <sup>*</sup></label>
+	                                           	<select name="priceSort" class="form-control" required>
+                                              	<option value="">선택하세요</option>
+                                              	<option value="10000">1만원대</option>
+                                              	<option value="20000">2만원대</option>
+                                              	<option value="30000">3만원대</option>
+                                              	<option value="40000">4만원대</option>
+                                              	<option value="50000">5만원대</option>
+                                              	<option value="60000">6만원대</option>
+                                              	<option value="70000">7만원대</option>
+                                              	<option value="80000">8만원대</option>
+                                              	<option value="90000">9만원대</option>
+                                              	<option value="100000">10만원대</option>
+                                              	<option value="110000">10만원이상</option>
+                                              </select>
+	                                        </div>
+                                           <div class="form-group">
 											<fieldset>
 											<label>영업시간 <sup>*</sup></label><hr style="margin-top: 5px; margin-bottom: 10px;">
                                       			<div class="col-sm-6">
@@ -264,15 +278,15 @@ function bussCK(){
                                         		<div class="form-group">
 	                                               	<div class="checkbox padding-bottom-15">
 	                                                    <label>
-	                                                        <input type="checkbox" name="facility1" value="주차"> 주차 가능
+	                                                        <input type="checkbox" name="facility1" value="주차가능"> 주차 가능
 	                                                        	<input type="text" class="form-control" name="facDisc1" placeholder="상세정보(선택)">
 	                                                    </label>
 	                                                    <label>
-	                                                        <input type="checkbox" name="facility2" value="반려동물"> 반려동물 동반
+	                                                        <input type="checkbox" name="facility2" value="반려동물가능"> 반려동물 동반
 	                                                        	<input type="text" class="form-control" name="facDisc2" placeholder="상세정보(선택)">
 	                                                    </label>
 	                                                    <label>
-	                                                        <input type="checkbox" name="facility3" value="노키즈"> 노키즈존
+	                                                        <input type="checkbox" name="facility3" value="노키즈존"> 노키즈존
 	                                                        	<input type="text" class="form-control" name="facDisc3" placeholder="상세정보(선택)">
 	                                                    </label>
 	                                                    <label>

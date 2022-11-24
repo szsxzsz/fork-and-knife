@@ -1800,7 +1800,50 @@ public class StoreDAO {
 		}
 		
 		// getStoreDetails 가게 상세보기 (s_no)
+		
 	
+		
+		// 점주의 가게수정 메서드 - getStore(s_no)
+		public StoreDTO getStore(int s_no) { // 가게번호를 불러옴
+			StoreDTO dto = null;
+			
+			try {
+				con = getConnection();
+				sql = "select * from store where s_no=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, s_no);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					dto = new StoreDTO();
+					
+					dto.setS_name(rs.getString("s_name"));
+					dto.setS_addr(rs.getString("s_addr"));
+					dto.setS_tel(rs.getString("s_tel"));
+					dto.setS_hours(rs.getString("s_hours"));
+					dto.setS_type(rs.getString("s_type"));
+					dto.setS_image(rs.getString("s_image"));
+					dto.setS_content(rs.getString("s_content"));
+					dto.setS_facility(rs.getString("s_facility"));
+					dto.setS_menuname(rs.getString("s_menuname"));
+					dto.setS_menuImg(rs.getString("s_menuImg"));
+					dto.setS_menuprice(rs.getString("s_menuprice"));
+					dto.setS_number(rs.getInt("s_number"));
+					
+					dto.setS_regdate(rs.getTimestamp("s_regdate"));
+				}
+				
+				System.out.println(" DAO : 가게 정보 조회완료!"+ dto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return dto;
+			
+		}
+				// 점주의 가게수정 메서드 - getStore(s_no)
 	
 	
 }

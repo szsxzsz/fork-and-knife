@@ -84,12 +84,12 @@ public class StoreFrontController extends HttpServlet {
 					
 				}
 				
-				else if(command.equals("/StoreJoinAction.st")) {
-					System.out.println(" C : /StoreJoinAction.st 호출");
+				else if(command.equals("/StoreJoinProAction.st")) {
+					System.out.println(" C : /StoreJoinProAction.st 호출");
 					System.out.println(" C : [패턴2] "); // 리다이렉션
 					
 					// StoreJoinAction()
-					action = new StoreJoinAction();
+					action = new StoreJoinProAction();
 					
 					try {
 						forward = action.execute(request, response);
@@ -102,9 +102,26 @@ public class StoreFrontController extends HttpServlet {
 				else if(command.equals("/StoreJoin.st")) {
 					System.out.println(" C : /StoreJoin.st 호출");
 					
-					forward = new ActionForward();
-					forward.setPath("./ceo/storeJoin.jsp");
-					forward.setRedirect(false);
+					action = new StoreJoinAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/StoreUpdate.st")) {
+					System.out.println(" C : /StoreUpdate.st 호출");
+					
+					action = new StoreUpdateAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 				
 				else if(command.equals("/gu.st")) {
