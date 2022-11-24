@@ -1881,7 +1881,7 @@ public class StoreDAO {
 			ArrayList list =  new ArrayList();
 			try {
 				con = getConnection();
-				sql = "select * from store order by rand() limit 3";
+				sql = "select * from store order by rand() limit 4";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -1922,7 +1922,7 @@ public class StoreDAO {
 			// 1.2. 디비 연결
 				con = getConnection();
 			// 3. sql 작성(select) & pstmt 객체
-					sql = "select * from store order by s_star desc limit 3";
+					sql = "select * from store order by s_star desc limit 4";
 					pstmt = con.prepareStatement(sql);
 					
 					rs = pstmt.executeQuery();

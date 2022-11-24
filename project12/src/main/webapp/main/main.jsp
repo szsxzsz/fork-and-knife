@@ -378,19 +378,7 @@
                 </div>
             </div> 
             </c:forEach>
-				<div class="col-sm-6 col-md-3 p0">
-                    <div class="box-tree more-proerty text-center">
-                        <div class="item-tree-icon">
-                            <i class="fa fa-th"></i>
-                        </div>
-                        <div class="more-entry overflow">
-                            <h5><a href="./storeList.st" >CAN'T DECIDE ? </a></h5>
-                            <a href="./storeList.st" ><h5 class="tree-sub-ttl">Show all restaurants</h5></a>
-                            <a href="./storeList.st" >
-                             <button class="btn border-btn more-black" value="All properties">더보기</button></a>
-                        </div>
-                    </div>
-                </div>
+				
 			</div>
 		</div>
 	</div>
@@ -429,19 +417,6 @@
                 </div>
             </div> 
             </c:forEach>
-				<div class="col-sm-6 col-md-3 p0">
-                    <div class="box-tree more-proerty text-center">
-                        <div class="item-tree-icon">
-                            <i class="fa fa-th"></i>
-                        </div>
-                        <div class="more-entry overflow">
-                            <h5><a href="./storeList.st" >CAN'T DECIDE ? </a></h5>
-                            <a href="./storeList.st" ><h5 class="tree-sub-ttl">Show all restaurants</h5></a>
-                            <a href="./storeList.st" >
-                             <button class="btn border-btn more-black" value="All properties">더보기</button></a>
-                        </div>
-                    </div>
-                </div>
 			</div>
 		</div>
 	</div>
