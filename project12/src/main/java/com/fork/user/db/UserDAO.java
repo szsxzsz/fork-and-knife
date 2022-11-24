@@ -13,8 +13,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.fork.reservation.db.ReservationDTO;
-import com.fork.reviewcs.db.ReviewDTO;
 import com.fork.store.db.StoreDTO;
 
 public class UserDAO {
@@ -2482,7 +2480,7 @@ public class UserDAO {
 						while(rs.next()) {
 							StoreDTO sdto = new StoreDTO();
 							
-							sdto.setS_no(rs.getLong("s_no"));
+							sdto.setS_no(rs.getInt("s_no"));
 							sdto.setS_name(rs.getString("s_name"));
 							sdto.setS_addr(rs.getString("s_addr"));
 							sdto.setS_tel(rs.getString("s_tel"));
@@ -2497,7 +2495,7 @@ public class UserDAO {
 							sdto.setS_menuprice(rs.getString("s_menuprice"));
 							sdto.setS_menuImg(rs.getString("s_menuImg"));
 							sdto.setS_number(rs.getInt("s_number"));
-							sdto.setC_no(rs.getLong("c_no"));
+							sdto.setC_no(rs.getInt("c_no"));
 							sdto.setS_star(rs.getDouble("s_star"));
 							sdto.setS_regdate(rs.getTimestamp("s_regdate"));
 							
@@ -2533,7 +2531,7 @@ public class UserDAO {
 						rs = pstmt.executeQuery();
 						
 						while(rs.next()) {
-							ReservationDTO vdto = new ReservationDTO();
+							ReservDTO vdto = new ReservDTO();
 							
 							vdto.setRes_no(rs.getInt("res_no"));
 							vdto.setS_no(rs.getInt("s_no"));
@@ -2646,7 +2644,7 @@ public class UserDAO {
 							
 							// 데이터 처리
 							while(rs.next()) {
-								ReservationDTO vdto = new ReservationDTO();
+								ReservDTO vdto = new ReservDTO();
 								
 								vdto.setRes_no(rs.getInt("res_no"));
 								vdto.setS_no(rs.getInt("s_no"));
@@ -2680,7 +2678,7 @@ public class UserDAO {
 							
 							// 데이터처리
 							while(rs.next()) {
-								ReservationDTO vdto = new ReservationDTO();
+								ReservDTO vdto = new ReservDTO();
 								
 								vdto.setRes_no(rs.getInt("res_no"));
 								vdto.setS_no(rs.getInt("s_no"));
@@ -2740,7 +2738,7 @@ public class UserDAO {
 								
 								// 데이터 처리
 								while(rs.next()) {
-									ReservationDTO vsdto = new ReservationDTO();
+									ReservDTO vsdto = new ReservDTO();
 									
 									vsdto.setRes_no(rs.getInt("res_no"));
 									vsdto.setS_no(rs.getInt("s_no"));
@@ -2774,7 +2772,7 @@ public class UserDAO {
 								
 								// 데이터처리
 								while(rs.next()) {
-									ReservationDTO vsdto = new ReservationDTO();
+									ReservDTO vsdto = new ReservDTO();
 									
 									vsdto.setRes_no(rs.getInt("res_no"));
 									vsdto.setS_no(rs.getInt("s_no"));
@@ -2925,7 +2923,7 @@ public class UserDAO {
 									System.out.println("sql 완료오로올오오");
 									// 데이터 처리
 									while(rs.next()) {
-										ReviewDTO rdto = new ReviewDTO();
+										ReviewcsDTO rdto = new ReviewcsDTO();
 										
 										rdto.setRev_no(rs.getInt("rev_no"));
 										rdto.setS_no(rs.getInt("s_no"));
@@ -2964,7 +2962,7 @@ public class UserDAO {
 									
 									// 데이터 처리
 									while(rs.next()) {
-										ReviewDTO rdto = new ReviewDTO();
+										ReviewcsDTO rdto = new ReviewcsDTO();
 										
 										rdto.setRev_no(rs.getInt("rev_no"));
 										rdto.setS_no(rs.getInt("s_no"));
@@ -3003,7 +3001,7 @@ public class UserDAO {
 									
 									// 데이터처리
 									while(rs.next()) {
-										ReviewDTO rdto = new ReviewDTO();
+										ReviewcsDTO rdto = new ReviewcsDTO();
 										
 										rdto.setRev_no(rs.getInt("rev_no"));
 										rdto.setS_no(rs.getInt("s_no"));
@@ -3042,7 +3040,7 @@ public class UserDAO {
 									
 									// 데이터처리
 									while(rs.next()) {
-										ReviewDTO rdto = new ReviewDTO();
+										ReviewcsDTO rdto = new ReviewcsDTO();
 										
 										rdto.setRev_no(rs.getInt("rev_no"));
 										rdto.setS_no(rs.getInt("s_no"));
@@ -3077,8 +3075,8 @@ public class UserDAO {
 					
 					
 					// 리뷰 1개 정보 조회 - reviewInfo(res_no)
-					public ReviewDTO reviewInfo(int res_no) {
-						ReviewDTO rdto = null;
+					public ReviewcsDTO reviewInfo(int res_no) {
+						ReviewcsDTO rdto = null;
 						
 						try {
 							con = getConnection();
@@ -3096,7 +3094,7 @@ public class UserDAO {
 							
 							// 데이터 처리
 							if(rs.next()) {
-								rdto = new ReviewDTO();
+								rdto = new ReviewcsDTO();
 								
 								rdto.setRev_no(rs.getInt("rev_no"));
 								rdto.setS_no(rs.getInt("s_no"));
@@ -3111,7 +3109,7 @@ public class UserDAO {
 								rdto.setRev_c_date(rs.getTimestamp("rev_c_date"));
 								rdto.setM_nickname(rs.getString("m_nickname"));
 								rdto.setDate(rs.getString("date"));
-								rdto.setC_date(rs.getString("c_date"));
+//								rdto.setC_date(rs.getString("c_date"));
 								
 							}
 							
@@ -3256,4 +3254,121 @@ public class UserDAO {
 						return result;
 					}		
 							// 어드민 점주 회원리스트 받기
+					
+					/** 가게 목록 가져오기 - getStoreList(id, listType, startRow,pageSize)
+					 *  가게 조회와 정렬, 페이징 처리하는 메서드. id, listType, startRowm pageSize
+					 *  리턴값 o, List 배열
+					 * @param id
+					 * @param listType
+					 * @param startRowm
+					 * @param pageSize
+					 * @return
+					 */
+					public List getStoreList(String id,String listType,int startRow,int pageSize,String s) {
+						// 가게 목록 저장 List
+						List storeList = new ArrayList();
+						
+						
+						try {
+							con = getConnection();
+							
+							if(s.equals("0")) {
+							sql = "select c.c_id, s.*, "
+									+ "(select count(*) from bookmark b where s.s_no = b.s_no) bcount, "
+									+ "(select count(*) from reviewcs r where s.s_no = r.s_no) rcount "
+									+ "from store s Join ceo c "
+									+ "on c.c_no = s.c_no where c.c_id=? "
+									+ "order by " + listType + " desc, s.s_no desc limit ?,?";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, id);
+							pstmt.setInt(2, startRow-1); // 시작행 -1
+							pstmt.setInt(3, pageSize); // 개수
+							
+							rs = pstmt.executeQuery();
+							
+							while(rs.next()) {
+								// DB -> DTO -> List
+								StoreDTO sdto = new StoreDTO();
+								
+								sdto.setS_no(rs.getInt("s_no"));
+								sdto.setS_name(rs.getString("s_name"));
+								sdto.setS_addr(rs.getString("s_addr"));
+								sdto.setS_tel(rs.getString("s_tel"));
+								sdto.setS_hours(rs.getString("s_hours"));
+								sdto.setS_type(rs.getString("s_type"));
+								sdto.setS_image(rs.getString("s_image"));
+								sdto.setS_content(rs.getString("s_content"));
+								sdto.setS_facility(rs.getString("s_facility"));
+								sdto.setS_latitude(rs.getString("s_latitude"));
+								sdto.setS_longtude(rs.getString("s_longtude"));
+								sdto.setS_menuname(rs.getString("s_menuname"));
+								sdto.setS_menuprice(rs.getString("s_menuprice"));
+								sdto.setS_menuImg(rs.getString("s_menuImg"));
+								sdto.setS_number(rs.getInt("s_number"));
+								sdto.setC_no(rs.getInt("c_no"));
+								sdto.setS_star(rs.getDouble("s_star"));
+								sdto.setS_regdate(rs.getTimestamp("s_regdate"));
+								sdto.setBcount(rs.getInt("bcount"));
+								sdto.setRcount(rs.getInt("rcount"));
+								
+								// DTO -> List
+								storeList.add(sdto);
+								
+							} // while
+							
+//							System.out.println(" DAO : 가지고 있는 가게 수 : "+storeList.size());
+							} else if(s.equals("1")) {
+								sql = "select c.c_id, s.*, "
+										+ "(select count(*) from bookmark b where s.s_no = b.s_no) bcount, "
+										+ "(select count(*) from reviewcs r where s.s_no = r.s_no) rcount "
+										+ "from store s Join ceo c "
+										+ "on c.c_no = s.c_no where c.c_id=? "
+										+ "order by " + listType + " asc, s.s_no desc limit ?,?";
+								pstmt = con.prepareStatement(sql);
+								
+								pstmt.setString(1, id);
+								pstmt.setInt(2, startRow-1); // 시작행 -1
+								pstmt.setInt(3, pageSize); // 개수
+								
+								rs = pstmt.executeQuery();
+								
+								while(rs.next()) {
+									// DB -> DTO -> List
+									StoreDTO sdto = new StoreDTO();
+									
+									sdto.setS_no(rs.getInt("s_no"));
+									sdto.setS_name(rs.getString("s_name"));
+									sdto.setS_addr(rs.getString("s_addr"));
+									sdto.setS_tel(rs.getString("s_tel"));
+									sdto.setS_hours(rs.getString("s_hours"));
+									sdto.setS_type(rs.getString("s_type"));
+									sdto.setS_image(rs.getString("s_image"));
+									sdto.setS_content(rs.getString("s_content"));
+									sdto.setS_facility(rs.getString("s_facility"));
+									sdto.setS_latitude(rs.getString("s_latitude"));
+									sdto.setS_longtude(rs.getString("s_longtude"));
+									sdto.setS_menuname(rs.getString("s_menuname"));
+									sdto.setS_menuprice(rs.getString("s_menuprice"));
+									sdto.setS_menuImg(rs.getString("s_menuImg"));
+									sdto.setS_number(rs.getInt("s_number"));
+									sdto.setC_no(rs.getInt("c_no"));
+									sdto.setS_star(rs.getDouble("s_star"));
+									sdto.setS_regdate(rs.getTimestamp("s_regdate"));
+									sdto.setBcount(rs.getInt("bcount"));
+									sdto.setRcount(rs.getInt("rcount"));
+									
+									// DTO -> List
+									storeList.add(sdto);
+							}
+								
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							closeDB();
+						}
+						
+						return storeList;
+					}
 }

@@ -110,7 +110,7 @@ public class AdminPaymentList implements Action {
 		// 직접출력 -> 위임(대신출력) view.jsp페이지에서 출력
 		// Action -> jsp 페이지 정보 전달(request 영역객체 저장)
 		
-		request.setAttribute("reservList", reservList);
+//		request.setAttribute("reservList", reservList);
 		//request.setAttribute("boardListAll", dao.getBoardList());
 		
 		// 페이징처리 정보 저장

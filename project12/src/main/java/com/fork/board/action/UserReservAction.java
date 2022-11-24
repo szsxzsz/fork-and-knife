@@ -31,7 +31,7 @@ public class UserReservAction implements Action {
 		
 		
 		
-		request.setAttribute("udto", dao.getUserInfo(id));
+//		request.setAttribute("udto", dao.getUserInfo(id));
 		
 		
 		forward.setPath("./board/reservation.jsp");

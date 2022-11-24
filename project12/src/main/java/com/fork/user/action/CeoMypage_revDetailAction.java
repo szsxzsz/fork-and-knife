@@ -1,10 +1,12 @@
 package com.fork.user.action;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fork.reviewcs.db.ReviewDTO;
+
+import com.fork.user.db.ReviewcsDTO;
 import com.fork.user.db.UserDAO;
 
 public class CeoMypage_revDetailAction implements Action {
@@ -30,7 +32,7 @@ public class CeoMypage_revDetailAction implements Action {
 		
 		// 정보 불러오기
 		UserDAO rdao = new UserDAO();
-		ReviewDTO rdto = rdao.reviewInfo(rev_no);
+		ReviewcsDTO rdto = rdao.reviewInfo(rev_no);
 		
 		// 정보 보내기
 		request.setAttribute("rdto", rdto);

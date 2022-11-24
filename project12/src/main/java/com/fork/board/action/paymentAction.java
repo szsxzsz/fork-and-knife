@@ -33,16 +33,16 @@ public class paymentAction implements Action {
 		dto.setRes_tel((String)request.getParameter("res_tel"));
 		
 		BoardDAO dao = new BoardDAO();
-		int res_no = dao.insertReserv(dto);
+//		int res_no = dao.insertReserv(dto);
 		
 		
 		PaymentDTO dto2 = new PaymentDTO();
 		dto2.setM_no(m_no);
 		dto2.setP_info((String)request.getParameter("m_id")+"님의 "+(String)request.getParameter("s_name")+" 예약");
 		dto2.setP_price(Integer.parseInt(request.getParameter("s_price")));
-		dto2.setRes_no(res_no);
+//		dto2.setRes_no(res_no);
 		dto2.setP_no((String)request.getParameter("p_no"));
-		dao.insertPayment(dto2);
+//		dao.insertPayment(dto2);
 		
 		
 		return null;
