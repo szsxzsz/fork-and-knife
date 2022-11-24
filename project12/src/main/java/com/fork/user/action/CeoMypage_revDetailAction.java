@@ -1,19 +1,17 @@
 package com.fork.user.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fork.user.db.CeoDTO;
+import com.fork.reviewcs.db.ReviewDTO;
 import com.fork.user.db.UserDAO;
 
-public class CeoMypageAction implements Action {
+public class CeoMypage_revDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(" M : CeoMypageAction_execute 호출 ");
+		System.out.println(" M : CeoMypage_reDetailAction_execute ");
 		
 		// 세션제어
 		HttpSession session = request.getSession();
@@ -26,19 +24,21 @@ public class CeoMypageAction implements Action {
 			return forward;
 		}
 		
-		// DAO - 회원정보 가져오기(getCEO(id))
-		UserDAO cdao = new UserDAO();
-		CeoDTO cdto = cdao.getCEO(id);
-		List reservInfo = cdao.getCeoReservInfo(id);
+		// 정보 저장
+		int rev_no = Integer.parseInt(request.getParameter("rev_no"));
+		System.out.println(rev_no);
 		
-		// 정보 request 에 저장
-		request.setAttribute("cdto", cdto);
-		request.setAttribute("reservInfo", reservInfo);
+		// 정보 불러오기
+		UserDAO rdao = new UserDAO();
+		ReviewDTO rdto = rdao.reviewInfo(rev_no);
+		
+		// 정보 보내기
+		request.setAttribute("rdto", rdto);
+		
 		
 		// 페이지 이동
-		forward.setPath("./member/ceoMyPage.jsp");
+		forward.setPath("./member/ceoReviewDetail.jsp");
 		forward.setRedirect(false);
-		
 		return forward;
 	}
 

@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 import com.fork.user.db.CeoDTO;
 import com.fork.user.db.UserDAO;
 
-public class CeoMypageAction implements Action {
+public class CeoInfoUpdateAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(" M : CeoMypageAction_execute 호출 ");
+		System.out.println(" M : CeoInfoUpdateAction_execute ");
 		
 		// 세션제어
 		HttpSession session = request.getSession();
@@ -29,17 +29,15 @@ public class CeoMypageAction implements Action {
 		// DAO - 회원정보 가져오기(getCEO(id))
 		UserDAO cdao = new UserDAO();
 		CeoDTO cdto = cdao.getCEO(id);
-		List reservInfo = cdao.getCeoReservInfo(id);
 		
 		// 정보 request 에 저장
 		request.setAttribute("cdto", cdto);
-		request.setAttribute("reservInfo", reservInfo);
 		
 		// 페이지 이동
-		forward.setPath("./member/ceoMyPage.jsp");
+		forward.setPath("./member/ceoMyPage_info.jsp");
 		forward.setRedirect(false);
 		
 		return forward;
-	}
+		}
 
 }

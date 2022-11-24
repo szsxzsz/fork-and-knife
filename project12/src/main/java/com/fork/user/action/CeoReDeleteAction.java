@@ -1,19 +1,18 @@
 package com.fork.user.action;
 
-import java.util.List;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fork.user.db.CeoDTO;
 import com.fork.user.db.UserDAO;
 
-public class CeoMypageAction implements Action {
+public class CeoReDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(" M : CeoMypageAction_execute 호출 ");
+		System.out.println(" M : CeoReDeleteAction_execute ");
 		
 		// 세션제어
 		HttpSession session = request.getSession();
@@ -26,20 +25,24 @@ public class CeoMypageAction implements Action {
 			return forward;
 		}
 		
-		// DAO - 회원정보 가져오기(getCEO(id))
-		UserDAO cdao = new UserDAO();
-		CeoDTO cdto = cdao.getCEO(id);
-		List reservInfo = cdao.getCeoReservInfo(id);
+		// 정보 저장
+		int rev_no = Integer.parseInt(request.getParameter("rev_no"));
+		System.out.println(rev_no);
 		
-		// 정보 request 에 저장
-		request.setAttribute("cdto", cdto);
-		request.setAttribute("reservInfo", reservInfo);
 		
-		// 페이지 이동
-		forward.setPath("./member/ceoMyPage.jsp");
-		forward.setRedirect(false);
+		// DB 수정
+		UserDAO dao = new UserDAO();
+		int result = dao.ceoReDelete(rev_no);
 		
-		return forward;
+		if(result == 1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(result+"");
+			out.flush();
+			out.close();
+		}
+		
+		return null;
 	}
 
 }
