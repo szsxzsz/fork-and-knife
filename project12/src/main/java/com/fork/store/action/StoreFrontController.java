@@ -126,9 +126,9 @@ public class StoreFrontController extends HttpServlet {
 					}
 				}
 				
-				else if(command.equals("/gu.st")) {
+				else if(command.equals("/dd.st")) {
 					forward= new ActionForward();
-					forward.setPath("./board/gu.xml");
+					forward.setPath("./main/submit-property.html");
 					forward.setRedirect(false);
 					
 				}

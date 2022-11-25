@@ -26,7 +26,7 @@
                                             <a class="nav-link" href="./adminReportList.us">신고 목록</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="./adminReservList.us">예약 목록</a>
+                                            <a class="nav-link" href="./adminReservList.us">예약 & 결제 목록</a>
                                         </li>
                                         <li class="nav-item">
 	                                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-11" aria-controls="submenu-11">공지 & 이벤트</a>

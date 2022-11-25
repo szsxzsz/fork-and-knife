@@ -44,7 +44,7 @@
                         <div class="header-half header-social">
                             <ul class="list-inline">
                             	<c:if test="${id!=null }">
-                            	<li>${id }님 어서오세요.</li>
+                            	<li>${id }<c:if test='${result==1 }'>[일반]</c:if><c:if test='${result==2 }'>[점주]</c:if>님 어서오세요.</li>
                             	</c:if>
                                 
                             </ul>

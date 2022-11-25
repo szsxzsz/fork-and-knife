@@ -868,6 +868,38 @@ public class UserDAO {
 			}
 			// 어드민 점주 삭제
 			
+			public void adminDeletePayment(String p_no) {			
+				try {
+					con = getConnection();
+					
+					sql = "select * from payment where p_no=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, p_no);
+					pstmt.executeQuery();
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						sql = "delete from payment where p_no=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setString(1, p_no);
+						pstmt.executeUpdate();
+					}
+					
+					
+					System.out.println(" DAO : 회원삭제 완료");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					closeDB();
+				}
+				
+			
+			}
+			// 어드민 점주 삭제
+			
 			// 어드민 신고 갯수 조회
 			public int getReportCount() {
 				int cnt = 0;
@@ -2331,22 +2363,23 @@ public class UserDAO {
 					// 1.2. 디비 연결
 						con = getConnection();
 					// 3. sql 작성(select) & pstmt 객체
-						sql = "select B.p_no, C.m_id, A.s_name, B.p_price, B.p_info, B.p_date, B.p_status, A.s_no, C.m_no"
+						sql = "select B.p_no, C.m_id, A.s_name, B.p_price, B.p_info, B.p_date, B.p_status, A.s_no, C.m_no, C.m_nickname "
 								+ "from store A, payment B, member C "
-								+ "where A.s_no=B.s_no and C.m_no=B.m_no and (A.s_name Like ? or C.m_id ?) limit ?,?;";
+								+ "where A.s_no=B.s_no and C.m_no=B.m_no and (A.s_name Like ? or C.m_id Like ? or C.m_nickname Like ?) limit ?,?";
 						pstmt = con.prepareStatement(sql);
 					// ?????
 						pstmt.setString(1, keyword);
 						pstmt.setString(2, keyword);
-						pstmt.setInt(3, startRow-1); // 시작행-1
-						pstmt.setInt(4, pageSize); // 개수
+						pstmt.setString(3, keyword);
+						pstmt.setInt(4, startRow-1); // 시작행-1
+						pstmt.setInt(5, pageSize); // 개수
 					// 4. sql 실행
 						rs = pstmt.executeQuery();
 					// 5. 데이터 처리 (DB -> DTO -> List)
 						while(rs.next()) {
 							// DB -> DTO
 							hm = new HashMap<String,Object>();
-							hm.put("p_no", rs.getInt("p_no"));
+							hm.put("p_no", rs.getString("p_no"));
 							hm.put("m_id", rs.getString("m_id"));
 							hm.put("s_name", rs.getString("s_name"));
 							hm.put("p_price", rs.getInt("p_price"));
@@ -2355,6 +2388,7 @@ public class UserDAO {
 							hm.put("p_status",rs.getInt("p_status"));
 							hm.put("s_no",rs.getInt("s_no"));
 							hm.put("m_no",rs.getInt("m_no"));
+							hm.put("m_nickname", rs.getString("m_nickname"));
 							paymentList.add(hm);
 						}//while
 						
@@ -2382,7 +2416,7 @@ public class UserDAO {
 					// 1.2. 디비 연결
 						con = getConnection();
 					// 3. sql 작성(select) & pstmt 객체
-						sql = "select B.p_no, C.m_id, A.s_name, B.p_price, B.p_info, B.p_date, B.p_status,A.s_no, C.m_no"
+						sql = "select B.p_no, C.m_id, A.s_name, B.p_price, B.p_info, B.p_date, B.p_status,A.s_no, C.m_no,C.m_nickname "
 								+ "from store A, payment B, member C "
 								+ "where A.s_no=B.s_no and C.m_no=B.m_no limit ?,?";
 						pstmt = con.prepareStatement(sql);
@@ -2396,7 +2430,7 @@ public class UserDAO {
 						while(rs.next()) {
 							// DB -> DTO
 							hm = new HashMap<String,Object>();
-							hm.put("p_no", rs.getInt("p_no"));
+							hm.put("p_no", rs.getString("p_no"));
 							hm.put("m_id", rs.getString("m_id"));
 							hm.put("s_name", rs.getString("s_name"));
 							hm.put("p_price", rs.getInt("p_price"));
@@ -2405,6 +2439,7 @@ public class UserDAO {
 							hm.put("p_status",rs.getInt("p_status"));
 							hm.put("s_no",rs.getInt("s_no"));
 							hm.put("m_no",rs.getInt("m_no"));
+							hm.put("m_nickname", rs.getString("m_nickname"));
 							
 							paymentList.add(hm);
 						}//while
@@ -2431,10 +2466,10 @@ public class UserDAO {
 					// 1.2. 디비 연결
 						con = getConnection();
 					// 3. sql 작성(select) & pstmt 객체
-						sql = "select count(*) from reservation";
+						sql = "select count(*) from reservation where s_name Like ?";
 						pstmt = con.prepareStatement(sql);
 					// ?????
-						
+						pstmt.setString(1, s_name);
 						
 					// 4. sql 실행
 						rs = pstmt.executeQuery();
@@ -2457,6 +2492,45 @@ public class UserDAO {
 					return cnt;
 				}
 				
+				
+				public int adminCntGetPaymentList(int startRow, int pageSize, String keyword) {
+					System.out.println(" DAO : getBoardList() 호출 ");
+					// 글정보 모두 저장하는 배열
+					int cnt = 0;
+					
+					
+					try {
+					// 1.2. 디비 연결
+						con = getConnection();
+					// 3. sql 작성(select) & pstmt 객체
+						sql = "select count(*) "
+								+ "from store A, payment B, member C "
+								+ "where A.s_no=B.s_no and C.m_no=B.m_no and (A.s_name Like ? or C.m_id Like ? or C.m_nickname Like ? )";;
+						pstmt = con.prepareStatement(sql);
+					// ?????
+						pstmt.setString(1, keyword);
+						pstmt.setString(2, keyword);
+						pstmt.setString(3, keyword);
+					// 4. sql 실행
+						rs = pstmt.executeQuery();
+					// 5. 데이터 처리 (DB -> DTO -> List)
+						if(rs.next()) {
+							// DB -> DTO
+							cnt = rs.getInt(1);
+							
+							
+						}//while
+						
+						
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						closeDB();
+					}
+					
+					return cnt;
+				}
 				/** 가게 정보 저장 - getStoreInfo(id)
 				 * 가게 정보 저장하는 메서드. id 값 받아서 사용
 				 * 리턴값 List

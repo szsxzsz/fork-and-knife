@@ -199,6 +199,18 @@ public class UserFrontController extends HttpServlet {
 					
 				}
 				
+				else if(command.equals("/adminDeletePaymentAction.us")) {
+					
+					action = new AdminDelPaymentAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
 				/// 관리자 페이지 (어드민 일반 회원 목록)
 				
 				else if(command.equals("/adminDeleteReservAction.us")) {
@@ -578,6 +590,20 @@ public class UserFrontController extends HttpServlet {
 					}
 				}
 				// 관리자페이지
+				else if(command.equals("/adminPaymentList.us")) {
+					// MemberUpdatePro 객체 생성
+					action = new AdminPaymentListAction();
+					
+					try {
+						forward=action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				
+				
+				
 				System.out.println(" C : 2. 가상주소 매핑(패턴 1,2,3) 끝 \n");
 				
 				// 3. 페이지 이동

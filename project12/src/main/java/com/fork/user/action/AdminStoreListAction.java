@@ -126,7 +126,7 @@ public class AdminStoreListAction implements Action {
 		// 페이지 이동준비(티켓 생성)
 		
 		forward.setPath("./admin/adminStoreList.jsp");
-		forward.setRedirect(false);
+		forward.setRedirect(true);
 		
 		
 		return forward;
