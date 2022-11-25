@@ -137,7 +137,16 @@ public class BoardFrontController extends HttpServlet{
 			
 		}
 		
-					
+		else if(command.equals("/notice.br")) {
+			action = new NoticeListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		// 3. 페이지 이동

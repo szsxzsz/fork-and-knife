@@ -1,4 +1,4 @@
-package com.fork.user.action;
+package com.fork.board.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fork.user.db.UserDAO;
 
-public class AdminEventListAction implements Action {
+public class NoticeListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -18,24 +18,11 @@ public class AdminEventListAction implements Action {
 
 		ActionForward forward = new ActionForward();
 		
-		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("id");
-		int cnt = dao.getNoticeCount(1);
-		
-		if(id!=null) {
-			if (!(id.equals("admin"))) {
-			forward.setPath("./main.st");
-			forward.setRedirect(true);
-			return forward;
-			}
-		} else{
-			forward.setPath("./main.st");
-			forward.setRedirect(true);
-			return forward;
-		}
-		// 로그인 제어
-		
 		int pageSize = 9;
+		
+		int cnt = dao.getNoticeCount(0);
+		
+		
 		
 		// http://localhost:8088/JSP/board/boardList.jsp?pageNum=2
 		
@@ -44,6 +31,7 @@ public class AdminEventListAction implements Action {
 		if (pageNum == null) {
 		pageNum = "1";
 		}
+		
 		
 		// 시작행 번호 계산하기 1  11  21  31  41 .....
 		int currentPage = Integer.parseInt(pageNum);
@@ -54,22 +42,26 @@ public class AdminEventListAction implements Action {
 		////////////////////////////////////////////////////////////
 		
 		
+		
 		// 디비에 전체 글 리스트 가져오기
 		//ArrayList boardListAll = dao.getBoardList();
-		List noticeList = dao.adminGetNoticeList(startRow,pageSize,1);
-		System.out.println(noticeList);
-		String keyword;
-		StringBuffer sb = new StringBuffer();
-		if (request.getParameter("keyword")!=null) {
-			keyword = (String)request.getParameter("keyword");
-			keyword.trim();
-			sb.append(keyword);
-			sb.insert(0, "%");
-			sb.insert(keyword.length()+1, "%");
-			noticeList = dao.adminGetNoticeList(startRow, pageSize, sb.toString(),1);
-			cnt = dao.adminCntGetNoticeList(startRow, pageSize, sb.toString(),1);
-			
-		}
+		List noticeList = dao.adminGetNoticeList(startRow, pageSize, 0);
+		List noticeList2 = dao.adminGetNoticeList(startRow, pageSize, 1);
+//		StringBuffer sb = new StringBuffer();
+//		if (c_id!=null) {
+//			request.setAttribute("keyword",c_id );
+//			c_id = c_id.trim();
+//			sb.append(c_id);
+//			sb.insert(0, "%");
+//			sb.insert(c_id.length()+1, "%");
+//			ceoMemList = dao.adminGetCeoMemList(startRow, pageSize, sb.toString());
+//			cnt = dao.adminCntGetCeoMemList(startRow, pageSize, sb.toString());
+//		}
+//		else {
+//			ceoMemList = dao.adminGetCeoMemList(startRow,pageSize);
+//		}
+		
+		
 		////////////////////////////////////////////////////////////
 		// 페이징 처리 (2)
 		
@@ -102,6 +94,7 @@ public class AdminEventListAction implements Action {
 		// Action -> jsp 페이지 정보 전달(request 영역객체 저장)
 		
 		request.setAttribute("noticeList", noticeList);
+		request.setAttribute("noticeList2", noticeList2);
 		//request.setAttribute("boardListAll", dao.getBoardList());
 		
 		// 페이징처리 정보 저장
@@ -112,7 +105,7 @@ public class AdminEventListAction implements Action {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		
-		forward.setPath("./admin/adminEventList.jsp");
+		forward.setPath("./main/notice.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

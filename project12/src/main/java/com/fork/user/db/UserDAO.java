@@ -1325,16 +1325,16 @@ public class UserDAO {
 			// 어드민 공지 목록
 			
 			// 어드민 공지 갯수 조회
-			public int getNoticeCount() {
+			public int getNoticeCount(int isE) {
 				int cnt = 0;
 				
 				// 1.2. 디비연결
 				try {
 					con = getConnection();
 					// 3. sql
-					sql = "select count(*) from notice";
+					sql = "select count(*) from notice where n_isEvent=?";
 					pstmt = con.prepareStatement(sql);
-					
+					pstmt.setInt(1, isE);
 					// 4. sql 실행
 					rs = pstmt.executeQuery();
 					// 5. 데이터처리

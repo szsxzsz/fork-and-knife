@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
-       
+       <link rel="stylesheet" href="assets/css/wizard.css">
     </head>
     <body>
     
