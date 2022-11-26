@@ -13,6 +13,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.fork.board.db.BookDTO;
+import com.fork.review.db.ReviewDTO;
 import com.fork.store.db.StoreDTO;
 
 public class UserDAO {
@@ -3445,4 +3447,260 @@ public class UserDAO {
 						
 						return storeList;
 					}
+					public MemberDTO getMember(String id){
+					    MemberDTO dto = null;
+					    try {
+					        con = getConnection();
+					        sql = "select * from member where m_id=?";
+					        pstmt = con.prepareStatement(sql);
+					        
+					        pstmt.setString(1, id);
+					        rs = pstmt.executeQuery();
+					        
+					        if(rs.next()) {
+					            dto = new MemberDTO();
+					            
+					            dto.setM_no(rs.getInt("m_no"));
+					            dto.setM_id(rs.getString("m_id"));
+					            dto.setM_nickName(rs.getString("m_nickname"));
+					            dto.setM_email(rs.getString("m_email"));
+					            dto.setM_gender(rs.getString("m_gender"));
+					            dto.setM_tel(rs.getString("m_tel"));
+					            dto.setM_birth(rs.getString("m_birth"));
+					            dto.setM_regdate(rs.getTimestamp("m_regdate"));
+					            dto.setM_name(rs.getString("m_name"));
+					        }
+					        System.out.println(" DAO : 회원 정보 저장완료! ");
+					        
+					    } catch (Exception e) {
+					        e.printStackTrace();
+					    } finally {
+					        closeDB();
+					    }
+					    
+					    return dto;
+					}
+					// 회원정보 조회 - getMember(id)
+					
+					// 회원정보 수정 - updateMember(dto)
+					public int updateMember(MemberDTO dto) {
+					    int result = -1;
+					    
+					    try {
+					        con = getConnection();
+					        sql = "select m_pw from member where m_id = ?";
+					        pstmt = con.prepareStatement(sql);
+					        pstmt.setString(1, dto.getM_id());
+					        rs = pstmt.executeQuery();
+					        
+					        if(rs.next()) {
+					            if(dto.getM_pw().equals(rs.getString("m_pw"))) {
+					                sql = "update member set m_name=?,m_email=?,m_nickName=?,m_birth=?,m_gender=?,m_tel=? "
+					                        + " where m_id=?";
+					                pstmt = con.prepareStatement(sql);
+					                pstmt.setString(1, dto.getM_name());
+					                pstmt.setString(2, dto.getM_email());
+					                pstmt.setString(3, dto.getM_nickName());
+					                pstmt.setString(4, dto.getM_birth());
+					                pstmt.setString(5, dto.getM_gender());
+					                pstmt.setString(6, dto.getM_tel());
+					                pstmt.setString(7, dto.getM_id());
+					                
+					                result = pstmt.executeUpdate();
+					            }else {
+					                result = 0;
+					            }               
+					        }else {
+					            result = -1;
+					        }
+					        
+					        System.out.println(" DAO : 회원수정 완료("+result+")");
+					        
+					    } catch (Exception e) {
+					        e.printStackTrace();
+					    } finally {
+					        closeDB();
+					    }
+					    
+					    return result;
+					}
+					// 회원정보 수정 - updateMember(dto)
+					
+					
+					// 회원정보 삭제 - deleteMember(id,pw)
+					public int deleteMember(String id,String pw) {
+					    int result = -1;
+					    
+					    try {
+					        con = getConnection();
+					        sql = "select m_pw from member where m_id = ?";
+					        pstmt = con.prepareStatement(sql);
+					        pstmt.setString(1, id);
+					        rs = pstmt.executeQuery();
+					        
+					        if(rs.next()) {
+					            if(pw.equals(rs.getString("m_pw"))) {
+					                sql = "delete from member "
+					                        + "where m_id = ?";
+					                pstmt = con.prepareStatement(sql);
+					                pstmt.setString(1, id);
+					                result = pstmt.executeUpdate();             
+					            }else {
+					                result = 0;
+					            }               
+					        }else {
+					            result = -1;
+					        }
+					        System.out.println(" DAO : 회원삭제 완료("+result+")");
+					        
+					    } catch (Exception e) {
+					        e.printStackTrace();
+					    } finally {
+					        closeDB();
+					    }
+					    
+					    return result;
+					}
+					// 회원정보 삭제 - deleteMember(id,pw)
+					
+					// 예약목록 조회 - getReserveList
+					public List getReserveList(String id) {
+					    // 예약목록 저장 List
+					    List reserveList = new ArrayList();
+					    
+					    try {
+					        con = getConnection();
+					        sql = "select * from reservation r join member m on r.m_no = m.m_no  where m_id = ?";
+					        pstmt = con.prepareStatement(sql);
+					        pstmt.setString(1, id);
+					        
+					        rs = pstmt.executeQuery();
+					        
+					        while(rs.next()) {
+					            // DC -> DTO -> List
+					            BookDTO dto= new BookDTO();
+					        
+					            int cnt = 0;
+					            dto.setRes_no(rs.getInt(++cnt));
+					            dto.setS_no(rs.getInt(2));
+					            dto.setM_no(rs.getInt(3));
+					            dto.setRes_num(rs.getInt(4));
+					            dto.setRes_date(rs.getString(5));
+					            dto.setRes_name(rs.getString(6));
+					            dto.setRes_msg(rs.getString(7));
+					            dto.setRes_status(rs.getInt(8));
+					            dto.setRes_time(rs.getInt(9));
+					            dto.setRes_tel(rs.getString(10));
+					            
+					            //DTO -> List
+					            reserveList.add(dto);
+					            
+					            
+					        }//while
+					        
+					        System.out.println(" DAO : "+reserveList);
+					        System.out.println(" DAO : 예약수 : "+reserveList.size());
+					        
+					    }catch (Exception e) {
+					        e.printStackTrace();
+					    }finally {
+					        closeDB();
+					    }
+					    return reserveList;
+					    }
+					//// 예약목록 조회 - getReserveList
+					
+							
+
+					//리뷰목록 조회 - getReviewList
+					public List getReviewList(String id) {
+					    // 리뷰목록 저장 List
+					    List reviewList = new ArrayList();
+					    
+					    try {
+					        con = getConnection();
+					        sql = "select * from reviewcs join member on reviewcs.m_no = member.m_no  where m_id = ?";
+					        pstmt = con.prepareStatement(sql);
+					        pstmt.setString(1, id);
+					        
+					        rs = pstmt.executeQuery();
+					        
+					        while(rs.next()) {
+					            // DC -> DTO -> List
+					            ReviewDTO dto= new ReviewDTO();
+					        
+					      
+					            dto.setRev_no(rs.getInt("rev_no"));
+								dto.setS_no(rs.getInt("s_no"));
+								dto.setRev_date(rs.getTimestamp("rev_date"));
+								dto.setRev_star(rs.getInt("rev_star"));
+								dto.setRev_subject(rs.getString("rev_subject"));
+								dto.setRev_category(rs.getInt("rev_category"));
+								dto.setM_no(rs.getInt("m_no"));
+//								dto.setQna_sort(rs.getString("qna_sort"));
+								dto.setRev_content(rs.getString("rev_content"));
+								dto.setRev_file(rs.getString("rev_file"));
+					            
+					            //DTO -> List
+					            reviewList.add(dto);
+					            
+					            
+					        }//while
+					        
+					        System.out.println(" DAO : "+reviewList);
+					        System.out.println(" DAO : 리뷰수 : "+reviewList.size());
+					        
+					    }catch (Exception e) {
+					        e.printStackTrace();
+					    }finally {
+					        closeDB();
+					    }
+					    return reviewList;
+					    }
+					//// 리뷰목록 조회 - getReviewList
+					
+							
+					// 북마크 목록불러오기 getWishList()
+					public List<Map> getWishList(String id) {
+						System.out.println(" DAO : getWishList() 호출 ");
+						// 북마크정보 저장하는 배열
+						List<Map> wishList = new ArrayList<Map>();
+						HashMap<String,Object> book = null;
+						
+						try {
+						// 1.2. 디비 연결
+							con = getConnection();    //id랑, 북마크 멤버 조인 
+					           sql = "select * from bookmark b join store s on s.s_no = b.s_no "
+					                 +"join member m on b.m_no = m.m_no join reviewcs r on r.s_no = b.s_no  where m.m_id=?";
+					           pstmt = con.prepareStatement(sql);
+					        pstmt.setString(1, id);
+					        
+					        rs = pstmt.executeQuery();
+						// 5. 데이터 처리 (DB -> DTO -> List)
+							while(rs.next()) {
+								// DB -> DTO
+								book = new HashMap<String,Object>();
+								book.put("m_no", rs.getInt("m_no"));
+								book.put("s_no", rs.getLong("s_no"));
+								book.put("s_image", rs.getString("s_image"));
+								book.put("s_name", rs.getString("s_name"));
+								book.put("s_type", rs.getString("s_type"));
+								book.put("rev_star", rs.getString("rev_star"));
+								//DTO -> List
+								
+								wishList.add(book);
+							}//while
+							System.out.println(wishList);
+							System.out.println(" DAO : 북마크 목록 저장완료!");
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+						}finally {
+							closeDB();
+						}
+						
+						return wishList;
+					}
+					
+					// 북마크 목록 불러오기 getWishList()
 }

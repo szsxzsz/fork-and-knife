@@ -406,7 +406,19 @@ public class UserFrontController extends HttpServlet {
 			}
 			//회원 마이 페이지(리뷰관리)
 			
-			
+			//회원 정보 수정
+			else if(command.equals("/MemberInfoEdit.us")) {
+				System.out.println(" C : ./MemberInfoEdit.us 호출 ");
+				System.out.println(" C : 패턴3) DB사용o, 페이지출력");
+				
+				// MemberUpdateAction
+				action = new MemberInfoEditAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			
 			//회원 마이 페이지(찜한매장)
 			else if(command.equals("/MemberWish.us")) {
@@ -600,7 +612,110 @@ public class UserFrontController extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+				else if(command.equals("/MemberInfoEditPro.us")) {
+					System.out.println(" C : /MemberInfoEditPro.us 호출");
+					System.out.println(" C : 패턴2) DB사용 O, 페이지이동");
+					// MemberUpdateProAction() 객체 
+					action = new MemberInfoEditProAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				
+				//회원 정보 수정
+
+
+				// 회원정보수정 액션페이지 이동
+				else if(command.equals("/JoinAction.us")) {
+					System.out.println(" C : /JoinAction.us .호출 ");
+					System.out.println(" C : 패턴2) DB 사용 o, 페이지 이동 ");
+					
+					// StoreJoinAction() 객체
+					action = new JoinAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+
+				
+				//회원 프로필
+			else if(command.equals("/MemberMypageMain.us")) {
+				System.out.println(" C : ./MemberMypageMain.us 호출 ");
+				System.out.println(" C : 패턴3) DB사용o, 페이지출력");
+				
+				// MemberProfileAction
+				action = new MemberProfileAction();
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+
+			//마이페이지 (예약내역)
+            else if(command.equals("/MemberReserve.us")) {
+                System.out.println(" C : /MemberReserve.us 호출");
+                System.out.println(" C : 패턴3) ");
+                
+                //ReserveListAction() 객체
+                action = new ReserveListAction();
+                
+                try {
+                    forward = action.execute(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+            }
+            // 마이페이지 (예약내역)
+
+        
+    //회원 마이 페이지(리뷰관리)
+    
+    else if(command.equals("/MemberReviewEdit.us")) {
+        System.out.println(" C : /MemberReviewEdit.us  호출 ");
+        System.out.println(" C : [패턴3] DB사용o, view출력");
+        
+        // ReviewListAction 객체 생성
+        action = new ReviewListAction();
+        
+        try {
+            forward = action.execute(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    } 
+    
+    //회원 마이 페이지(리뷰관리)
+
+            
+        
+        
+        //회원 마이 페이지(찜한매장)
+        else if(command.equals("/MemberWish.us")) {
+        	System.out.println(" C : /MemberWish.us 호출 ");
+            System.out.println(" C : [패턴3] DB사용o, view출력");
+            
+            // WishListAction 객체 생성
+            action = new WishListAction();
+            
+            try {
+                forward = action.execute(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+        } 
+        //회원 마이 페이지(찜한매장)
 				
 				
 				
