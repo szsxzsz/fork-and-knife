@@ -2702,12 +2702,12 @@ public class UserDAO {
 						
 						try {
 						// 1.2. 디비 연결
-							con = getConnection();    //id랑, 북마크 멤버 조인 
+							con = getConnection();    //id랑, 북마크 멤버 조인
 					           sql = "select * from bookmark b join store s on s.s_no = b.s_no "
-					                 +"join member m on b.m_no = m.m_no join reviewcs r on r.s_no = b.s_no  where m.m_id=?";
+					                 +"join member m on b.m_no = m.m_no where m.m_id=?";
 					           pstmt = con.prepareStatement(sql);
 					        pstmt.setString(1, id);
-					        
+					       
 					        rs = pstmt.executeQuery();
 						// 5. 데이터 처리 (DB -> DTO -> List)
 							while(rs.next()) {
@@ -2718,7 +2718,7 @@ public class UserDAO {
 								book.put("s_image", rs.getString("s_image"));
 								book.put("s_name", rs.getString("s_name"));
 								book.put("s_type", rs.getString("s_type"));
-								book.put("rev_star", rs.getString("rev_star"));
+								book.put("s_star", rs.getString("s_star"));
 								//DTO -> List
 								
 								wishList.add(book);

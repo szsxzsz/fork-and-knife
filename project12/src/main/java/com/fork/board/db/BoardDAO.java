@@ -480,9 +480,67 @@ public class BoardDAO {
 			
 			return qnaList;
 		}		
+		
+		
+	public int insertReserv(BookDTO dto) {
+		
+		int res_no=0;
+		try {
+			con = getConnection();
+			sql = "select max(res_no) from reservation";
+			pstmt = con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				res_no=rs.getInt(1)+1;
+			}
+			
+			
+			sql = "insert into reservation values(?,?,?,?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, res_no);
+			pstmt.setInt(2, dto.getS_no());
+			pstmt.setInt(3, dto.getM_no());
+			pstmt.setInt(4, dto.getRes_num());
+			pstmt.setString(5, dto.getRes_date());
+			pstmt.setString(6, dto.getRes_name());
+			pstmt.setString(7, dto.getRes_msg());
+			pstmt.setInt(8, 0);
+			pstmt.setInt(9,dto.getRes_time());
+			pstmt.setString(10, dto.getRes_tel());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return res_no;
+	}
 	
-	
-	
-	
+public void insertPayment(PaymentDTO dto) {
+		
+		try {
+			con = getConnection();
+			
+			sql = "insert into payment values(?,?,?,?,?,?,now(),?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getP_no());
+			pstmt.setInt(2, dto.getM_no());
+			pstmt.setInt(3, dto.getRes_no());
+			pstmt.setInt(4, dto.getP_price());
+			pstmt.setString(5, dto.getP_info());
+			pstmt.setInt(6, 0);
+			pstmt.setInt(7, dto.getS_no());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

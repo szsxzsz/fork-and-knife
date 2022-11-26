@@ -120,14 +120,6 @@ public class UserFrontController extends HttpServlet {
 				
 				}
 				
-//				else if(command.equals("/StMyPage.on")) {
-//					System.out.println(" C : /StMyPage.on 호출 ");
-//					System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
-//					
-//					forward = new ActionForward();
-//					forward.setPath("./member/myPage.jsp");
-//					forward.setRedirect(false);
-//				} 
 				
 				///// 이메일 인증 //////
 				else if(command.equals("/MemberEmailCheck.us")) {
@@ -370,29 +362,9 @@ public class UserFrontController extends HttpServlet {
 					}
 				}
 			
-			//회원 마이 페이지(예약내역)
-			else if(command.equals("/MemberReserve.us")) {
-			System.out.println(" C : /MemberReserve.us 호출 ");
-			System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
-			
-			forward = new ActionForward();
-			forward.setPath("./mypage/myPage_book.jsp");
-			forward.setRedirect(false);
-			}
-			//회원 마이 페이지(예약내역)
 			
 			
 			
-			//회원 마이 페이지(리뷰관리)
-			else if(command.equals("/MemberReviewEdit.us")) {
-			System.out.println(" C : /MemberReviewEdit.us 호출 ");
-			System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
-			
-			forward = new ActionForward();
-			forward.setPath("./mypage/myPage_review.jsp");
-			forward.setRedirect(false);
-			}
-			//회원 마이 페이지(리뷰관리)
 			
 			//회원 정보 수정
 			else if(command.equals("/MemberInfoEdit.us")) {
@@ -416,27 +388,7 @@ public class UserFrontController extends HttpServlet {
 				forward.setPath("./main/addInfo.jsp");
 				forward.setRedirect(false);
 			}
-			//회원 마이 페이지(찜한매장)
-			else if(command.equals("/MemberWish.us")) {
-			System.out.println(" C : /MemberWish.us 호출 ");
-			System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
 			
-			forward = new ActionForward();
-			forward.setPath("./mypage/myPage_st.jsp");
-			forward.setRedirect(false);
-			}
-			//회원 마이 페이지(찜한매장)
-			
-			//회원 마이 페이지(찜한매장삭제)
-			else if(command.equals("/MemberWishDelete.us")) {
-			System.out.println(" C : /MemberWishDelete.us 호출 ");
-			System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
-			
-			forward = new ActionForward();
-			forward.setPath("./mypage/myPage_wish_delete.jsp");
-			forward.setRedirect(false);
-			}
-			//회원 마이 페이지(찜한매장삭제)
 				
 			// 로그인 페이지 이동
 			else if(command.equals("/Login.us")) {

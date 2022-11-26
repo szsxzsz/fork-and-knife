@@ -303,10 +303,6 @@
 			dataType:'json',
 			success:function(result){
 				if(result == 1){
-					if(nick=="${mdto.m_nickName}"){
-		                  $('#checkNick').html('')
-		                  $('#noch').val(0);
-		               } else {
 					$('#checkNick').html('사용할 수 없는 닉네임입니다.');
 					$('#checkNick').attr('color','red');
 					$('#noch').val(1);
@@ -349,11 +345,6 @@
 			dataType:'json',
 			success:function(result){
 				if(result == 1){
-					if(nick=="${mdto.m_tel}"){
-		                  $('#checkTel').html('')
-		                  $('#noch').val(0);
-		               } else {
-				}
 					$('#checkTel').html('사용 중인 연락처입니다.');
 					$('#checkTel').attr('color','red');
 					$('#noch').val(1);
