@@ -88,6 +88,7 @@
                         <form action="./QnaBoardReWriteAction.br?pageNum=${param.pageNum}&s_no=${param.s_no}&rev_no=${param.rev_no}" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="rev_ref" value="${param.rev_ref}">
 							<input type="hidden" name="rev_seq" value="${param.rev_seq}">
+							<input type="hidden" name="rev_category" value="0">
 <%
           	String pageNum = request.getParameter("pageNum");
           	int s_no = Integer.parseInt(request.getParameter("s_no"));

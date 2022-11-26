@@ -369,18 +369,6 @@ public class UserFrontController extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-				
-				//회원 마이 페이지(메인페이지)
-			else if(command.equals("/MemberMypageMain.us")) {
-			System.out.println(" C : /MemberMypageMain.us 호출 ");
-			System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
-			
-			forward = new ActionForward();
-			forward.setPath("./mypage/myPage.jsp");
-			forward.setRedirect(false);
-			}
-			//회원 마이 페이지(메인페이지)
-			
 			
 			//회원 마이 페이지(예약내역)
 			else if(command.equals("/MemberReserve.us")) {
@@ -419,7 +407,15 @@ public class UserFrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
+				
+			else if(command.equals("/KaKaoJoin.us")) {
+				System.out.println(" C : /KaKaoJoin.us 호출 ");
+				System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
+				
+				forward = new ActionForward();
+				forward.setPath("./main/addInfo.jsp");
+				forward.setRedirect(false);
+			}
 			//회원 마이 페이지(찜한매장)
 			else if(command.equals("/MemberWish.us")) {
 			System.out.println(" C : /MemberWish.us 호출 ");
@@ -493,14 +489,18 @@ public class UserFrontController extends HttpServlet {
 				}
 				} 
 				
-				else if(command.equals("/CeoMyPage_re.us")) {
-					System.out.println(" C : /CeoMyPage_re.us ");
-					System.out.println(" C : 패턴1) DB 사용 x, view 이동 ");
-					
-					forward = new ActionForward();
-					forward.setPath("./member/ceoMyPage_review.jsp");
-					forward.setRedirect(false);
-				} 
+			else if(command.equals("/CeoMyPage_re.us")) {
+				System.out.println(" C : /CeoMyPage_re.us 호출 ");
+				System.out.println(" C : 패턴3) DB사용o, 페이지출력 ");
+				
+				action = new CeoMypage_revAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} 
 				
 				else if(command.equals("/GenMemDetailReport.us")) {
 					
@@ -676,7 +676,62 @@ public class UserFrontController extends HttpServlet {
                 
             }
             // 마이페이지 (예약내역)
-
+				// 가게정보 삭제
+			else if(command.equals("/DeleteStoreAction.us")) {
+				System.out.println(" C : /DeleteStoreAction 호출 ");
+				System.out.println(" C : (패턴2)");
+				
+				// BoardDeleteAction() 객체
+				action = new DeleteStoreAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} // 가게정보 삭제
+			
+			// 예약거절
+			else if(command.equals("/refuselReservAction.us")) {
+				System.out.println(" C : /refuseReservationAction 호출 ");
+				System.out.println(" C : (패턴2) ");
+				
+				action = new RefuseReservAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			// ceo 답글 작성,수정
+			else if(command.equals("/CeoReWriteAction.us")) {
+				System.out.println(" C : CeoReWriteAction.us 호출 ");
+				System.out.println(" C : (패턴2) ");
+				
+				action = new CeoReWriteAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			// ceo 답글 삭제
+			else if(command.equals("/CeoReDeleteAction.us")) {
+				System.out.println(" C : CeoReDeleteAction.us 호출 ");
+				System.out.println(" C : (패턴2) ");
+				
+				action = new CeoReDeleteAction();
+				
+				try {
+					forward = action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
         
     //회원 마이 페이지(리뷰관리)
     

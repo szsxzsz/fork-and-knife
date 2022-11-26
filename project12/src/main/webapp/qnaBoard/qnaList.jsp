@@ -128,45 +128,31 @@
                                 </div>                                                        
                             </div>
 
-<%-- ${s_no } --%>
-                        <div class="section"> 
-                            <div class="pull-right">
+<%-- ${s_no } --%>		<div class="col-md-9  pr0 padding-top-40 properties-page">
+                        <div class="row"> 
                                 <div class="pagination">
                                 <c:if test="${requestScope.totalCnt !=0 }">
                                 	
                                 	
                                 	<c:if test="${startPage > pageBlock }">
-										<a href="./QnaList.br?pageNum=${startPage-pageBlock}&s_no=${s_no}">
+										<a href="./QnaList.br?pageNum=${startPage-pageBlock}&s_no=${s_no}&rev_category=0">
 										[이전]
 										</a>
 									</c:if>
 								
 <!-- 								페이지 번호(1,2,3...) -->
 									<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">	
-										<a href="./QnaList.br?pageNum=${i}&s_no=${s_no}">${i}</a>
+										<a href="./QnaList.br?pageNum=${i}&s_no=${s_no}&rev_category=0">${i}</a>
 									</c:forEach>
-<%-- 								<% for(int i=startPage;i<=endPage;i++){ %> --%>
-<%-- 									<a href="QnaList.br?pageNum=<%=i%>"><%=i%> %></a> --%>
-<%-- 								<%} %> --%>
 							
 									<c:if test="${endPage < pageCount }">
-										<a href="./QnaList.br?pageNum=${startPage+pageBlock}&s_no=${s_no}">
+										<a href="./QnaList.br?pageNum=${startPage+pageBlock}&s_no=${s_no}&rev_category=0">
 										[다음]
 										</a>
 									</c:if>
 							</c:if>
-
-
-<!--                                     <ul> -->
-<!--                                         <li><a href="#">Prev</a></li> -->
-<!--                                         <li><a href="#">1</a></li> -->
-<!--                                         <li><a href="#">2</a></li> -->
-<!--                                         <li><a href="#">3</a></li> -->
-<!--                                         <li><a href="#">4</a></li> -->
-<!--                                         <li><a href="#">Next</a></li> -->
-<!--                                     </ul> -->
                                 </div>
-                            </div>                
+                                </div>
                         </div>
 
 

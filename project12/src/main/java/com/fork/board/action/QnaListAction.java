@@ -16,9 +16,9 @@ public class QnaListAction implements Action {
 		System.out.println("M : QnaListAction_execute 실행");
 		String s_no = request.getParameter("s_no");
 //		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		
 		int rev_category = Integer.parseInt(request.getParameter("rev_category"));
 		
-		System.out.println(s_no+"+"+rev_category);
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		ActionForward forward = new ActionForward();
@@ -37,7 +37,7 @@ public class QnaListAction implements Action {
 		//페이징 처리 (1)
 		
 		// 한 페이지에 보여줄 글의 개수
-		int pageSize = 10;
+		int pageSize = 5;
 		
 		// http://localhost:8088/JSP/board/boardList.jsp?pageNum=2
 		// ctrl 누른 상태에서 주소누르면 들어가진다!

@@ -123,6 +123,7 @@
                 <div class="col-md-12 large-search"> 
                     <div class="search-form wow pulse">
                         <form action="./storeList.st" class="form-inline" method="get">
+                        <input type="hidden" name="prnon" value="1">
                             <div class="col-md-12">
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" placeholder="가게 검색" name="kw" value="${kw2 }">

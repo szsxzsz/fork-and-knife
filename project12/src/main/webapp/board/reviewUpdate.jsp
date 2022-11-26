@@ -103,7 +103,6 @@ $('#star a').click(function(){
                         <h2>리뷰 수정하기</h2>
                         <form action="./ReviewUpdateProAction.rv?pageNum=${pageNum }&s_no=${dto.s_no }&rev_sno=${dto.rev_no }" method="post" enctype="multipart/form-data">
                       
-                       ${pageNum } /${dto.rev_no } /${dto.s_no }
 <!--                             <div class="row">
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
@@ -112,7 +111,7 @@ $('#star a').click(function(){
                                 <br>
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
-
+<c:if test="${!id.equals('admin') }">
 별점을 입력해주세요.
 
 <P id="star"> <!-- 부모 -->
@@ -122,10 +121,12 @@ $('#star a').click(function(){
 <a href="#" id="starrate" data-rate="4">★</a>
 <a href="#" id="starrate" data-rate="5">★</a>
  <p>
-
-
+ 
+ 
 
 <input type="hidden" name="rev_star" value="starValue">
+</c:if>
+
  <input type="hidden" name="rev_no" value="${dto.rev_no }">
 
 									

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fork.board.action.UserReservAction;
+
 
 
 
@@ -126,12 +128,6 @@ public class StoreFrontController extends HttpServlet {
 					}
 				}
 				
-				else if(command.equals("/dd.st")) {
-					forward= new ActionForward();
-					forward.setPath("./main/submit-property.html");
-					forward.setRedirect(false);
-					
-				}
 				
 				System.out.println(" C : 2. 가상주소 매핑 끝 \n");
 				// 3. 페이지 이동
