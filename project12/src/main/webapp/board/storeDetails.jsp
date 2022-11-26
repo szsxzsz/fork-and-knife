@@ -33,9 +33,6 @@ function bkgo() {
  }
 $(document).ready(function(){
 	
-	
-	alert('hi');
-	
 	//좋아
 	$('.like-content').one('click','.like-review', function(e) {
 		$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
@@ -472,7 +469,7 @@ $(document).ready(function(){
          </div>
          <div class="panel-body search-widget">
          
-             <form action="./reservation.st" class="form-inline" method="get"> 
+             <form action="./reservation.br" class="form-inline" method="get"> 
               <input type="hidden" name="s_no" value="${param.s_no }">
              <input type="hidden" name="s_name" value="${dto.s_name }">
              <input type="hidden" name="s_addr" value="${dto.s_addr }">

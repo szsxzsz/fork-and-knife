@@ -136,13 +136,13 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="lastname">예약 인원</label>
+                                            <label for="lastname">예약자 전화번호</label>
                                             <input type="text" class="form-control" id="lastname" name="res_tel" placeholder="유사시 연락할 전화번호 입력">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="lastname">예약 인원</label>
+                                            <label for="lastname">예약자 번호</label>
                                             <input type="text" class="form-control" id="lastname" name="res_num" value="${param.total }" readonly>
                                         </div>
                                     </div>

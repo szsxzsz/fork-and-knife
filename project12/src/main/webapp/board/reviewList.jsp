@@ -416,12 +416,12 @@
                                            <c:if test="${dto.rev_seq < 1 }">
                                          	
                                             <small class="text-mute"> 
-                                            <input type="submit" value="답글"onclick="location.href='./reviewReply.rv?rev_no=${dto.rev_no}&pageNum=${pageNum }&rev_ref=${dto.rev_ref }&rev_seq=${dto.rev_seq }&rev_subject=${dto.rev_subject }&s_no=${dto.s_no }'" >
+                                            <input type="button" value="답글"onclick="location.href='./reviewReply.rv?rev_no=${dto.rev_no}&pageNum=${pageNum }&rev_ref=${dto.rev_ref }&rev_seq=${dto.rev_seq }&rev_subject=${dto.rev_subject }&s_no=${dto.s_no }'" >
 											</small>
 											</c:if>
 											 </c:if>
 											<c:if test="${mine!=null}">
-											<input type="submit" value="답글"onclick="location.href='./reviewReply.rv?rev_no=${dto.rev_no}&pageNum=${pageNum }&rev_ref=${dto.rev_ref }&rev_seq=${dto.rev_seq }&rev_subject=${dto.rev_subject }&s_no=${dto.s_no }'" >
+											<input type="button" value="답글"onclick="location.href='./reviewReply.rv?rev_no=${dto.rev_no}&pageNum=${pageNum }&rev_ref=${dto.rev_ref }&rev_seq=${dto.rev_seq }&rev_subject=${dto.rev_subject }&s_no=${dto.s_no }'" >
 											</c:if>
 											</div>
                                             </div>
@@ -450,35 +450,6 @@
 				                                        
 				                                        
 				                                        
-<%--                                          <c:forEach var="dto" items="${reviewListAll }" begin="1" end="1"> --%>
-<!--                                         <nav aria-label="Page navigation example"> -->
-                                       
-<!--                                             <ul class="pagination"> -->
-<%--                                              <c:if test="${totalCnt != 0}"> --%>
-                                             
-                                             
-<%--                                               <c:if test="${startPage > pageBlock }"> --%>
-
-<%--                                                 <li class="page-item"><a class="page-link" href="./ReviewList.rv?pageNum=${startPage-pageBlock }&s_no=${dto.s_no }">Previous</a></li> --%>
-<%--                                                </c:if>  --%>
-                                               
-<!--                                                  페이지 번호(1,2,3....)	   -->
-<%-- 	   										 <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1"> --%>
-<%--                                                 <li class="page-item"><a class="page-link" href="./ReviewList.rv?pageNum=${i }&s_no=${dto.s_no }">${i }</a></li> --%>
-
-<%--                                               </c:forEach> --%>
-                                              
-                                              
-<%-- 	  										  <c:if test="${endPage < pageCount }"> --%>
-<%--                                                 <li class="page-item"><a class="page-link" href="./ReviewList.rv?pageNum=${startPage+pageBlock }&s_no=${dto.s_no }">Next</a></li> --%>
-                                               
-<%--                                                 </c:if> --%>
-<%--                                                 </c:if> --%>
-                                                
-                                              
-<!--                                             </ul> -->
-<!--                                         </nav> -->
-<%--                                         </c:forEach> --%>
                                     </div>
                                     <div class="tab-pane fade" id="pills-msg" role="tabpanel" aria-labelledby="pills-msg-tab">
                                         <div class="card">
