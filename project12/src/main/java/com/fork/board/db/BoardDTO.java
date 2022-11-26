@@ -26,6 +26,7 @@ public class BoardDTO extends StoreDTO {
 	private String s_addr;
 	private String m_nickName;
 	private String m_id;
+	
 
 	
 	
