@@ -67,7 +67,7 @@
                             
                             <h2>Social login :  </h2> 
                             <a href="javascript:kakaoLogin()">
-							<img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png">
+							<img src="main/kakao.jpg">
 							</a>
 						
 							<form action="KaKaoJoin.us" id="kakao_form" method="POST"

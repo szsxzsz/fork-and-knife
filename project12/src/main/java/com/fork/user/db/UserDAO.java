@@ -86,8 +86,8 @@ public class UserDAO {
 					System.out.println(" DAO : m_no : " + m_no);
 					
 					// 회원가입
-					sql = "insert into member(m_no,m_id,m_name,m_email,m_nickname,m_pw) "
-							+ "values(?,?,?,?,?,?)";
+					sql = "insert into member "
+							+ "values(?,?,?,?,?,?,?,?,?,now())";
 					pstmt = con.prepareStatement(sql);
 					
 					// ??
@@ -97,6 +97,10 @@ public class UserDAO {
 					pstmt.setString(4, dto.getM_email());
 					pstmt.setString(5, dto.getM_nickName());
 					pstmt.setString(6, dto.getM_pw());
+					pstmt.setString(7, dto.getM_birth());
+					pstmt.setString(8, dto.getM_gender());
+					pstmt.setString(9, dto.getM_tel());
+					
 					
 					int result = pstmt.executeUpdate();
 					

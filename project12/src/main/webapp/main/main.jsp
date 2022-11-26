@@ -86,7 +86,7 @@
     } else {
       window.addEventListener('DOMContentLoaded', l, false);
       window.addEventListener('load', l, false);
-    }
+    
   })();
   ChannelIO('boot', {
     "pluginKey": "11a959e9-32da-4bfa-baab-2259838a8261"
@@ -102,9 +102,17 @@
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
  
-                    <div class="item"><img src="assets/img/main.jpg" alt="The Last of us" style="background-attachment:fixed;"></div>
-                    <div class="item"><img src="assets/img/main2.jpg" alt="GTA V" style="background-attachment:fixed;"></div>
-
+                    <div class="item"><img src="assets/img/chef.jpg" alt="banner" style="background-attachment:fixed;"></div>
+                    <div class="item"><img src="assets/img/banner2.jpg" alt="banner2" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner3.jpg" alt="banner3" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner4.jpg" alt="banner4" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner5.jpg" alt="banner5" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner6.jpg" alt="banner6" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner7.jpg" alt="banner7" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner8.jpeg" alt="banner8" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner9.jpeg" alt="banner9" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner10.jpeg" alt="banner10" style="background-attachment:fixed;"></div>
+					<div class="item"><img src="assets/img/banner11.jpeg" alt="banner11" style="background-attachment:fixed;"></div>
                 </div>
             </div>
             <div class="container slider-content">
