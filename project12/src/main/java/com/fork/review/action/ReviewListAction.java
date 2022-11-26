@@ -15,8 +15,16 @@ public class ReviewListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("m_id");
 		
+		String id=null;
+		int c=0;
+		if(session.getAttribute("m_id")!=null) {
+			id = (String) session.getAttribute("m_id");
+		}
+		
+		if (session.getAttribute("c")!=null) {
+			c = (int) session.getAttribute("c");
+		}
 		//모두가 리뷰 게시판은 볼수잇어야됨
 		
 		
@@ -29,7 +37,12 @@ public class ReviewListAction implements Action {
 		System.out.println(cnt);		
 		int pageSize =9;
 		
-		
+		if (id!=null & c!=0) {
+			int result = dao.isMine(id, s_no);
+			if (result==1) {
+				session.setAttribute("mine", 1);
+			}
+		}
 //		ReviewDTO dto = new ReviewDTO();
 		
 //		dto.setS_no(Integer.parseInt(request.getParameter("s_no")));

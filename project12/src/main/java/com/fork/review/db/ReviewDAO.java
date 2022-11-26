@@ -101,7 +101,7 @@ public class ReviewDAO {
 						+ "select avg(rev_star) "
 						+ "from reviewcs B "
 						+ "where A.s_no=B.s_no) "
-						+ "where A.s_no=? and s_star != 0";
+						+ "where A.s_no=? and (s_star != 0 or s_star != null)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,dto.getS_no());
 				
@@ -174,7 +174,7 @@ public class ReviewDAO {
 						con = getConnection();
 						
 						
-						sql = "select rev_subject, rev_content, rev_star, s_name, m_nickname, s_readcount, rev_date, rev_file "
+						sql = "select rev_subject, rev_content, rev_star, s_name, m_nickname, s_readcount, rev_date, rev_file, rev_no, m_id "
 								+ "from reviewcs A, store B, member C "
 								+ "where A.s_no = B.s_no "
 								+ "and A.m_no = C.m_no "
@@ -199,6 +199,8 @@ public class ReviewDAO {
 							hm.put("s_readcount",rs.getString("s_readcount"));
 							hm.put("rev_date",rs.getTimestamp("rev_date"));
 							hm.put("rev_file",rs.getString("rev_file"));
+							hm.put("rev_no", rs.getInt("rev_no"));
+							hm.put("m_id",rs.getString("m_id"));
 							reviewList.add(hm);
 							
 							
@@ -427,4 +429,26 @@ public class ReviewDAO {
 					
 				}
 				// 답글쓰기 - replyReview(DTO)
+		public int isMine(String id, int s_no) {
+			int result=0;
+			try {
+				con=getConnection();
+				
+				sql="select s_no from store A, ceo B where A.c_no=B.c_no and B.c_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				
+				while (rs.next()) {
+					if(rs.getInt("s_no")==s_no) {
+						result=1;
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
 }

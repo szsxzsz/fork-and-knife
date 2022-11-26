@@ -77,7 +77,7 @@ public class ReviewWriteAction implements Action {
 		dto.setRev_file(multi.getParameter("rev_file"));
 		dto.setM_no(mdto.getM_no());
 		dto.setRev_file(multi.getFilesystemName("rev_file"));
-		
+		dto.setRev_star(Integer.parseInt(multi.getParameter("rev_star")));
 		
 		
 	

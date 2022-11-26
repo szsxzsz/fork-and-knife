@@ -72,8 +72,7 @@ $('#star a').click(function(){
 	
 });
 function sub() {
-	var starValue = getElementById("starrate").attr("data-rate");
-	if(starValue == "" || starValue == null){
+	if(document.frm.rev_star.value=="starValue"){
 	alert('별점을 꼭 입력하세요');
 	return false;
 	}
@@ -123,10 +122,8 @@ function sub() {
                 <div class="col-md-9">
 
                     <div class="" id="contact1">                        
-                  ${dto }
                   <div align="center">
                         <hr>
-                        ${dto }
                         <h2>리뷰 쓰세오</h2>
                         <form action="./ReviewWriteAction.rv?s_no=${param.s_no }" method="post" enctype="multipart/form-data" name="frm" onsubmit="return sub()">
                        <input type="hidden" value="${param.s_no }" name="s_no">
