@@ -149,7 +149,7 @@
                                         <a class="nav-link" id="pills-packages-tab" href="./GenMemDetailReport.us?m=${param.m }">신고 목록</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-packages-tab" href="./detailGenMemDetailReview.us?m=${param.m }">리뷰 목록</a>
+                                        <a class="nav-link" id="pills-packages-tab" href="./adminGenMemDetailReview.us?m=${param.m }">리뷰 목록</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
@@ -250,6 +250,10 @@
                                                     <h4 class="mb-0">노쇼 하심</h4>
                                                     <p>상태</p>
                                                     </c:if>
+                                                    <c:if test="${res.res_status==3 }">
+                                                    <h4 class="mb-0">점장 거절</h4>
+                                                    <p>상태</p>
+                                                    </c:if>
                                                 </div>
                                                 <div class="campaign-metrics d-xl-inline-block">
                                                     <h4 class="mb-0"><a href="#" onclick="window.open('./genMemReservMsg.us?msg=${res.res_msg}','예약 메세지','width=600, height=150, left=700, top=400')">
@@ -293,22 +297,22 @@
             <!-- ============================================================== -->
             <!-- end content -->
             <!-- ============================================================== -->
-            <div class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--             <div class="footer"> -->
+<!--                 <div class="container-fluid"> -->
+<!--                     <div class="row"> -->
+<!--                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> -->
+<!--                             Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>. -->
+<!--                         </div> -->
+<!--                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> -->
+<!--                             <div class="text-md-right footer-links d-none d-sm-block"> -->
+<!--                                 <a href="javascript: void(0);">About</a> -->
+<!--                                 <a href="javascript: void(0);">Support</a> -->
+<!--                                 <a href="javascript: void(0);">Contact Us</a> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
             <!-- ============================================================== -->
             <!-- end footer -->
             <!-- ============================================================== -->

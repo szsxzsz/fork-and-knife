@@ -114,30 +114,55 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		} 
-		else if(command.equals("/book.br")) {
-			System.out.println(" C : /book.br 호출");
-
-			// BookAction()
-			action = new BookAction();
+		else if(command.equals("/reservation.br")) {
+			action = new UserReservAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/paymentPro.br")) {
+			action = new paymentAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		else if(command.equals("/notice.br")) {
+			action = new NoticeListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/QnaBoardReWriteAction.br")) {
+			System.out.println( "C : QnaBoardReWriteAction.br 호출 ~~");
+			
+			action = new QnaBoardReWriteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/BookCompleteAction.br")) {
-			System.out.println(" C : /BookCompleteAction.br 호출 ");
+		else if(command.equals("/ReservationComplete.br")){ 
+			forward = new ActionForward();
 			
-			// BookCompleteAction
-			action = new BookCompleteAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) { e.printStackTrace(); }			
-		
+			forward.setPath("./board/reservationComplete.jsp");
+			forward.setRedirect(false);
 		}
-		
-					
-		
 		
 		// 3. 페이지 이동
 		if(forward != null) {

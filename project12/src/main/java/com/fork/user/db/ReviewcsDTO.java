@@ -23,5 +23,10 @@ public class ReviewcsDTO {
 	private String rev_file;
 	private int rev_ref;
 	private int rev_seq;
+	private String rev_c_re;
+	private Timestamp rev_c_date;
+	private String s_name;
+	private String m_nickname;
+	private String date;
 	
 }

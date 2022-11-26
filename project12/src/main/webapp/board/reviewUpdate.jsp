@@ -63,6 +63,23 @@ $('#star a').click(function(){
 	  
 });
 });
+
+function sub() {
+	if(document.frm.rev_star.value=="starValue"){
+	alert('별점을 꼭 입력하세요');
+	return false;
+	}
+	
+	if (document.frm.rev_subject.value=="") {
+		alert('제목 쓰셈 ㅋ');
+		return false;
+	}
+	if (document.frm.rev_content.value=="") {
+		alert('내용 쓰셈 ㅋ');
+		return false;
+	}
+
+}
 </script>
     </head>
     
@@ -100,10 +117,9 @@ $('#star a').click(function(){
                   
                   <div align="center">
                         <hr>
-                        <h2>리뷰 쓰세오</h2>
-                        <form action="./ReviewUpdateProAction.rv?pageNum=${pageNum }" method="post" enctype="multipart/form-data">
+                        <h2>리뷰 수정하기</h2>
+                        <form action="./ReviewUpdateProAction.rv?pageNum=${pageNum }&s_no=${dto.s_no }&rev_sno=${dto.rev_no }" method="post" enctype="multipart/form-data" name="frm" onsubmit="return sub()">
                       
-                       
 <!--                             <div class="row">
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
@@ -112,11 +128,8 @@ $('#star a').click(function(){
                                 <br>
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
-
-
-${rev_no }
-
-의 별점은?
+<c:if test="${!id.equals('admin') }">
+별점을 입력해주세요.
 
 <P id="star"> <!-- 부모 -->
 <a href="#" id="starrate" data-rate="1">★</a> <!-- 자식들--> 
@@ -125,11 +138,17 @@ ${rev_no }
 <a href="#" id="starrate" data-rate="4">★</a>
 <a href="#" id="starrate" data-rate="5">★</a>
  <p>
+ 
+ 
 
 <input type="hidden" name="rev_star" value="starValue">
+</c:if>
+<c:if test="${id.equals('admin') }">
+<input type="hidden" name="rev_star" value="${param.rev_star }">
+</c:if>
+ <input type="hidden" name="rev_no" value="${dto.rev_no }">
 
-									<input type="hidden" name="rev_no" value="${rev_no }">
-									<input type="hidden" name="s_no" value="${s_no }">
+									
                                     <label for="subject">제목</label>
                                   	  <input type="text" class="form-control" id="subject" name="rev_subject" value="${dto.rev_subject }">
 <!--                                     </div> -->
@@ -138,12 +157,9 @@ ${rev_no }
 <!--                                     <div class="form-group"> -->
                                     <label for="subject">첨부파일</label>
                                   	  <input type="file" class="form-control" id="file" name="rev_file">
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 <div class="col-sm-12"> -->
-<!--                                     <div class="form-group"> -->
+
                                     <label for="message">내용</label>
-                                    <textarea id="message" class="form-control" name="rev_content" width="730px" placeholder="${dto.rev_content }"></textarea>
+                  <textarea id="rev_content" class="form-control" name="rev_content" width="730px" placeholder="${dto.rev_content }">${dto.rev_content }</textarea>
 <!--                                     </div> -->
 <!--                                 </div> -->
 					<br>
@@ -151,16 +167,7 @@ ${rev_no }
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
                                review 수정 하기 </button></form>
 							
-							<form action="./ReviewList.rv?s_no=${dto.s_no }&s_name=${dto.s_name }"> 
-							<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                               review 목록으로~ </button></form>
-                               
-                              
-							 
-<!--                                 </div> -->
-<!--                             </div> -->
-                            <!-- /.row -->
-                        
+							
                     </div>
                 </div>
                 <!-- /.col-md-9 -->    
@@ -189,6 +196,17 @@ ${rev_no }
         <script src="assets/js/gmaps.init.js"></script>
 
         <script src="assets/js/main.js"></script>
+<style type="text/css">
+  #star a{
+   text-decoration: none;
+   color: gray;
+  }
+  #star a.on{
+   color: red;
+  } 
 
+
+
+</style>
     </body>
 </html>

@@ -1,3 +1,5 @@
+<%@page import="org.apache.commons.collections4.bag.SynchronizedSortedBag"%>
+<%@page import="com.fork.board.action.ActionForward"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!DOCTYPE html>
@@ -48,7 +50,18 @@
         <!--End top header -->
 
         <!-- End of nav bar -->
-
+	
+		<%
+		HttpSession session1 = request.getSession();
+		String id = (String) session1.getAttribute("id");
+		System.out.println("id : "+id);
+		
+		if(id==null) {
+			System.out.println("Let's go!!!!!!");
+			response.sendRedirect("Login.us");
+		}
+		%>
+		
         <div class="page-head"> 
             <div class="container">
                 <div class="row">
@@ -70,43 +83,50 @@
                        
                         <hr>
                         <h2>QnA 문의하기</h2>
-                        ${param.s_no}
-                        <form action="./QnaBoardWriteAction.br" method="post" enctype="multipart/form-data">
+                        <br>
+                        <br>
+                       
+                        <form action="./QnaBoardWriteAction.br?s_no=${param.s_no}&rev_category=0" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="s_no" value="${param.s_no}">
                         
-<!--                             <div class="row"> -->
-<!--                                 <div class="col-sm-6"> -->
+                            <div class="row">
+                                <div class="col-sm-12">
 <!--                                     <div class="form-group"> -->
+<%-- ${param.s_no} --%>
                                         <label for="firstname">문의분류</label>
-                                        <input type="radio" name="qna_sort" value="reser" checked>예약 문의
-                                        <input type="radio" name="qna_sort" value="store">식당 문의
-                                        <input type="radio" name="qna_sort" value="etc">기타 문의
+                                        <input type="radio" name="qna_sort" value="reser" checked style="width: 10px">예약 문의
+                                        <input type="radio" name="qna_sort" value="store" style="width: 10px">식당 문의
+                                        <input type="radio" name="qna_sort" value="etc" style="width: 10px">기타 문의
 <!--                                     </div> -->
-<!--                                 </div> -->
+                                </div>
                                 <br>
-<!--                                 <div class="col-sm-6"> -->
+                                <div class="col-sm-12">
 <!--                                     <div class="form-group"> -->
                                         <label for="subject">제목</label>
-                                        <input type="text" class="form-control" id="subject" name="rev_subject">
-<!--                                     </div> -->
+                                        <input type="text" class="form-control" id="subject" name="rev_subject" placeholder="제목을 적으세요">
+                                    </div>
 <!--                                 </div> -->
-<!--                                 <div class="col-sm-6"> -->
-<!--                                     <div class="form-group"> -->
+
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label for="subject">첨부파일</label>
                                         <input type="file" class="form-control" id="file" name="rev_file">
-<!--                                     </div> -->
-<!--                                  </div> -->
-<!--                                 <div class="col-sm-12"> -->
-<!--                                     <div class="form-group"> -->
+                                    </div>
+                                 </div>
+
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label for="message">내용</label>
-                                        <textarea id="message" class="form-control1" name="rev_content"></textarea>
-<!--                                     </div> -->
-<!--                                 </div> -->
+                                        <textarea id="message" class="form-control1" name="rev_content" cols="145" rows="5"></textarea>
+                                    </div>
+                                </div>
 									<br>
 <!--                                 <div class="col-sm-12 text-center"> -->
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> QnA 등록하기 </button>
-<!--                                 </div> -->
-<!--                             </div> -->
+                                </div>
+                            </div>
                             <!-- /.row -->
                         </form>
                     </div>

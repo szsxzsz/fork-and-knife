@@ -149,7 +149,7 @@
                                         <a class="nav-link active" id="pills-packages-tab" href="#">신고 목록</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-packages-tab" href="./detailGenMemDetailReview.us?m=${param.m }">리뷰 목록</a>
+                                        <a class="nav-link" id="pills-packages-tab" href="./adminGenMemDetailReview.us?m=${param.m }">리뷰 목록</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
@@ -211,13 +211,13 @@
 			                                            <ul class="pagination">
 			                                            	<c:if test="${reqeustScope.totalCnt != 0 }">
 			                                            		<c:if test="${startPage > pageBlock }">
-					                                                <li class="page-item"><a class="page-link" href="./adminGenMemList.us?pageNum=${startPage-pageBlock }">Previous</a></li>
+					                                                <li class="page-item"><a class="page-link" href="./GenMemDetailReport.us?pageNum=${startPage-pageBlock }&m=${param.m}">Previous</a></li>
 					                                            </c:if>
 					                                            <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-					                                                <li class="page-item"><a class="page-link"  href="./adminGenMemList.us?pageNum=${i }">${i }</a></li>
+					                                                <li class="page-item"><a class="page-link"  href="./GenMemDetailReport.us?pageNum=${i }&m=${param.m}">${i }</a></li>
 					                                            </c:forEach>   
 					                                            <c:if test="${endPage < pageCount }">
-					                                                <li class="page-item"><a class="page-link"  href="./adminGenMemList.us?pageNum=${startPage+pageBlock }">[Next]]</a></li>
+					                                                <li class="page-item"><a class="page-link"  href="./GenMemDetailReport.us?pageNum=${startPage+pageBlock }&m=${param.m}">[Next]]</a></li>
 					                                            </c:if>
 					                                        </c:if>
 			                                            </ul>

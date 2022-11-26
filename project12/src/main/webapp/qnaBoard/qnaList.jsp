@@ -39,6 +39,17 @@
         <link rel="stylesheet" href="assets/css/responsive.css">
     </head>
     <body>
+<%--     <jsp:include page="../inc/top.jsp" /> --%>
+<%
+		HttpSession session1 = request.getSession();
+		String id = (String) session1.getAttribute("id");
+		System.out.println("id : "+id);
+		
+		if(id==null) {
+			System.out.println("Let's go!!!!!!");
+			response.sendRedirect("Login.us");
+		}
+		%>
 
         <div id="preloader">
             <div id="status">&nbsp;</div>
@@ -55,7 +66,11 @@
             </div>
         </div>
         <!-- End page header -->
-       <input type="button" onclick="location.href='./QnaWrite.br?s_no=${s_no}'" value="write" class="button">
+        &nbsp;  &nbsp;  &nbsp;  &nbsp;
+        <input type="button" style="width:201px" class="nav-link" onclick="location.href='./storeDetails.st?s_no=${param.s_no }'" value="Reservation">
+        <input type="button" style="width:201px" class="nav-link" onclick="location.href='./storeList.st'" value="Store List">
+        <input type="button" style="width:201px" class="nav-link" onclick="location.href=''./BookMarkList.bk'" value="My BookMarkList">
+        <input type="button" style="width:201px" onclick="location.href='./QnaWrite.br?s_no=${s_no}&rev_category=0'" value="write" class="button">
         <!-- property area -->
         <div class="content-area recent-property" style="background-color: #FFF;">
             <div class="container">   
@@ -71,15 +86,18 @@
                         </div>
 
                         <div class="section"> 
-                        <c:forEach var="dto" items="${boardListAll }">
+<%--                         ${qnaList } --%>
+<%--                         <c:set var="mdto" value="${mListAll }" /> --%>
+<%-- 	${qnaList} --%>
+                        <c:forEach var="dto" items="${qnaList }">
                             <div id="list-type" class="proerty-th-list">
                                 <div class="col-md-4 p0">
                                     <div class="box-two proerty-item">
-                                        <div class="item-entry overflow">
+                                        <div class="item-entry overflow" style="width:830px;">
                                             <h5><a href="./QnaContent.br?rev_no=${dto.rev_no}&s_no=${dto.s_no}&pageNum=${pageNum}">${dto.rev_no} ${dto.rev_subject }</a></h5>
                                             <div class="dot-hr"></div>
                                                 <div class="dealer-action pull-right">                                        
-                                                    <a href="" class="button">작성자 </a>
+                                                    <a href="" class="button">${m_id } </a>
                                                     <a href="" class="button delete_user_car">${dto.rev_date}</a>
 <!--                                                     <a href="" class="button">조회수</a>
  -->                                                </div>
@@ -110,37 +128,31 @@
                                 </div>                                                        
                             </div>
 
-                        <div class="section"> 
-                            <div class="pull-right">
+<%-- ${s_no } --%>		<div class="col-md-9  pr0 padding-top-40 properties-page">
+                        <div class="row"> 
                                 <div class="pagination">
-                                <c:if test="${requestScope.totalCnt !=0 }"}>
-                                <c:if test="${startPage > pageBlock }">
-								<a href="./QnaList.br?pageNum=${startPage-pageBlock }">
-								[이전]
-								</a>
-								</c:if>
+                                <c:if test="${requestScope.totalCnt !=0 }">
+                                	
+                                	
+                                	<c:if test="${startPage > pageBlock }">
+										<a href="./QnaList.br?pageNum=${startPage-pageBlock}&s_no=${s_no}&rev_category=0">
+										[이전]
+										</a>
+									</c:if>
 								
-								<!-- 페이지 번호(1,2,3...) -->
-								<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-								<a href="./QnaList.br?pageNum=${i }">${i }</a>
-								</c:forEach>
+<!-- 								페이지 번호(1,2,3...) -->
+									<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">	
+										<a href="./QnaList.br?pageNum=${i}&s_no=${s_no}&rev_category=0">${i}</a>
+									</c:forEach>
 							
-								<!-- 다음 -->
-								<c:if test="${endPage < pageCount }">
-								<a href="./QnaList.br?pageNum=${startPage+pageBlock }">
-								[다음]
-								</a></c:if>
+									<c:if test="${endPage < pageCount }">
+										<a href="./QnaList.br?pageNum=${startPage+pageBlock}&s_no=${s_no}&rev_category=0">
+										[다음]
+										</a>
+									</c:if>
 							</c:if>
-<!--                                     <ul> -->
-<!--                                         <li><a href="#">Prev</a></li> -->
-<!--                                         <li><a href="#">1</a></li> -->
-<!--                                         <li><a href="#">2</a></li> -->
-<!--                                         <li><a href="#">3</a></li> -->
-<!--                                         <li><a href="#">4</a></li> -->
-<!--                                         <li><a href="#">Next</a></li> -->
-<!--                                     </ul> -->
                                 </div>
-                            </div>                
+                                </div>
                         </div>
 
 

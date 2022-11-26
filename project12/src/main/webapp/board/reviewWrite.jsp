@@ -47,9 +47,9 @@
         
 <script src="./board/jquery-3.6.1.js"></script>
 <script type="text/javascript">
+
+
 $(document).ready(function(){
-	
-	
 	
 $('#star a').click(function(){ 
 	 $(this).parent().children("a").removeClass("on");    
@@ -61,8 +61,32 @@ $('#star a').click(function(){
 	  $('input[name=rev_star]').attr('value',starValue);
 	  return starValue;
 	  
+	  
 });
+
+
+
+
+// var starValue ;
+	
+	
 });
+function sub() {
+	if(document.frm.rev_star.value=="starValue"){
+	alert('별점을 꼭 입력하세요');
+	return false;
+	}
+	
+	if (document.frm.rev_subject.value=="") {
+		alert('제목 쓰셈 ㅋ');
+		return false;
+	}
+	if (document.frm.rev_content.value=="") {
+		alert('내용 쓰셈 ㅋ');
+		return false;
+	}
+
+}
 </script>
     </head>
     
@@ -98,14 +122,12 @@ $('#star a').click(function(){
                 <div class="col-md-9">
 
                     <div class="" id="contact1">                        
-                  
                   <div align="center">
                         <hr>
                         <h2>리뷰 쓰세오</h2>
-                        <form action="./ReviewWriteAction.rv?s_no=${param.s_no }&?s_name=${param.s_name }" method="post" enctype="multipart/form-data">
-                      
+                        <form action="./ReviewWriteAction.rv?s_no=${param.s_no }" method="post" enctype="multipart/form-data" name="frm" onsubmit="return sub()">
                        <input type="hidden" value="${param.s_no }" name="s_no">
-                       <input type="hidden" value="${param.s_name }" name="s_name">
+                       
 <!--                             <div class="row">
 <!--                                 <div class="col-sm-6"> -->
 <!--                                     <div class="form-group"> -->
@@ -113,10 +135,11 @@ $('#star a').click(function(){
 <!--                                 </div> -->
                                 <br>
 <!--                                 <div class="col-sm-6"> -->
-<!--                                     <div class="form-group"> -->
-${param.s_name }
+<!--   
 
-의 별점은?
+                               <div class="form-group"> -->
+ 
+가게는 어떠셨나요?
 
 <P id="star"> <!-- 부모 -->
 <a href="#" id="starrate" data-rate="1">★</a> <!-- 자식들--> 
@@ -141,18 +164,21 @@ ${param.s_name }
 <!--                                 </div> -->
 <!--                                 <div class="col-sm-12"> -->
 <!--                                     <div class="form-group"> -->
-                                    <label for="message">내용</label>
+
+                                    <label for="message">어떤 점이 좋았나요?</label>
                                     <textarea id="message" class="form-control" name="rev_content" width="730px" placeholder="간단한 리뷰를 적어주세요"></textarea>
 <!--                                     </div> -->
 <!--                                 </div> -->
 					<br>
 <!--                                 <div class="col-sm-12 text-center"> -->
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                               review 등록하기 </button></form>
 							
-							<form action="./ReviewList.rv?s_no=${param.s_no }&s_name=${param.s_name }"> 
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
+                               등록 </button></form>
+							
+							<form action="./ReviewList.rv"> 
+							<input type="hidden" name="s_no" value="${param.s_no }">
 							<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 
-                               review 목록으로~ </button></form>
+                              목록 </button></form>
                                
                               
 							 
@@ -162,8 +188,8 @@ ${param.s_name }
                         
                     </div>
                 </div>
-                <!-- /.col-md-9 -->    
-                <a href="javascript:window.history.back();">뒤로가기</a>          
+               
+               <i class="fa-solid fa-arrow-rotate-left"></i><a href="javascript:window.history.back();">뒤로가기</a>          
             </div>
         </div>
         
@@ -188,6 +214,30 @@ ${param.s_name }
         <script src="assets/js/gmaps.init.js"></script>
 
         <script src="assets/js/main.js"></script>
+	
+
+
+
+
+<style type="text/css">
+  #star a{
+   text-decoration: none;
+   color: gray;
+  }
+  #star a.on{
+   color: red;
+  } 
+
+element.style {
+    height: 350px;
+}
+
+.col-md-9 {
+    width: 100%;
+}
+</style>
+
+
 
     </body>
 </html>

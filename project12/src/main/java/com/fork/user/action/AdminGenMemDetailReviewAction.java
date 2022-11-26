@@ -36,7 +36,7 @@ public class AdminGenMemDetailReviewAction implements Action {
 		}
 		// 로그인 제어
 		
-		int pageSize = 9;
+		int pageSize = 5;
 		
 		// http://localhost:8088/JSP/board/boardList.jsp?pageNum=2
 		

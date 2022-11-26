@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fork.board.action.UserReservAction;
+
 
 
 
@@ -34,12 +36,14 @@ public class StoreFrontController extends HttpServlet {
 				
 				// 2. 가상주소 매핑(패턴1,2,3)
 				if(command.equals("/main.st")) {
-					System.out.println("C : /main.st 호출");
-					System.out.println("C : [패턴1] DB X, view");
+					System.out.println("C :  main.st 호출");
 					
-					forward = new ActionForward();
-					forward.setPath("./main/main.jsp");
-					forward.setRedirect(false);
+					action = new MainAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 				
 				else if(command.equals("/loginForm.st")) {
@@ -84,12 +88,12 @@ public class StoreFrontController extends HttpServlet {
 					
 				}
 				
-				else if(command.equals("/StoreJoinAction.st")) {
-					System.out.println(" C : /StoreJoinAction.st 호출");
+				else if(command.equals("/StoreJoinProAction.st")) {
+					System.out.println(" C : /StoreJoinProAction.st 호출");
 					System.out.println(" C : [패턴2] "); // 리다이렉션
 					
 					// StoreJoinAction()
-					action = new StoreJoinAction();
+					action = new StoreJoinProAction();
 					
 					try {
 						forward = action.execute(request, response);
@@ -102,10 +106,28 @@ public class StoreFrontController extends HttpServlet {
 				else if(command.equals("/StoreJoin.st")) {
 					System.out.println(" C : /StoreJoin.st 호출");
 					
-					forward = new ActionForward();
-					forward.setPath("./ceo/storeJoin.jsp");
-					forward.setRedirect(false);
+					action = new StoreJoinAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
 				}
+				
+				else if(command.equals("/StoreUpdate.st")) {
+					System.out.println(" C : /StoreUpdate.st 호출");
+					
+					action = new StoreUpdateAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
 				
 				System.out.println(" C : 2. 가상주소 매핑 끝 \n");
 				// 3. 페이지 이동

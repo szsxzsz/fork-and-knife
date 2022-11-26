@@ -24,9 +24,11 @@ public class StoreDTO {
 	private int c_no;
 	private Double s_star;
 	private Timestamp s_regdate;
+	private int Bcount;
+	private int Rcount;
 	
-	private int bcount;
-	private int rcount;
+	private int s_price;
+	private int s_readcount;
 	
 	
 }
