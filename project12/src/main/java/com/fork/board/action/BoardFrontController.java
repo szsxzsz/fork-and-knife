@@ -147,7 +147,16 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		
+		else if(command.equals("/QnaBoardReWriteAction.br")) {
+			System.out.println( "C : QnaBoardReWriteAction.br 호출 ~~");
+			
+			action = new QnaBoardReWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 3. 페이지 이동
 		if(forward != null) {
