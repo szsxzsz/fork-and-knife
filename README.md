@@ -6,7 +6,6 @@
 [fork and knife 배포 사이트](http://itwillbs10.cafe24.com/Fork)
 
 ### [LOGIN ACCOUNTS] 
-
 관리자 : admin / admin123 
 
 일반 유저 : user111 / dkssud1 
@@ -23,4 +22,5 @@ SLACK / Github / KakaoTalk
 ### 기간 및 인원
 2022.10.27. ~ 2022.11.29. / 6명
 
+### 프로젝트 요약
 
