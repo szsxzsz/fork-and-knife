@@ -14,3 +14,13 @@
 점장 유저 : store1 / 1234aa 
 
 ### 활용 스킬
+JAVA / JSP / JavaScript / JQuery
+
+HTML5 / CSS / MySQL / ApacheTomcat 9.0
+
+SLACK / Github / KakaoTalk
+
+### 기간 및 인원
+2022.10.27. ~ 2022.11.29. / 6명
+
+
