@@ -7,9 +7,9 @@ JSP 활용한 음식점 예약 및 관리 사이트
 
 ### 🖥️ 프로젝트 요약
 랜덤,가격대,인기순,별점순 등으로 식당 추천 및 실시간 예약, 리뷰 등이 가능한 사이트입니다.
-##### [LOGIN ACCOUNTS] 
-[fork and knife 배포 사이트](http://itwillbs10.cafe24.com/Fork)
 
+[fork and knife 배포 사이트](http://itwillbs10.cafe24.com/Fork)
+##### [LOGIN ACCOUNTS] 
 관리자 : admin / admin123 
 
 일반 유저 : user111 / dkssud1 
