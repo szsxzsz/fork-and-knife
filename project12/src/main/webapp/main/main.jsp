@@ -674,7 +674,9 @@
 <%--                                 <img src="upload/${review.s_image.split(',')[0]}" alt="" style="background-attachment: local; height:100px; width:100px; border-radius:50%;"> --%>
 <!--                             	</div> -->
 <!--                             	</div> -->
-                            	<div class="client-face wow fadeInRight animated animated" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; background-attachment: local; width: 90px; height: 100px; border-radius:50%; z-index: 100; top:55px; right:30px;"> 
+                            	<div class="client-face wow fadeInRight animated animated" data-wow-delay=".9s" style="visibility: visible;
+				animation-delay: 0.9s; background-attachment: local; width: 90px; height: 100px; border-radius:50%;
+				z-index: 100; top:55px; right:30px;"> 
                                 <img src="upload/jerry.gif" alt="">
                             	</div>
                             </div>
@@ -683,7 +685,8 @@
                         </div>
                         </c:forEach>
                          </div>
-                        <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div>
+                        <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active">
+			<span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div>
 					</div>
                         </div>
                 </div>
